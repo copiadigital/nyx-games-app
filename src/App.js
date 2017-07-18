@@ -16,7 +16,7 @@ class App extends Component {
               <img src={logo} className="app-logo" alt="NYX logo" />
               <h2>We love games</h2>
             </div>
-            <div class="app-body">
+            <div className="app-body">
                 <Route path="/" component={Games} />
                 <Route path="/games" component={Games} />
             </div>
