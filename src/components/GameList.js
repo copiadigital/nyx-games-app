@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import games from './../data/games';
 import GameListGame from './GameListGame';
+import Loading from "./Loading";
 
 class GameList extends Component {
     constructor(props){
@@ -17,17 +18,22 @@ class GameList extends Component {
     loadGames(){
         this.setState({ loading: true });
 
-        games.all()
-            .then((res) => {
-                this.setState({
-                    loading: false,
-                    games: res.data.games
-                });
+        games.all({
+            params: {
+                itemsPerPage: 12,
+                featured: (this.props.featured)? 1 : 0
+            }
+        })
+        .then((res) => {
+            this.setState({
+                loading: false,
+                games: res.data.games
             });
+        });
     }
     render() {
         if(this.state.loading){
-            return (<div><p className="loading loading__games">Loading...</p></div>);
+            return <Loading/>;
         }
 
         const games = this.state.games;

@@ -5,8 +5,11 @@ var instance = axios.create({
 });
 
 var Games =  {
-    all: function () {
-        return instance.get('/game');
+    all: function (config) {
+        return instance.get('/game', config);
+    },
+    getById: function(id){
+        return instance.get('/game/' + id);
     }
 };
 

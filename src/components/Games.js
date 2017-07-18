@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import Game from './Game';
+import { Route, Redirect } from 'react-router-dom';
 import GameList from './GameList';
 
 class Games extends Component {
@@ -8,8 +7,9 @@ class Games extends Component {
         const match = this.props.match;
         return (
             <div>
-                <Route path={`${match.url}/:gameSlug`} component={Game} />
-                <Route exact path={match.url} component={GameList} />
+                <Route exact path={match.url} render={() => <Redirect to="/games/all" />} />
+                <Route exact path={`${match.url}/featured`} render={() => <GameList featured={true} />} />
+                <Route exact path={`${match.url}/all`} render={() => <GameList featured={false} />} />
             </div>
         );
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Games from './components/Games';
+import Game from './components/Game';
 import {
     BrowserRouter as Router,
     Redirect,
@@ -18,10 +19,10 @@ class App extends Component {
               <h2>We love games</h2>
             </div>
             <div className="app-body">
-                <Route exact path="/">
-                    <Redirect to="/games" />
-                </Route>
+                <Route path="/" exact={true} render={() => <Redirect to="/games/featured" />} />
                 <Route path="/games" component={Games} />
+                <Route path="/game/:gameId/:gameSlug" component={Game} />
+
             </div>
             <div className="app-footer">
               <p>&copy; 2017</p>
