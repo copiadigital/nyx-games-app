@@ -4,6 +4,7 @@ import './App.css';
 import Games from './components/Games';
 import {
     BrowserRouter as Router,
+    Redirect,
     Route,
 } from 'react-router-dom'
 
@@ -17,7 +18,9 @@ class App extends Component {
               <h2>We love games</h2>
             </div>
             <div className="app-body">
-                <Route path="/" component={Games} />
+                <Route exact path="/">
+                    <Redirect to="/games" />
+                </Route>
                 <Route path="/games" component={Games} />
             </div>
             <div className="app-footer">
