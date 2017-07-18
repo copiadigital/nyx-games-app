@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import games from './../data/games';
+import GameListGame from './GameListGame';
 
 class GameList extends Component {
     constructor(props){
@@ -18,8 +19,6 @@ class GameList extends Component {
 
         games.all()
             .then((res) => {
-                console.log('games!', res.data.games);
-
                 this.setState({
                     loading: false,
                     games: res.data.games
@@ -31,13 +30,19 @@ class GameList extends Component {
             return (<div><p className="loading loading__games">Loading...</p></div>);
         }
 
-        if(this.state.games.length === 0){
+        const games = this.state.games;
+
+        if(games.length === 0){
             return (<div><p className="none-found none-found__games">No games found.</p></div>)
         }
 
+        const gameNode = games.map((game) => {
+            return (<GameListGame game={game} key={game.id} />)
+        });
+
         return (
             <div>
-                <p>Games here!</p>
+                <ul>{gameNode}</ul>
             </div>
         );
     }
