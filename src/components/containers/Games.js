@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import GameList from './GameList';
+import GameList from '../controllers/GameList';
 
 class Games extends Component {
     render() {

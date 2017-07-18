@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import games from './../data/games';
-import Loading from "./Loading";
+import games from '../../data/games';
+import Loading from "../utilities/Loading";
 
 class Game extends Component {
     constructor(props){

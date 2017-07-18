@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import games from './../data/games';
-import GameListGame from './GameListGame';
-import Loading from "./Loading";
+import games from '../../data/games';
+import GameListGame from '../GameListGame';
+import Loading from "../utilities/Loading";
 
 class GameList extends Component {
     constructor(props){

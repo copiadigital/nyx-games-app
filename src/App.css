@@ -3,13 +3,11 @@
 }
 
 .app-logo {
-  animation: app-logo-spin infinite 20s linear;
   height: 80px;
 }
 
 .app-header {
-  background-color: #222;
-  height: 150px;
+  background-color: #132029;
   padding: 20px;
   color: white;
 }
@@ -18,7 +16,19 @@
   font-size: large;
 }
 
-@keyframes app-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.app-footer {
+  background-color: #132029;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.promo-banner {
+  width: 80%;
+  max-width: 800px;
+  height: 120px;
+  background-color: #646464;
+  margin: 0 auto;
+  padding: 20px;
+  color: black;
 }

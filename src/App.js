@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './assets/images/logo.svg';
 import './App.css';
-import Games from './components/Games';
-import Game from './components/Game';
+import Game from './components/controllers/Game';
+import Games from './components/containers/Games';
+import PromoBanner from './components/PromoBanner';
 import {
     BrowserRouter as Router,
     Redirect,
@@ -15,14 +16,16 @@ class App extends Component {
         <Router>
           <div className="app">
             <div className="app-header">
-              <img src={logo} className="app-logo" alt="NYX logo" />
-              <h2>We love games</h2>
+                <div>
+                    <img src={logo} className="app-logo" alt="NYX logo" />
+                    <h2>Game Portal</h2>
+                </div>
+                <Route path="/games" component={PromoBanner} />
             </div>
             <div className="app-body">
                 <Route path="/" exact={true} render={() => <Redirect to="/games/featured" />} />
                 <Route path="/games" component={Games} />
                 <Route path="/game/:gameId/:gameSlug" component={Game} />
-
             </div>
             <div className="app-footer">
               <p>&copy; 2017</p>
