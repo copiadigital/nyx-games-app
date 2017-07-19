@@ -11,18 +11,27 @@ ul.games-grid{
     flex-wrap: wrap;
 }
 
-ul.games-grid li.games-grid-game-container{
+li.games-grid-game-container{
     margin: 7.5px;
-
 }
 
-ul.games-grid li.games-grid-game-container div.games-grid-game{
+div.games-grid-game{
     width: 200px;
     height: 127px;
     background-color: #646464;
 }
 
-ul.games-grid li.games-grid-game-container div.games-grid-game__highlight{
+div.games-grid-game__highlight{
     background-color: #132029;
     color: #ffffff;
+}
+
+div.games-grid-game{
+    width: 200px;
+    height: 127px;
+    background-color: #646464;
+}
+
+div.games-grid-game-summary{
+    font-size: 0.8em;
 }

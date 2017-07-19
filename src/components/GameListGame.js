@@ -24,6 +24,7 @@ class GameListGame extends Component {
         return (
             <div>
                 <div className="games-grid-game-name">{game.name}</div>
+                <div className="games-grid-game-summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                 <Button className="btn-white" to={`/game/${game.id}/${game.slug}`}>Play</Button>
                 <Button className="btn-white" to={`/game/${game.id}/${game.slug}`}>Info</Button>
             </div>
