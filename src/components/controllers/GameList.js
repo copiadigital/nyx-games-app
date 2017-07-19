@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import games from '../../data/games';
 import GameListGame from '../GameListGame';
 import Loading from "../utilities/Loading";
+import './GameList.css';
 
 class GameList extends Component {
     constructor(props){
@@ -47,8 +48,10 @@ class GameList extends Component {
         });
 
         return (
-            <div>
-                <ul>{gameNode}</ul>
+            <div className="games-grid-container">
+                <ul className="games-grid">
+                    {gameNode}
+                </ul>
             </div>
         );
     }

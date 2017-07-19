@@ -1,0 +1,28 @@
+div.games-grid-container{
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+ul.games-grid{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul.games-grid li.games-grid-game-container{
+    margin: 7.5px;
+
+}
+
+ul.games-grid li.games-grid-game-container div.games-grid-game{
+    width: 200px;
+    height: 127px;
+    background-color: #646464;
+}
+
+ul.games-grid li.games-grid-game-container div.games-grid-game__highlight{
+    background-color: #132029;
+    color: #ffffff;
+}

@@ -24,11 +24,27 @@
 }
 
 .promo-banner {
-  width: 80%;
-  max-width: 800px;
+  width: 100%;
+  max-width: 860px;
   height: 120px;
   background-color: #646464;
   margin: 0 auto;
-  padding: 20px;
   color: black;
+}
+
+.promo-banner p{
+  padding: 20px;
+}
+
+a.btn{
+  margin: 5px;
+  padding: 0 15px;
+  background-color: #000000;
+  border: 5px #000000 solid;
+  border-radius: 15px;
+}
+
+a.btn.btn-white{
+  background-color: #ffffff;
+  border-color: #fff;
 }
