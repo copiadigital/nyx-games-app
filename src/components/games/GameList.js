@@ -14,15 +14,18 @@ class GameList extends Component {
         };
     }
     componentDidMount(){
-        this.loadGames();
+        this.loadGames(this.props);
     }
-    loadGames(){
+    componentWillReceiveProps(nextProps){
+        this.loadGames(nextProps);
+    }
+    loadGames(props){
         this.setState({ loading: true });
 
         games.all({
             params: {
                 itemsPerPage: 12,
-                featured: (this.props.featured)? 1 : 0
+                featured: (props.featured)? 1 : 0
             }
         })
         .then((res) => {

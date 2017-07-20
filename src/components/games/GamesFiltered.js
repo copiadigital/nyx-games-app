@@ -1,20 +1,40 @@
 import React, { Component } from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
 import GameList from './GameList';
+import FilterForm from "./FilterForm";
+import update from 'immutability-helper';
+import PropTypes from 'prop-types';
 
-class Games extends Component {
+class GamesFiltered extends Component {
+    constructor(props) {
+        super(props);
+
+        this.filter = {
+            featured: (props.featured)
+        };
+
+        this.setFilter = this.setFilter.bind(this);
+    }
+    setFilter(data) {
+        this.filter = update(this.filter, { $merge: data });
+
+        var path = '/games/' + (this.filter.featured? 'featured' : 'all');
+        this.context.router.history.push(path);
+    }
     render() {
-        const match = this.props.match;
         const featured = (this.props.featured);
         const explicitFeatured = (this.props.explicitFeatured);
 
         return (
             <div>
-                <select></select>
+                <FilterForm featured={featured} explicitFeatured={explicitFeatured} setFilter={this.setFilter} />
                 <GameList featured={featured} />
             </div>
         );
     }
 }
 
-export default Games;
+GamesFiltered.contextTypes = {
+    router: PropTypes.object
+};
+
+export default GamesFiltered;

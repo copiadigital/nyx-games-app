@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import logo from './assets/images/logo.svg';
 import './App.css';
-import Game from './components/games/Game';
-import Games from './components/game/Games';
+import Game from './components/game/Game';
+import Games from './components/games/Games';
 import PromoBanner from './components/framework/PromoBanner';
 import {
-    BrowserRouter as Router,
+    BrowserRouter,
     Redirect,
     Route,
 } from 'react-router-dom'
@@ -13,7 +13,7 @@ import {
 class App extends Component {
   render() {
     return (
-        <Router>
+        <BrowserRouter>
           <div className="app">
             <div className="app-header">
                 <div>
@@ -31,7 +31,7 @@ class App extends Component {
               <p>&copy; 2017</p>
             </div>
           </div>
-        </Router>
+        </BrowserRouter>
     );
   }
 }
