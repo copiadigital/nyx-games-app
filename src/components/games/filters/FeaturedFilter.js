@@ -11,13 +11,16 @@ class FeaturedFilter extends Component {
         ];
 
         return (
-            <DropdownList
-                value={featured? 'featured' : 'all' }
-                data={options}
-                valueField="id"
-                textField="name"
-                onChange={(value) => this.props.setFilter({ featured: (value.id === 'featured') })}
-            />
+            <fieldset>
+                <label>Games:</label>
+                <DropdownList
+                    value={featured? 'featured' : 'all' }
+                    data={options}
+                    valueField="id"
+                    textField="name"
+                    onChange={(value) => this.props.setFilter({ featured: (value.id === 'featured') })}
+                />
+            </fieldset>
         );
     }
 }
