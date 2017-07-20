@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import games from '../../data/games';
-import GameListGame from '../GameListGame';
+import GameListGame from './GameListGame';
 import Loading from "../utilities/Loading";
 import './GameList.css';
 

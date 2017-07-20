@@ -6,7 +6,7 @@ class ImageLoader extends Component {
 
         this.src = this.props.src;
         this.alt = this.props.alt? this.props.alt : '';
-        this.errorOutput = this.props.error? this.props.error : <img src={this.src} alt={this.props.alt} />;
+        this.errorOutput = (typeof this.props.error !== undefined)? this.props.error : false;
         this.loadingOutput = this.props.loading? this.props.loading : null;
 
         this.state = {
@@ -44,7 +44,7 @@ class ImageLoader extends Component {
             );
         }
 
-        if(this.state.error){
+        if(this.state.error && this.errorOutput !== false){
             return <div>{this.errorOutput}</div>;
         }
 

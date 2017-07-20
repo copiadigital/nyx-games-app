@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Button from './utilities/Button';
-import ImageLoader from './utilities/ImageLoader';
-import LoadingImage from './utilities/LoadingImage';
+import Button from '../utilities/Button';
+import ImageLoader from '../utilities/ImageLoader';
+import LoadingImage from '../utilities/LoadingImage';
 
 class GameListGame extends Component {
     constructor(props) {
