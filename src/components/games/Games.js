@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import GamesFiltered from './GamesFiltered';
+import './Games.css';
 
 class Games extends Component {
     render() {

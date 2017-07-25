@@ -35,3 +35,14 @@ div.games-grid-game{
 div.games-grid-game-summary{
     font-size: 0.8em;
 }
+
+form.game-filter{
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+}
+
+form.game-filter fieldset{
+    max-width: 150px;
+}
