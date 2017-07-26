@@ -20,7 +20,8 @@ class JurisdictionFilter extends Component {
 
         jurisdictions.all({
             params: {
-                itemsPerPage: 100
+                itemsPerPage: 100,
+                sort: 'name'
             }
         })
             .then((res) => {
@@ -45,7 +46,7 @@ class JurisdictionFilter extends Component {
                     data={this.state.options}
                     valueField="id"
                     textField="name"
-                    onChange={(value) => this.props.setFilter({ jurisdictions: value.map(function(a){ return a.id }) })}
+                    onChange={ (value) => console.log('juri', value) /* this.props.setFilter({ jurisdictions: value.map(function(a){ return a.id }) }) */ }
                 />
             </fieldset>
         );

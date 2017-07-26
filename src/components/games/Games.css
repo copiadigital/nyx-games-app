@@ -44,5 +44,5 @@ form.game-filter{
 }
 
 form.game-filter fieldset{
-    max-width: 150px;
+    width: 180px;
 }
