@@ -23,19 +23,6 @@
   color: white;
 }
 
-.promo-banner {
-  width: 100%;
-  max-width: 860px;
-  height: 120px;
-  background-color: #646464;
-  margin: 0 auto;
-  color: black;
-}
-
-.promo-banner p{
-  padding: 20px;
-}
-
 a.btn{
   margin: 5px;
   padding: 0 15px;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownList } from 'react-widgets';
+import { Multiselect } from 'react-widgets';
 import jurisdictions from '../../../data/jurisdictions';
 import 'react-widgets/dist/css/react-widgets.css';
 
@@ -41,7 +41,7 @@ class JurisdictionFilter extends Component {
         return (
             <fieldset>
                 <label>Jurisdiction:</label>
-                <DropdownList
+                <Multiselect
                     value={jurisdictions}
                     data={this.state.options}
                     valueField="id"
