@@ -24,7 +24,9 @@ class GameList extends Component {
         games.all({
             params: {
                 itemsPerPage: 12,
-                featured: (props.filter.featured)? 1 : 0
+                featured: (props.filter.featured)? 1 : 0,
+                category: props.filter.category,
+                jurisdiction: props.filter.jurisdiction
             }
         })
         .then((res) => {

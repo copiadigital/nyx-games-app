@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Multiselect } from 'react-widgets';
-import jurisdictions from '../../../data/jurisdictions';
+import providers from '../../../data/providers';
 import 'react-widgets/dist/css/react-widgets.css';
 
-class JurisdictionFilter extends Component {
+class ProviderFilter extends Component {
     constructor(props) {
         super(props);
 
@@ -18,7 +18,7 @@ class JurisdictionFilter extends Component {
     loadOptions(props) {
         this.setState({ loading: true });
 
-        jurisdictions.all({
+        providers.all({
             params: {
                 itemsPerPage: 100,
                 sort: 'name'
@@ -27,26 +27,26 @@ class JurisdictionFilter extends Component {
             .then((res) => {
                 this.setState({
                     loading: false,
-                    options: res.data.jurisdictions
+                    options: res.data.providers
                 });
             });
     }
     render() {
-        const jurisdiction = this.props.jurisdiction? this.props.jurisdiction : [];
+        const provider = this.props.provider? this.props.provider : [];
 
         return (
             <fieldset>
-                <label>Jurisdiction:</label>
+                <label>Studio:</label>
                 <Multiselect
-                    value={jurisdiction}
+                    value={provider}
                     data={this.state.options}
                     valueField="id"
                     textField="name"
-                    onChange={ (value) => this.props.setFilter({ jurisdiction: value.map(function(a){ return a.id }) }) }
+                    onChange={ (value) => this.props.setFilter({ provider: value.map(function(a){ return a.id }) }) }
                 />
             </fieldset>
         );
     }
 }
 
-export default JurisdictionFilter;
+export default ProviderFilter;
