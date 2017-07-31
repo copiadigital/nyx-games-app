@@ -34,7 +34,6 @@ class JurisdictionFilter extends Component {
     render() {
         const jurisdictions = this.props.jurisdictions? this.props.jurisdictions : [];
         const options = [
-            { id: 'featured', name: 'Featured' },
             { id: 'all', name: 'All' }
         ];
 
@@ -46,7 +45,7 @@ class JurisdictionFilter extends Component {
                     data={this.state.options}
                     valueField="id"
                     textField="name"
-                    onChange={ (value) => console.log('juri', value) /* this.props.setFilter({ jurisdictions: value.map(function(a){ return a.id }) }) */ }
+                    onChange={ (value) => this.props.setFilter({ jurisdictions: value.map(function(a){ return a.id }) }) }
                 />
             </fieldset>
         );

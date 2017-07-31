@@ -8,26 +8,27 @@ class GamesFiltered extends Component {
     constructor(props) {
         super(props);
 
-        this.filter = {
-            featured: (props.featured)
+        this.state = {
+            filter: {
+                featured: (props.featured),
+                explicitFeatured: (props.explicitFeatured)
+            }
         };
 
         this.setFilter = this.setFilter.bind(this);
     }
     setFilter(data) {
-        this.filter = update(this.filter, { $merge: data });
+        var filter = update(this.state.filter, { $merge: data });
+        var path = '/games/' + ((this.filter.featured && this.filter.explicitFeatured)? 'featured' : 'all');
 
-        var path = '/games/' + (this.filter.featured? 'featured' : 'all');
         this.context.router.history.push(path);
+        this.setState({ filter: filter });
     }
     render() {
-        const featured = (this.props.featured);
-        const explicitFeatured = (this.props.explicitFeatured);
-
         return (
             <div>
-                <FilterForm featured={featured} explicitFeatured={explicitFeatured} setFilter={this.setFilter} />
-                <GameList featured={featured} />
+                <FilterForm filter={this.state.filter} setFilter={this.setFilter} />
+                <GameList filter={this.state.filter} />
             </div>
         );
     }

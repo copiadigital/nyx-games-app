@@ -7,10 +7,11 @@ class FilterForm extends Component {
         return (
             <form className="game-filter">
                 <FeaturedFilter
-                    featured={ this.props.featured }
+                    featured={ this.props.filter.featured }
                     setFilter={ this.props.setFilter }
                 />
                 <JurisdictionFilter
+                    jurisdictions={ this.props.filter.jurisdictions }
                     setFilter={ this.props.setFilter }
                 />
             </form>

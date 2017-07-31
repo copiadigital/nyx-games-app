@@ -50,7 +50,7 @@ class ImageLoader extends Component {
 
         return (
             <div>
-                <img src={this.src} alt={this.alt} />
+                <img src={this.src} alt={this.alt} className={this.props.className} />
             </div>
         );
     }
