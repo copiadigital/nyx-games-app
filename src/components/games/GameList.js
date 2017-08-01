@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Modal from 'react-modal';
 import games from '../../data/games';
 import GameListGame from './GameListGame';
 import Loading from "../utilities/Loading";
+import DemoModal from "../game/DemoModal";
 
 class GameList extends Component {
     constructor(props){
@@ -11,10 +13,13 @@ class GameList extends Component {
             loading: true,
             more: false,
             currentPage: 1,
-            games: []
+            games: [],
+            isDemoModalOpen: false,
+            demoModalGame: null
         };
 
         this.loadMoreGames = this.loadMoreGames.bind(this);
+        this.closeDemoModal = this.closeDemoModal.bind(this);
     }
     componentDidMount(){
         this.loadGames(this.props);
@@ -55,6 +60,20 @@ class GameList extends Component {
         // increment currentPage and call load games
         this.setState((state) => ({currentPage : state.currentPage + 1}), () => ( this.loadGames(this.props) ));
     }
+    openDemoModal(game, channel){
+        this.setState({
+            isDemoModalOpen: true,
+            demoModalGame: game,
+            demoModalChannel: channel
+        });
+    }
+    closeDemoModal() {
+        this.setState({
+            isDemoModalOpen: false,
+            demoModalGame: null,
+            demoModalChannel: null
+        });
+    }
     render() {
         const loading = this.state.loading;
         const more = this.state.more;
@@ -67,7 +86,7 @@ class GameList extends Component {
         }
 
         const gameNode = games.map((game) => {
-            return (<GameListGame game={game} key={game.id} />)
+            return (<GameListGame game={game} key={game.id} openDemoModal={(channel) => (this.openDemoModal(game, channel))}/>)
         });
 
         return (
@@ -75,10 +94,26 @@ class GameList extends Component {
                 <ul className="games-grid">
                     {gameNode}
                 </ul>
+                <Modal
+                    isOpen={this.state.isDemoModalOpen}
+                    onRequestClose={this.closeDemoModal}
+                    contentLabel="Game demo modal"
+                    className="modal"
+                    overlayClassName="modal-overlay"
+                >
+                    {(this.state.isDemoModalOpen? <DemoModal
+                        game={this.state.demoModalGame}
+                        channel={this.state.demoModalChannel}
+                        closeDemoModal={this.closeDemoModal}
+                    /> : null)}
+                </Modal>
                 {(more && !loading? <div><button onClick={this.loadMoreGames}>Load More Games</button></div> : '')}
                 {(loading? <div><Loading /></div> : '')}
             </div>
         );
+    }
+    renderDemoModal() {
+
     }
 }
 

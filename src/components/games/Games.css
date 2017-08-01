@@ -45,3 +45,40 @@ form.game-filter{
 form.game-filter fieldset{
     width: 180px;
 }
+
+.game-demo-container{
+    display: flex;
+    width: 100%;
+}
+
+.game-demo-close{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    line-height: 20px;
+    color: #132029;
+    border: 1px #132029 solid;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0;
+    padding: 0 4px 3px 4px;
+}
+
+.game-demo-viewport{
+    display: table-cell;
+    flex: 1;
+    overflow: hidden;
+}
+
+.game-demo-viewport iframe{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.game-demo-detail{
+    display: table-cell;
+    background-color: white;
+    width: 200px;
+}

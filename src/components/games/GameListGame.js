@@ -28,8 +28,7 @@ class GameListGame extends Component {
         }
     }
     playDemo(channel){
-        var game = this.props.game;
-        console.log('play demo', game.id, channel);
+        this.props.openDemoModal(channel);
     }
     renderHighlight(game) {
         return (
