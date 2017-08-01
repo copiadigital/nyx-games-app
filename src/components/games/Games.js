@@ -10,9 +10,9 @@ class Games extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path={`${match.url}/all`} render={() => <GamesFiltered {...props} featured={false} />} />
+                    <Route exact path={`${match.url}/all`} render={() => <GamesFiltered {...props} featured={false} explicitFeatured={false} />} />
                     <Route exact path={`${match.url}/featured`} render={() => <GamesFiltered {...props} featured={true} explicitFeatured={true} />} />
-                    <Route exact path={match.url} render={() => <GamesFiltered {...props} featured={true} />} />
+                    <Route exact path={match.url} render={() => <GamesFiltered {...props} featured={true} explicitFeatured={false} />} />
                 </Switch>
             </div>
         );

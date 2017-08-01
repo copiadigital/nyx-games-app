@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Multiselect } from 'react-widgets';
-import categories from '../../../data/categories';
 import 'react-widgets/dist/css/react-widgets.css';
 
 class ChannelFilter extends Component {

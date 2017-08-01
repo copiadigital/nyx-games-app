@@ -4,6 +4,7 @@ import JurisdictionFilter from './filters/JurisdictionFilter';
 import CategoryFilter from './filters/CategoryFilter';
 import ProviderFilter from "./filters/ProviderFilter";
 import ChannelFilter from "./filters/ChannelFilter";
+import ResetFilter from "./filters/ResetFilter";
 
 class FilterForm extends Component {
     render() {
@@ -27,6 +28,9 @@ class FilterForm extends Component {
                 />
                 <ChannelFilter
                     channel={ this.props.filter.channel }
+                    setFilter={ this.props.setFilter }
+                />
+                <ResetFilter
                     setFilter={ this.props.setFilter }
                 />
             </form>

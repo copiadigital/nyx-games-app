@@ -9,41 +9,60 @@ class GameList extends Component {
 
         this.state = {
             loading: true,
+            more: false,
+            currentPage: 1,
             games: []
         };
+
+        this.loadMoreGames = this.loadMoreGames.bind(this);
     }
     componentDidMount(){
         this.loadGames(this.props);
     }
     componentWillReceiveProps(nextProps){
-        this.loadGames(nextProps);
+        // reset games and call load games, as this is a new filter
+        this.setState({
+            loading: true,
+            more: false,
+            currentPage: 1,
+            games: []
+        }, () => ( this.loadGames(nextProps) ));
     }
     loadGames(props){
         this.setState({ loading: true });
 
         games.all({
             params: {
+                page: this.state.currentPage,
                 itemsPerPage: 12,
                 featured: (props.filter.featured)? 1 : 0,
                 category: props.filter.category,
-                jurisdiction: props.filter.jurisdiction
+                jurisdiction: props.filter.jurisdiction,
+                provider: props.filter.provider,
+                channel: props.filter.channel
             }
         })
         .then((res) => {
-            this.setState({
+            this.setState((prevState) => ({
                 loading: false,
-                games: res.data.games
-            });
+                more: (res.data.meta.currentPage < res.data.meta.totalPages),
+                currentPage: res.data.meta.currentPage,
+                games: [ ...prevState.games, ...res.data.games ]
+            }));
         });
     }
+    loadMoreGames(){
+        // increment currentPage and call load games
+        this.setState((state) => ({currentPage : state.currentPage + 1}), () => ( this.loadGames(this.props) ));
+    }
     render() {
-        if(this.state.loading){
-            return <Loading/>;
-        }
-
+        const loading = this.state.loading;
+        const more = this.state.more;
         const games = this.state.games;
 
-        if(games.length === 0){
+        if(loading && games.length === 0){
+            return <Loading />;
+        }else if(games.length === 0){
             return (<div><p className="none-found none-found__games">No games found.</p></div>)
         }
 
@@ -56,6 +75,8 @@ class GameList extends Component {
                 <ul className="games-grid">
                     {gameNode}
                 </ul>
+                {(more && !loading? <div><button onClick={this.loadMoreGames}>Load More Games</button></div> : '')}
+                {(loading? <div><Loading /></div> : '')}
             </div>
         );
     }

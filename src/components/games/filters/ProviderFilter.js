@@ -32,7 +32,8 @@ class ProviderFilter extends Component {
             });
     }
     render() {
-        const provider = this.props.provider? this.props.provider : [];
+        // force to number for strict matching
+        const provider = this.props.provider? this.props.provider.map(num => Math.floor(num)) : [];
 
         return (
             <fieldset>
@@ -42,7 +43,7 @@ class ProviderFilter extends Component {
                     data={this.state.options}
                     valueField="id"
                     textField="name"
-                    onChange={ (value) => this.props.setFilter({ provider: value.map(function(a){ return a.id }) }) }
+                    onChange={ (value) => this.props.setFilter({ provider: value.map(function(a){ return +a.id }) }) }
                 />
             </fieldset>
         );

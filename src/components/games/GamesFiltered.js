@@ -13,7 +13,7 @@ class GamesFiltered extends Component {
     constructor(props) {
         super(props);
 
-        var filter = this.buildFilter();
+        var filter = this.buildFilter(props);
 
         this.state = {
             filter: filter
@@ -21,24 +21,27 @@ class GamesFiltered extends Component {
 
         this.setFilter = this.setFilter.bind(this);
     }
+    componentWillReceiveProps(nextProps){
+        var filter = this.buildFilter(nextProps);
+        this.setState({ filter: filter });
+    }
     setFilter(data) {
-        if(data.featured){
-            data.explicitFeatured = true;
-        }
+        // set explicitFeatured if we've just changed to featured or its already set
+        // needed to switch to a list of all games on filter change, unless user has actually asked for featured games
+        data.explicitFeatured = (this.state.filter.explicitFeatured || data.featured);
 
         var filter = update(this.state.filter, { $merge: data });
         var newUrl = this.buildUrl(filter);
 
         this.context.router.history.push(newUrl);
-        this.setState({ filter: filter });
     }
-    buildFilter(){
+    buildFilter(props){
         var filter = {
-            featured: (this.props.featured),
-            explicitFeatured: (this.props.explicitFeatured)
+            featured: (props.featured),
+            explicitFeatured: (props.explicitFeatured)
         };
 
-        var queryParams = queryString.parse(this.props.location.search, queryStringOptions);
+        var queryParams = queryString.parse(props.location.search, queryStringOptions);
         filter['category'] = queryParams.category;
         filter['channel'] = queryParams.channel;
         filter['jurisdiction'] = queryParams.jurisdiction;
