@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from '../utilities/Button';
+import LinkButton from '../utilities/LinkButton';
 import ImageLoader from '../utilities/ImageLoader';
 import LoadingImage from '../utilities/LoadingImage';
 
@@ -13,6 +13,7 @@ class GameListGame extends Component {
 
         this.mouseEnter = this.mouseEnter.bind(this);
         this.mouseLeave = this.mouseLeave.bind(this);
+        this.playDemoButtonHandler = this.playDemoButtonHandler.bind(this);
     }
     mouseEnter() {
         this.setState({ highlight: true });
@@ -20,13 +21,28 @@ class GameListGame extends Component {
     mouseLeave() {
         this.setState({ highlight: false });
     }
+    playDemoButtonHandler(channel){
+        var self = this;
+        return function(){
+            self.playDemo(channel);
+        }
+    }
+    playDemo(channel){
+        var game = this.props.game;
+        console.log('play demo', game.id, channel);
+    }
     renderHighlight(game) {
         return (
             <div>
                 <div className="games-grid-game-name">{game.name}</div>
-                <div className="games-grid-game-summary">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                <Button className="btn-white" to={`/game/${game.id}/${game.slug}`}>Play</Button>
-                <Button className="btn-white" to={`/game/${game.id}/${game.slug}`}>Info</Button>
+                <div className="col-6">
+                    <span className="games-grid-game-title">Demo</span>
+                    { ( (game.channels.indexOf('desktop') > -1) ? <button className="btn btn-white games-grid-game-demo games-grid-game-demo_desktop" onClick={this.playDemoButtonHandler('desktop')}>Desktop</button> : '' ) }
+                    { ( (game.channels.indexOf('mobile') > -1) ? <button className="btn btn-white games-grid-game-demo games-grid-game-demo_mobile" onClick={this.playDemoButtonHandler('mobile')}>Mobile</button> : '' ) }
+                </div>
+                <div className="col-6">
+                    <LinkButton className="btn-white" to={`/game/${game.id}/${game.slug}`}>Info</LinkButton>
+                </div>
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class Button extends Component {
+class LinkButton extends Component {
     render() {
         const props = this.props;
         const className = 'btn' + (props.className? ' ' + props.className : null);
@@ -10,4 +10,4 @@ class Button extends Component {
     }
 }
 
-export default Button;
+export default LinkButton;
