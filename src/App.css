@@ -35,3 +35,8 @@ a.btn.btn-white{
   background-color: #ffffff;
   border-color: #fff;
 }
+
+.col-6{
+  display: inline-block;
+  width: 50%;
+}
