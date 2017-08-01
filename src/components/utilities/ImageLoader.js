@@ -18,22 +18,29 @@ class ImageLoader extends Component {
         this.onLoad = this.onLoad.bind(this);
     }
     onError() {
-        this.setState({
-            error: true,
-            loading: false
-        });
+        if(this.img) {
+            this.setState({
+                error: true,
+                loading: false
+            });
+        }
     }
     onLoad() {
-        this.setState({
-            error: false,
-            loading: false
-        });
+        if(this.img) {
+            this.setState({
+                error: false,
+                loading: false
+            });
+        }
     }
     componentDidMount() {
         this.img = new Image();
         this.img.onload = this.onLoad;
         this.img.onerror = this.onError;
         this.img.src = this.src;
+    }
+    componentWillUnmount(){
+        this.img = null;
     }
     render() {
         if(this.state.loading){
