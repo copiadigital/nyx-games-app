@@ -3,6 +3,8 @@ import games from '../../data/games';
 import Loading from "../utilities/Loading";
 import ImageLoader from "../utilities/ImageLoader";
 import ChannelList from "../utilities/ChannelList";
+import DemoIFrame from "./DemoIFrame";
+import './Game.css';
 
 class Game extends Component {
     constructor(props){
@@ -10,7 +12,8 @@ class Game extends Component {
 
         this.state = {
             loading: true,
-            game: null
+            game: null,
+            channel: 'desktop'
         };
     }
     componentDidMount(){
@@ -38,9 +41,18 @@ class Game extends Component {
         }
 
         const game = this.state.game;
+        const channel = this.state.channel;
+
+        var maxWidth = Math.min(window.innerWidth, 960);
+        var viewportWidth = maxWidth;
+        var viewportHeight = viewportWidth * (600/960);
 
         return (
-            <div>
+            <div className="page-game">
+                <div className="game-demo-viewport" style={ { width: viewportWidth, height: viewportHeight  } }>
+                    <DemoIFrame game={game} channel={channel} />
+                </div>
+
                 <h1>{game.name}</h1>
                 <ImageLoader
                     src={"/static/images/icons/providers/" + game.provider + ".png"}

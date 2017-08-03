@@ -46,12 +46,12 @@ form.game-filter fieldset{
     width: 180px;
 }
 
-.game-demo-container{
+.game-demo-modal-container{
     display: flex;
     width: 100%;
 }
 
-.game-demo-close{
+.game-demo-modal-close{
     position: absolute;
     top: 5px;
     right: 10px;
@@ -65,7 +65,13 @@ form.game-filter fieldset{
     padding: 0 4px 3px 4px;
 }
 
-.game-demo-viewport{
+.game-demo-modal-detail{
+    display: table-cell;
+    background-color: white;
+    width: 200px;
+}
+
+.game-demo-modal-container .game-demo-viewport{
     display: table-cell;
     flex: 1;
     overflow: hidden;
@@ -75,10 +81,4 @@ form.game-filter fieldset{
     margin: 0;
     padding: 0;
     border: 0;
-}
-
-.game-demo-detail{
-    display: table-cell;
-    background-color: white;
-    width: 200px;
 }

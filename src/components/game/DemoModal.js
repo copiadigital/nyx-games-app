@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ChannelList from "../utilities/ChannelList";
 import LinkButton from "../utilities/LinkButton";
 import queryString from 'query-string';
+import DemoIFrame from "./DemoIFrame";
 
 class DemoModal extends Component {
     constructor(props){
@@ -47,14 +48,14 @@ class DemoModal extends Component {
         var viewportHeight = viewportWidth * (600/960);
 
         return (
-            <div className="game-demo-container">
-                <div className="game-demo-close" onClick={this.props.closeDemoModal}>x</div>
+            <div className="game-demo-modal-container">
+                <div className="game-demo-modal-close" onClick={this.props.closeDemoModal}>x</div>
                 <div className="game-demo-viewport" style={ { width: viewportWidth, height: viewportHeight  } }>
-                    <iframe src={this.buildDemoUrl()} width="100%" height="100%" title={`${game.name} ${channel} demo`}></iframe>
+                    <DemoIFrame game={game} channel={channel} />
                 </div>
-                <div className="game-demo-detail" style={ { width: detailWidth } }>
-                    <div className="game-demo-title">{game.name}</div>
-                    <p className="game-demo-description">{game.description}</p>
+                <div className="game-demo-modal-detail" style={ { width: detailWidth } }>
+                    <div className="game-demo-modal-title">{game.name}</div>
+                    <p className="game-demo-modal-description">{game.description}</p>
                     <dl>
                         <dt>Channel</dt><dd><ChannelList channels={game.channels} glue=" | " /></dd>
                         <dt>Lines</dt><dd>##</dd>

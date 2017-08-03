@@ -8,7 +8,7 @@ class Games extends Component {
         const props = this.props;
         const match = props.match;
         return (
-            <div>
+            <div className="page-games">
                 <Switch>
                     <Route exact path={`${match.url}/all`} render={() => <GamesFiltered {...props} featured={false} explicitFeatured={false} />} />
                     <Route exact path={`${match.url}/featured`} render={() => <GamesFiltered {...props} featured={true} explicitFeatured={true} />} />
