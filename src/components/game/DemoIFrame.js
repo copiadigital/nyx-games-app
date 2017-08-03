@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ChannelList from "../utilities/ChannelList";
-import LinkButton from "../utilities/LinkButton";
 import queryString from 'query-string';
 
 class DemoIFrame extends Component {

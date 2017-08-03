@@ -6,8 +6,8 @@ class FeaturedFilter extends Component {
     render() {
         const featured = (this.props.featured);
         const options = [
-            { id: 'featured', name: 'Featured' },
-            { id: 'all', name: 'All' }
+            { id: 'featured', name: 'Featured Games' },
+            { id: 'all', name: 'All Games' }
         ];
 
         return (

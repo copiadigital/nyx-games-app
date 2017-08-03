@@ -36,6 +36,12 @@ a.btn.btn-white{
   border-color: #fff;
 }
 
+a.btn.btn-blue{
+  background-color: #007dba;
+  border-color: #007dba;
+  color: #fff;
+}
+
 .col-6{
   display: inline-block;
   width: 50%;

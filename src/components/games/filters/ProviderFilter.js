@@ -33,7 +33,7 @@ class ProviderFilter extends Component {
     }
     render() {
         // force to number for strict matching
-        const provider = this.props.provider? parseInt(this.props.provider) : null;
+        const provider = this.props.provider? Number(this.props.provider) : null;
 
         return (
             <fieldset>
