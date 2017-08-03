@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+ export UID
+ echo "Current working directory: '"$(pwd)"'"
+ docker-compose exec app npm $@
