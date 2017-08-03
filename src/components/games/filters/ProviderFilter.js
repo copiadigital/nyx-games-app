@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Multiselect } from 'react-widgets';
+import { DropdownList } from 'react-widgets';
 import providers from '../../../data/providers';
 import 'react-widgets/dist/css/react-widgets.css';
 
@@ -33,17 +33,17 @@ class ProviderFilter extends Component {
     }
     render() {
         // force to number for strict matching
-        const provider = this.props.provider? this.props.provider.map(num => Math.floor(num)) : [];
+        const provider = this.props.provider? parseInt(this.props.provider) : null;
 
         return (
             <fieldset>
                 <label>Studio:</label>
-                <Multiselect
+                <DropdownList
                     value={provider}
                     data={this.state.options}
                     valueField="id"
                     textField="name"
-                    onChange={ (value) => this.props.setFilter({ provider: value.map(function(a){ return +a.id }) }) }
+                    onChange={ (value) => this.props.setFilter({ provider: value.id }) }
                 />
             </fieldset>
         );

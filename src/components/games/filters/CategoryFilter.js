@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Multiselect } from 'react-widgets';
+import { DropdownList } from 'react-widgets';
 import categories from '../../../data/categories';
 import 'react-widgets/dist/css/react-widgets.css';
 
@@ -37,12 +37,12 @@ class CategoryFilter extends Component {
         return (
             <fieldset>
                 <label>Category:</label>
-                <Multiselect
+                <DropdownList
                     value={category}
                     data={this.state.options}
                     valueField="id"
                     textField="name"
-                    onChange={ (value) => this.props.setFilter({ category: value.map(function(a){ return a.id }) }) }
+                    onChange={ (value) => this.props.setFilter({ category: value.id }) }
                 />
             </fieldset>
         );
