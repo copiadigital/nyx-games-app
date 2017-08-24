@@ -1,0 +1,49 @@
+.game-filter{
+    display:flex;
+    padding-bottom:20px;
+    margin-bottom:20px;
+    border-bottom:2px solid $color-grey;
+}
+
+.game-filter fieldset{
+	margin:0;
+	padding:0 20px 0 0;
+	border:none;
+	color:$color-blue;
+
+	&:last-child{
+		padding-right:0;
+	}
+}
+
+.game-filter label{
+	display:block;
+	padding:0 0 8px 15px;
+	font-size:1.4em;
+}
+
+.game-filter .rw-widget-input{
+	font-size:1.6em;
+	border:1px solid $color-blue;
+	border-radius:25px;
+	cursor:pointer;
+	color:$color-grey-dark;
+
+	.rw-btn{
+			color:$color-blue;
+	}
+
+	&:hover{
+		background:$color-blue;
+		color:#fff;
+
+		.rw-btn{
+			color:#fff;
+		}
+
+	}
+}
+
+.game-filter .rw-widget-input .rw-input{
+	color:inherit;
+}

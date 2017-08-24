@@ -1,0 +1,35 @@
+.app-logo{
+	max-width:146px;
+}
+
+.app-header{
+  padding:20px;
+  color:white;
+}
+
+.app-logo{
+	display:inline-block;
+	margin:27px 20px 27px 0;
+	vertical-align:middle;
+}
+
+.app-title{
+	display:inline-block;
+	vertical-align:middle;
+}
+
+.nav{
+	float:right;
+	display:inline-block;
+	text-align:right;
+}
+
+.nav li{
+	display:inline-block;
+	margin-left:20px;
+}
+
+.nav li a{
+	color:white;
+	text-decoration:none;
+}

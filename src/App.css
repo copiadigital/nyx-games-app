@@ -1,51 +1,115 @@
-.app {
-  text-align: center;
-}
-
 .app-logo {
-  height: 80px;
-}
+  max-width: 146px; }
 
 .app-header {
-  background-color: #132029;
   padding: 20px;
+  color: white; }
+
+.app-logo {
+  display: inline-block;
+  margin: 27px 20px 27px 0;
+  vertical-align: middle; }
+
+.app-title {
+  display: inline-block;
+  vertical-align: middle; }
+
+.nav {
+  float: right;
+  display: inline-block;
+  text-align: right; }
+
+.nav li {
+  display: inline-block;
+  margin-left: 20px; }
+
+.nav li a {
   color: white;
-}
+  text-decoration: none; }
+
+.banner {
+  height: 510px; }
+
+.game-filter {
+  display: flex;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #c3c3c3; }
+
+.game-filter fieldset {
+  margin: 0;
+  padding: 0 20px 0 0;
+  border: none;
+  color: #007dbe; }
+  .game-filter fieldset:last-child {
+    padding-right: 0; }
+
+.game-filter label {
+  display: block;
+  padding: 0 0 8px 15px;
+  font-size: 1.4em; }
+
+.game-filter .rw-widget-input {
+  font-size: 1.6em;
+  border: 1px solid #007dbe;
+  border-radius: 25px;
+  cursor: pointer;
+  color: #636466; }
+  .game-filter .rw-widget-input .rw-btn {
+    color: #007dbe; }
+  .game-filter .rw-widget-input:hover {
+    background: #007dbe;
+    color: #fff; }
+    .game-filter .rw-widget-input:hover .rw-btn {
+      color: #fff; }
+
+.game-filter .rw-widget-input .rw-input {
+  color: inherit; }
+
+body {
+  font-size: 10px;
+  box-sizing: border-box;
+  background: #000 url(assets/images/bg-lightning-gems.png) center top no-repeat; }
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0 80px;
+  max-width: 1750px; }
+
+.wrapper--thin {
+  max-width: 1160px; }
+
+.app-body {
+  padding: 30px;
+  background: #fff; }
 
 .app-intro {
-  font-size: large;
-}
+  font-size: large; }
 
 .app-footer {
-  background-color: #132029;
   height: 150px;
   padding: 20px;
-  color: white;
-}
+  color: white; }
 
-a.btn{
+a.btn {
   margin: 5px;
   padding: 0 15px;
   background-color: #000000;
   border: 5px #000000 solid;
-  border-radius: 15px;
-}
+  border-radius: 15px; }
 
-a.btn.btn-white{
+a.btn.btn-white {
   background-color: #ffffff;
-  border-color: #fff;
-}
+  border-color: #fff; }
 
-a.btn.btn-blue{
+a.btn.btn-blue {
   background-color: #007dba;
   border-color: #007dba;
-  color: #fff;
-}
+  color: #fff; }
 
-.col-6{
+.col-6 {
   display: inline-block;
-  width: 50%;
-}
+  width: 50%; }
 
 .modal {
   position: absolute;
@@ -53,8 +117,7 @@ a.btn.btn-blue{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
-}
+  background-color: white; }
 
 .modal-overlay {
   position: fixed;
@@ -62,5 +125,4 @@ a.btn.btn-blue{
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-}
+  background-color: rgba(0, 0, 0, 0.7); }
