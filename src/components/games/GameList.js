@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+import Waypoint from 'react-waypoint';
 import games from '../../data/games';
 import GameListGame from './GameListGame';
 import Loading from "../utilities/Loading";
@@ -94,6 +95,8 @@ class GameList extends Component {
                 <ul className="games-grid">
                     {gameNode}
                 </ul>
+                {(more && !loading? this.renderLoadMoreButton() : '')}
+                {(loading? <div><Loading /></div> : '')}
                 <Modal
                     isOpen={this.state.isDemoModalOpen}
                     onRequestClose={this.closeDemoModal}
@@ -107,13 +110,15 @@ class GameList extends Component {
                         closeDemoModal={this.closeDemoModal}
                     /> : null)}
                 </Modal>
-                {(more && !loading? <div><button onClick={this.loadMoreGames}>Load More Games</button></div> : '')}
-                {(loading? <div><Loading /></div> : '')}
             </div>
         );
     }
-    renderDemoModal() {
-
+    renderLoadMoreButton() {
+        return <div>
+            <Waypoint onEnter={this.loadMoreGames} >
+                <button onClick={this.loadMoreGames}>Load More Games</button>
+            </Waypoint>
+        </div>
     }
 }
 
