@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class ResetFilter extends Component {
     render() {
         return (
-            <div>
+            <div className="filter-reset">
                 <Link to="/games" className="reset">Reset Filters</Link>
             </div>
         );

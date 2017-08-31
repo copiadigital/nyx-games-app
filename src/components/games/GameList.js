@@ -41,6 +41,7 @@ class GameList extends Component {
             params: {
                 page: this.state.currentPage,
                 itemsPerPage: 12,
+                q: props.filter.searchQuery,
                 featured: (props.filter.featured)? 1 : 0,
                 category: props.filter.category,
                 jurisdiction: props.filter.jurisdiction,

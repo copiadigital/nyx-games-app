@@ -31,17 +31,28 @@
   height: 510px; }
 
 .game-filter {
-  display: flex;
+  margin-bottom: 20px; }
+
+.game-filter > fieldset.row:first-child {
+  width: 100%;
   padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #c3c3c3; }
+  border-bottom: 2px solid #c3c3c3;
+  clear: both; }
+
+.game-filter > fieldset.row:first-child > fieldset {
+  width: 200px;
+  display: inline-block; }
 
 .game-filter fieldset {
   margin: 0;
   padding: 0 20px 0 0;
   border: none;
   color: #007dbe; }
-  .game-filter fieldset:last-child {
+
+.game-filter .filter-reset{
+  display: inline-block; }
+
+.game-filter fieldset:last-child {
     padding-right: 0; }
 
 .game-filter label {
@@ -65,6 +76,9 @@
 
 .game-filter .rw-widget-input .rw-input {
   color: inherit; }
+
+.game-filter #search{
+  float: right; }
 
 body {
   font-size: 10px;

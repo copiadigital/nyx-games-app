@@ -43,21 +43,34 @@ class GamesFiltered extends Component {
         };
 
         var queryParams = queryString.parse(props.location.search, queryStringOptions);
-        filter['category'] = queryParams.category;
-        filter['channel'] = queryParams.channel;
-        filter['jurisdiction'] = queryParams.jurisdiction;
-        filter['provider'] = queryParams.provider;
+        if(queryParams.query) {
+            filter['searchQuery'] = queryParams.query;
+        }else{
+            filter['category'] = queryParams.category;
+            filter['channel'] = queryParams.channel;
+            filter['jurisdiction'] = queryParams.jurisdiction;
+            filter['provider'] = queryParams.provider;
+        }
 
         return filter;
     }
     buildUrl(filter) {
-        var path = '/games/' + ((filter.featured && filter.explicitFeatured)? 'featured' : 'all');
-        var queryStringData = {
-            category: filter.category,
-            channel: filter.channel,
-            jurisdiction: filter.jurisdiction,
-            provider: filter.provider
-        };
+        var path, queryStringData;
+
+        if(filter.searchQuery){
+            path = '/games/all';
+            queryStringData = {
+                query: filter.searchQuery
+            };
+        }else {
+            path = '/games/' + ((filter.featured && filter.explicitFeatured) ? 'featured' : 'all');
+            queryStringData = {
+                category: filter.category,
+                channel: filter.channel,
+                jurisdiction: filter.jurisdiction,
+                provider: filter.provider
+            };
+        }
 
         // remove null/undefined filters
         queryStringData = _.pick(queryStringData, function(val){
