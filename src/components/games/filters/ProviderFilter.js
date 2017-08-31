@@ -11,6 +11,8 @@ class ProviderFilter extends Component {
             loading: true,
             options: []
         };
+
+        this.onChangeHandler = this.onChangeHandler.bind(this);
     }
     componentDidMount() {
         this.loadOptions(this.props);
@@ -31,19 +33,24 @@ class ProviderFilter extends Component {
                 });
             });
     }
+    onChangeHandler(value) {
+        var providerId = (value.id === '*')? null : value.id;
+        this.props.setFilter({ provider: providerId });
+    }
     render() {
         // force to number for strict matching
         const provider = this.props.provider? Number(this.props.provider) : null;
+        const options = [{id: '*', name: 'All Studios'}, ...this.state.options];
 
         return (
             <fieldset>
                 <label>Studio:</label>
                 <DropdownList
                     value={provider}
-                    data={this.state.options}
+                    data={options}
                     valueField="id"
                     textField="name"
-                    onChange={ (value) => this.props.setFilter({ provider: value.id }) }
+                    onChange={ this.onChangeHandler }
                 />
             </fieldset>
         );
