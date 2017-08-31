@@ -4,6 +4,7 @@ import FilterForm from "./FilterForm";
 import queryString from 'query-string';
 import update from 'immutability-helper';
 import PropTypes from 'prop-types';
+import _ from 'underscore';
 
 var queryStringOptions = {
     arrayFormat: 'bracket'
@@ -51,13 +52,19 @@ class GamesFiltered extends Component {
     }
     buildUrl(filter) {
         var path = '/games/' + ((filter.featured && filter.explicitFeatured)? 'featured' : 'all');
-        var query = queryString.stringify({
+        var queryStringData = {
             category: filter.category,
             channel: filter.channel,
             jurisdiction: filter.jurisdiction,
             provider: filter.provider
-        }, queryStringOptions);
+        };
 
+        // remove null/undefined filters
+        queryStringData = _.pick(queryStringData, function(val){
+            return (_.isNull(val) === false && _.isUndefined(val) === false);
+        });
+
+        var query = queryString.stringify(queryStringData, queryStringOptions);
         return path + '?' + query;
     }
     render() {
