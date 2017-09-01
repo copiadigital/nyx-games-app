@@ -40,7 +40,7 @@ class FilterForm extends Component {
                     <fieldset className="row">
                         <label>Sort by:</label>
                         <SearchFilter
-                            defaultValue={ this.props.filter.searchQuery }
+                            value={ this.props.filter.searchQuery }
                             setFilter={ this.props.setFilter }
                             />
                     </fieldset>
