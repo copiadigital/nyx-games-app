@@ -43,16 +43,13 @@ class GamesFiltered extends Component {
         };
 
         var queryParams = queryString.parse(props.location.search, queryStringOptions);
-        if(queryParams.query) {
-            filter['searchQuery'] = queryParams.query;
-        }else{
-            filter['category'] = queryParams.category;
-            filter['channel'] = queryParams.channel;
-            filter['jurisdiction'] = queryParams.jurisdiction;
-            filter['provider'] = queryParams.provider;
-            filter['sort'] = queryParams.sort;
-            filter['order'] = queryParams.order;
-        }
+        filter['searchQuery'] = queryParams.query;
+        filter['category'] = queryParams.category;
+        filter['channel'] = queryParams.channel;
+        filter['jurisdiction'] = queryParams.jurisdiction;
+        filter['provider'] = queryParams.provider;
+        filter['sort'] = queryParams.sort;
+        filter['order'] = queryParams.order;
 
         return filter;
     }
