@@ -50,6 +50,8 @@ class GamesFiltered extends Component {
             filter['channel'] = queryParams.channel;
             filter['jurisdiction'] = queryParams.jurisdiction;
             filter['provider'] = queryParams.provider;
+            filter['sort'] = queryParams.sort;
+            filter['order'] = queryParams.order;
         }
 
         return filter;
@@ -68,7 +70,9 @@ class GamesFiltered extends Component {
                 category: filter.category,
                 channel: filter.channel,
                 jurisdiction: filter.jurisdiction,
-                provider: filter.provider
+                provider: filter.provider,
+                sort: filter.sort,
+                order: filter.order
             };
         }
 

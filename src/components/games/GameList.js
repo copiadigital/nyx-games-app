@@ -30,12 +30,14 @@ class GameList extends Component {
         this.setState({
             loading: true,
             more: false,
-            currentPage: 1,
-            games: []
+            currentPage: 1
         }, () => ( this.loadGames(nextProps) ));
     }
     loadGames(props){
         this.setState({ loading: true });
+
+        var defaultSort = (props.filter.searchQuery)? '_score' : 'name';
+        var defaultOrder = (props.filter.searchQuery)? 'desc' : 'asc';
 
         games.all({
             params: {
@@ -46,15 +48,20 @@ class GameList extends Component {
                 category: props.filter.category,
                 jurisdiction: props.filter.jurisdiction,
                 provider: props.filter.provider,
-                channel: props.filter.channel
+                channel: props.filter.channel,
+                sort: props.filter.sort ? props.filter.sort : defaultSort,
+                order: props.filter.order ? props.filter.order : defaultOrder
             }
         })
         .then((res) => {
+            var currentPage = res.data.meta.currentPage;
+            var totalPages = res.data.meta.totalPages;
+
             this.setState((prevState) => ({
                 loading: false,
-                more: (res.data.meta.currentPage < res.data.meta.totalPages),
-                currentPage: res.data.meta.currentPage,
-                games: [ ...prevState.games, ...res.data.games ]
+                more: (currentPage < totalPages),
+                currentPage: currentPage,
+                games: (currentPage > 1)? [ ...prevState.games, ...res.data.games ] : res.data.games
             }));
         });
     }
