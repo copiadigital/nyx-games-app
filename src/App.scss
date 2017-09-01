@@ -12,20 +12,46 @@
 
 .app-title {
   display: inline-block;
-  vertical-align: middle; }
+  vertical-align: middle;
+  font-size: 1.2rem; }
 
 .nav {
   float: right;
   display: inline-block;
-  text-align: right; }
+  text-align: right;
+  padding-top: 34px; }
 
 .nav li {
   display: inline-block;
-  margin-left: 20px; }
+  margin-left: 20px;
+  font-size: 1rem; }
 
 .nav li a {
+  padding: 2px;
   color: white;
   text-decoration: none; }
+
+.app-footer {
+  position: relative;
+  background: #14334a; }
+
+.app-footer__slope {
+  position: absolute;
+  top: -3%;
+  left: -10%;
+  width: 110%;
+  padding-bottom: 10%;
+  background: #14334a; }
+  .app-footer__slope:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #14334a;
+    transform-origin: 100% 0;
+    transform: rotate(4deg); }
 
 .banner {
   height: 510px; }
@@ -98,7 +124,7 @@ body {
   max-width: 1160px; }
 
 .app-body {
-  padding: 30px;
+  padding: 30px 30px 150px 30px;
   background: #fff; }
 
 .app-intro {
@@ -144,3 +170,4 @@ a.btn.btn-blue {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7); }
+

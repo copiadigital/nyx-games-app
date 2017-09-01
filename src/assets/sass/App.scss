@@ -1,5 +1,6 @@
 @import "./variables.scss";
 @import "./header.scss";
+@import "./footer.scss";
 @import "./banner.scss";
 @import "./forms.scss";
 
@@ -20,7 +21,7 @@ body{
 }
 
 .app-body{
-  padding:30px;
+  padding:30px 30px 150px 30px;
   background:#fff;
 }
 

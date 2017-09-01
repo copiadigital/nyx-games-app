@@ -39,6 +39,7 @@ class App extends Component {
                 </div>
             </div>
             <div className="app-footer">
+              <div className="app-footer__slope"></div>
               <p>&copy; 2017</p>
             </div>
           </div>
