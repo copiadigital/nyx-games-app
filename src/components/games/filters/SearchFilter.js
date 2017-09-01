@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'underscore';
 
 class SearchFilter extends Component {
     constructor(props) {
@@ -9,17 +10,20 @@ class SearchFilter extends Component {
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.updateSearchQueryDebounced = _.debounce(this.updateSearchQuery, 500);
     }
     componentWillReceiveProps(nextProps) {
         this.setState({value: nextProps.value});
     }
     handleInputChange(event) {
         const value = event.target.value;
+        this.setState({ value: value });
+        this.updateSearchQueryDebounced(value);
+    }
+    updateSearchQuery(value) {
         const minLength = (this.props.minLength)? +this.props.minLength : 0;
-        const query = (value.length > minLength)? value : null;
-
-        if(query !== this.state.value) {
-            this.props.setFilter({searchQuery: query});
+        if(value.length === 0 || value.length >= minLength) {
+            this.props.setFilter({searchQuery: value});
         }
     }
     render() {

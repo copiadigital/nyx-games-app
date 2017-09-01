@@ -41,6 +41,7 @@ class FilterForm extends Component {
                         <label>Sort by:</label>
                         <SearchFilter
                             value={ this.props.filter.searchQuery }
+                            minLength={ 2 }
                             setFilter={ this.props.setFilter }
                             />
                     </fieldset>
