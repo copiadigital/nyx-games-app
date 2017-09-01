@@ -19,6 +19,7 @@ class FeaturedFilter extends Component {
                     valueField="id"
                     textField="name"
                     onChange={(value) => this.props.setFilter({ featured: (value.id === 'featured') })}
+                    disabled={ this.props.disabled }
                 />
             </fieldset>
         );

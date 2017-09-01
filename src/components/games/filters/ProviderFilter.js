@@ -51,6 +51,7 @@ class ProviderFilter extends Component {
                     valueField="id"
                     textField="name"
                     onChange={ this.onChangeHandler }
+                    disabled={ this.props.disabled }
                 />
             </fieldset>
         );

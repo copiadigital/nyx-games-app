@@ -9,6 +9,8 @@ import SearchFilter from "./filters/SearchFilter";
 
 class FilterForm extends Component {
     render() {
+        const filtersDisabled = (this.props.filter.searchQuery && this.props.filter.searchQuery.length > 0);
+
         return (
             <div className="wrapper wrapper--thin">
                 <form className="game-filter">
@@ -16,22 +18,27 @@ class FilterForm extends Component {
                         <FeaturedFilter
                             featured={ this.props.filter.featured }
                             setFilter={ this.props.setFilter }
+                            disabled={ filtersDisabled }
                         />
                         <JurisdictionFilter
                             jurisdiction={ this.props.filter.jurisdiction }
                             setFilter={ this.props.setFilter }
+                            disabled={ filtersDisabled }
                         />
                         <CategoryFilter
                             category={ this.props.filter.category }
                             setFilter={ this.props.setFilter }
+                            disabled={ filtersDisabled }
                         />
                         <ProviderFilter
                             provider={ this.props.filter.provider }
                             setFilter={ this.props.setFilter }
+                            disabled={ filtersDisabled }
                         />
                         <ChannelFilter
                             channel={ this.props.filter.channel }
                             setFilter={ this.props.setFilter }
+                            disabled={ filtersDisabled }
                         />
                         <ResetFilter
                             setFilter={ this.props.setFilter }

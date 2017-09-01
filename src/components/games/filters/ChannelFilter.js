@@ -19,6 +19,7 @@ class ChannelFilter extends Component {
                     valueField="id"
                     textField="name"
                     onChange={ (value) => this.props.setFilter({ channel: value.map(function(a){ return a.id }) }) }
+                    disabled={ this.props.disabled }
                 />
             </fieldset>
         );

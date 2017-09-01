@@ -43,6 +43,7 @@ class JurisdictionFilter extends Component {
                     valueField="id"
                     textField="name"
                     onChange={ (value) => this.props.setFilter({ jurisdiction: value.map(function(a){ return a.id }) }) }
+                    disabled={ this.props.disabled }
                 />
             </fieldset>
         );

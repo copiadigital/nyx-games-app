@@ -50,6 +50,7 @@ class CategoryFilter extends Component {
                     valueField="id"
                     textField="name"
                     onChange={ this.onChangeHandler }
+                    disabled={ this.props.disabled }
                 />
             </fieldset>
         );
