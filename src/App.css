@@ -80,6 +80,10 @@
 .game-filter #search{
   float: right; }
 
+.sort-widget.disabled a{
+  cursor: not-allowed;
+}
+
 body {
   font-size: 10px;
   box-sizing: border-box;

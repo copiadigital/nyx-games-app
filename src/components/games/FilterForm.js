@@ -6,6 +6,7 @@ import ProviderFilter from "./filters/ProviderFilter";
 import ChannelFilter from "./filters/ChannelFilter";
 import ResetFilter from "./filters/ResetFilter";
 import SearchFilter from "./filters/SearchFilter";
+import SortLink from "./filters/SortLink";
 
 class FilterForm extends Component {
     render() {
@@ -46,6 +47,15 @@ class FilterForm extends Component {
                     </fieldset>
                     <fieldset className="row">
                         <label>Sort by:</label>
+                        <SortLink
+                            field="name"
+                            label="A-Z"
+                            disabled={ filtersDisabled }
+                            active={ this.props.filter.sort === 'name' }
+                            order={ (this.props.filter.order === 'desc')? 'desc' : 'asc' }
+                            setFilter={ this.props.setFilter }
+                            />
+
                         <SearchFilter
                             value={ this.props.filter.searchQuery }
                             minLength={ 2 }
