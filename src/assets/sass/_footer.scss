@@ -1,0 +1,25 @@
+.app-footer{
+	position:relative;
+	background:$color-blue-dark;
+}
+
+.app-footer__slope{
+	position:absolute;
+	top:-3%;
+	left:-10%;
+	width:110%;
+	padding-bottom:10%;
+	background:$color-blue-dark;
+
+	&:before{
+		content:'';
+	    position:absolute;
+	    top:0;
+	    left:0;
+	    width:100%;
+	    height:100%;
+	    background:$color-blue-dark;
+	    transform-origin:100% 0;
+    	transform:rotate(4deg);
+	}
+}
