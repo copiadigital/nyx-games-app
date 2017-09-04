@@ -1,46 +1,25 @@
 import React, { Component } from 'react';
 import ChannelList from "../utilities/ChannelList";
 import LinkButton from "../utilities/LinkButton";
-import queryString from 'query-string';
 import DemoIFrame from "./DemoIFrame";
+import DemoSwitch from "./DemoSwitch";
 
 class DemoModal extends Component {
     constructor(props){
         super(props);
 
         this.state = {
+            channel: this.props.channel
         };
+
+        this.setChannel = this.setChannel.bind(this);
     }
-    buildDemoUrl() {
-        const game = this.props.game;
-        const channel = this.props.channel;
-
-        var clientType = 'flash';
-
-        switch(channel){
-            case 'html5':
-            case 'mobile':
-                clientType = 'html5';
-                break;
-            case 'desktop':
-            case 'flash':
-            default:
-                clientType = 'flash';
-                break;
-        }
-
-        return 'https://nogs-gl-stage.nyxmalta.com/game/?' + queryString.stringify({
-                nogsoperatorid: 894,
-                nogsgameid: game.id,
-                nogsmode: 'demo',
-                nogslang: 'en_us',
-                nogscurrency: 'EUR',
-                clienttype: clientType
-            });
+    setChannel(channel) {
+        this.setState({ channel: channel });
     }
     render() {
         const game = this.props.game;
-        const channel = this.props.channel;
+        const channel = this.state.channel;
 
         var maxWidth = Math.min(window.innerWidth * 0.9, 1280);
         var detailWidth = Math.max(100, maxWidth * 0.25);
@@ -63,6 +42,8 @@ class DemoModal extends Component {
                         <dt>Volatility</dt><dd>???????</dd>
                     </dl>
                     <LinkButton className="btn-blue" to={`/game/${game.id}/${game.slug}`}>View game info</LinkButton>
+
+                    <DemoSwitch game={game} channel={channel} setChannel={this.setChannel} />
                 </div>
             </div>
         )

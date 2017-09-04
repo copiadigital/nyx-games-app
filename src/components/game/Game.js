@@ -4,6 +4,7 @@ import Loading from "../utilities/Loading";
 import ImageLoader from "../utilities/ImageLoader";
 import ChannelList from "../utilities/ChannelList";
 import DemoIFrame from "./DemoIFrame";
+import DemoSwitch from "./DemoSwitch";
 import './Game.css';
 
 class Game extends Component {
@@ -15,6 +16,8 @@ class Game extends Component {
             game: null,
             channel: 'desktop'
         };
+
+        this.setChannel = this.setChannel.bind(this);
     }
     componentDidMount(){
         this.loadGame();
@@ -35,6 +38,9 @@ class Game extends Component {
                 });
             });
     }
+    setChannel(channel){
+        this.setState({ channel: channel });
+    }
     render() {
         if(this.state.loading){
             return <Loading/>
@@ -52,6 +58,7 @@ class Game extends Component {
                 <div className="game-demo-viewport" style={ { width: viewportWidth, height: viewportHeight  } }>
                     <DemoIFrame game={game} channel={channel} />
                 </div>
+                <DemoSwitch game={game} channel={channel} setChannel={this.setChannel} />
 
                 <h1>{game.name}</h1>
                 <ImageLoader
