@@ -3,6 +3,7 @@ import logo from './assets/images/logo.svg';
 import './App.css';
 import Game from './components/game/Game';
 import Games from './components/games/Games';
+import Service from './components/service/Service';
 import {
     BrowserRouter,
     Redirect,
@@ -33,6 +34,7 @@ class App extends Component {
                     <Route path="/" exact={true} render={() => <Redirect to="/games" />} />
                     <Route path="/games" component={Games} />
                     <Route path="/game/:gameId/:gameSlug" component={Game} />
+                    <Route path="/service" component={Service} />
                 </div>
             </div>
             <div className="app-footer">
