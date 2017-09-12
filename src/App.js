@@ -20,9 +20,10 @@ class App extends Component {
                     <img src={logo} className="app-logo" alt="NYX logo" />
                     <h2 className="app-title">Game Portal</h2>
                     <ul className="nav">
+                        <li><a href="/games">Games</a></li>
                         <li><a href="/news">News</a></li>
                         <li><a href="/contact">Contact</a></li>
-                        <li><a href="/service">Customer service</a></li>
+                        <li><a href="/service">Self service</a></li>
                     </ul>
                 </div>
             </div>
