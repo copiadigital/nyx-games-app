@@ -3,33 +3,60 @@
 }
 
 .app-header{
-  padding:20px;
+  padding:10px 20px;
   color:white;
+}
+
+@include respond(medium){
+	padding:20px;
 }
 
 .app-logo{
 	display:inline-block;
-	margin:27px 20px 27px 0;
+	margin:20px 20px 0 0;
 	vertical-align:middle;
+}
+
+@include respond(small){
+	.app-logo{
+		max-width:100px;
+	}
 }
 
 .app-title{
 	display:inline-block;
 	vertical-align:middle;
 	font-size:1.2rem;
+
+	@include respond(small){
+		float:right;
+		margin-bottom:5px;
+	}
 }
 
 .nav{
 	float:right;
 	display:inline-block;
 	text-align:right;
-	padding-top:34px;
+	padding-top:27px;
+
+	@include respond(small){
+		float:none;
+		display:block;
+		padding:0;
+		margin:-10px 0 0 0;
+	}
 }
 
 .nav li{
 	display:inline-block;
 	margin-left:20px;
 	font-size:1rem;
+
+	@include respond(small){
+		margin-left:8px;
+		font-size:0.7rem;
+	}
 }
 
 .nav li a{

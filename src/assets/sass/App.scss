@@ -1,27 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
 @import "./variables.scss";
+@import "./respond.scss";
 @import "./header.scss";
 @import "./footer.scss";
 @import "./banner.scss";
 @import "./forms.scss";
+@import "./buttons.scss";
 
 body{
   font-size:10px;
   box-sizing:border-box;
-  background:#000 url(assets/images/bg-lightning-gems.png) center top no-repeat;
+  background:#000102 url(assets/images/bg-lightning-gems.png) center 50px no-repeat;
+  background-size:100% auto;
+
+  @include respond(mobile-only){
+    background-size:130% auto;
+  }
+
+  @include respond(medium){
+    background-position:center top;
+  }
 }
 
 .wrapper{
   margin:0 auto;
-  padding:0 80px;
-  max-width:1750px;
+  padding:0 $gutter/3;
+  max-width:$wrapper-small;
+}
+
+@include respond(medium){
+  .wrapper{
+    padding:0 $gutter;
+    max-width:$wrapper-medium;
+  }
+}
+
+@include respond(large){
+  .wrapper{
+    max-width:$wrapper-large;
+  }
 }
 
 .wrapper--thin{
-  max-width:1160px;
+  max-width:$wrapper-small;
+  padding:0;
+}
+
+@include respond(medium){
+  .wrapper--thin{
+    max-width:$wrapper-medium;
+  }
+}
+
+@include respond(large){
+  .wrapper--thin{
+    padding:0 $gutter;
+  }
 }
 
 .app-body{
-  padding:30px 30px 150px 30px;
+  padding:30px 14px 150px 30px;
   background:#fff;
 }
 

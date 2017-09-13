@@ -28,7 +28,7 @@ class App extends Component {
                 </div>
             </div>
             <div className="banner">
-                <a className="banner-button">Find out now</a>
+                <a className="banner-button" href="#">Find out now</a>
             </div>
             <div className="wrapper">
                 <div className="app-body">

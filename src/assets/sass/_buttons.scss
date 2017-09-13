@@ -1,0 +1,21 @@
+.banner-button{
+	display:block;
+	margin:0 auto;
+	padding:15px 0;
+	width:240px;
+	height:auto;
+	background-color:$color-blue;
+	border-radius:25px;
+	box-shadow:2px 4px 4.5px 0.5px rgba(0, 0, 0, 0.2);
+	text-align:center;
+	color:#fff;
+	font-family:Lato;
+	font-size:20px;
+	font-weight:500;
+	line-height:25px;
+	text-decoration:none;
+
+	@include respond(mobile-only){
+		transform:scale(0.6);
+	}
+}
