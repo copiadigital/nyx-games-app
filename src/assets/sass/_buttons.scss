@@ -1,8 +1,8 @@
 .banner-button{
 	display:block;
 	margin:0 auto;
-	padding:15px 0;
-	width:240px;
+	padding:12px 0;
+	width:220px;
 	height:auto;
 	background-color:$color-blue;
 	border-radius:25px;
@@ -14,6 +14,10 @@
 	font-weight:500;
 	line-height:25px;
 	text-decoration:none;
+
+	@include respond(small){
+		transform:scale(0.7);
+	}
 
 	@include respond(mobile-only){
 		transform:scale(0.6);
