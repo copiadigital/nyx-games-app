@@ -9,16 +9,23 @@ class DemoModal extends Component {
         super(props);
 
         this.state = {
+            game: this.props.game,
             channel: this.props.channel
         };
 
         this.setChannel = this.setChannel.bind(this);
     }
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            game: nextProps.game,
+            channel: nextProps.channel,
+        })
+    }
     setChannel(channel) {
-        this.setState({ channel: channel });
+        this.props.openDemoModal(this.props.game, channel);
     }
     render() {
-        const game = this.props.game;
+        const game = this.state.game;
         const channel = this.state.channel;
 
         var maxWidth = Math.min(window.innerWidth * 0.9, 1280);

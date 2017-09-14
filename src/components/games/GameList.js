@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import Waypoint from 'react-waypoint';
+import _ from 'underscore';
 import games from '../../data/games';
 import GameListGame from './GameListGame';
 import Loading from "../utilities/Loading";
@@ -15,23 +16,41 @@ class GameList extends Component {
             more: false,
             currentPage: 1,
             games: [],
-            isDemoModalOpen: false,
-            demoModalGame: null
+            isDemoModalOpen: (props.demoModal)? true : false,
+            demoModal: (props.demoModal)? props.demoModal : null
         };
 
         this.loadMoreGames = this.loadMoreGames.bind(this);
+        this.openDemoModal = this.openDemoModal.bind(this);
         this.closeDemoModal = this.closeDemoModal.bind(this);
     }
     componentDidMount(){
         this.loadGames(this.props);
     }
     componentWillReceiveProps(nextProps){
-        // reset games and call load games, as this is a new filter
-        this.setState({
-            loading: true,
-            more: false,
-            currentPage: 1
-        }, () => ( this.loadGames(nextProps) ));
+        var self = this;
+        var newState = {};
+        var requireGamesLoad = false;
+
+        if(!_.isEqual(this.props.filter, nextProps.filter)){
+            requireGamesLoad = true;
+            newState.loading = true;
+            newState.more = false;
+            newState.currentPage = 1;
+        }
+
+        if(!_.isEqual(this.props.demoModal, nextProps.demoModal)){
+            newState.isDemoModalOpen = (nextProps.demoModal)? true : false;
+            newState.demoModal = nextProps.demoModal;
+        }
+
+        var stateCallback = function(){
+            if(requireGamesLoad) {
+                self.loadGames(nextProps);
+            }
+        };
+
+        this.setState(newState, stateCallback);
     }
     loadGames(props){
         this.setState({ loading: true });
@@ -42,7 +61,7 @@ class GameList extends Component {
         games.all({
             params: {
                 page: this.state.currentPage,
-                itemsPerPage: 12,
+                itemsPerPage: 25,
                 q: props.filter.searchQuery,
                 featured: (props.filter.featured)? 1 : 0,
                 category: props.filter.category,
@@ -70,18 +89,10 @@ class GameList extends Component {
         this.setState((state) => ({currentPage : state.currentPage + 1}), () => ( this.loadGames(this.props) ));
     }
     openDemoModal(game, channel){
-        this.setState({
-            isDemoModalOpen: true,
-            demoModalGame: game,
-            demoModalChannel: channel
-        });
+        this.props.openDemoModal(game, channel);
     }
     closeDemoModal() {
-        this.setState({
-            isDemoModalOpen: false,
-            demoModalGame: null,
-            demoModalChannel: null
-        });
+        this.props.closeDemoModal();
     }
     render() {
         const loading = this.state.loading;
@@ -113,9 +124,10 @@ class GameList extends Component {
                     overlayClassName="modal-overlay"
                 >
                     {(this.state.isDemoModalOpen? <DemoModal
-                        game={this.state.demoModalGame}
-                        channel={this.state.demoModalChannel}
+                        game={this.state.demoModal.game}
+                        channel={this.state.demoModal.channel}
                         closeDemoModal={this.closeDemoModal}
+                        openDemoModal={this.openDemoModal}
                     /> : null)}
                 </Modal>
             </div>
