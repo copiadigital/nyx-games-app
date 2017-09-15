@@ -16,16 +16,11 @@
     display:inline-block;
     max-width:100%;
     width:220px;
-    height:0;
+    height:140px;
     margin:0 16px 16px 0;
-    padding-bottom:11.4%;
     background-color:#646464;
     box-shadow:1.1px 2.8px 6px rgba(0, 0, 0, 0.3);
 }
-
-//.games-grid-game-container:nth-child(5n){
-//    margin-right:0;
-//}
 
 .games-grid-game{
     position:absolute;
@@ -36,21 +31,104 @@
 }
 
 .games-grid-game__highlight{
-    background-color:#132029;
+    padding:15px;
+    background-color:#14334a;
+    background-image:linear-gradient(139deg, #14334a 0%, #14334a 11%, #006ba3 100%);
     color:#fff;
 }
 
-div.games-grid-game__highlight a{
+.games-grid-game-name{
+    font-size:1.4em;
+    font-weight:bold;
+}
+
+.games-grid-game__highlight a{
     color: #ffffff;
 }
 
-div.games-grid-game img.games-grid-game-icon{
+.games-grid-game img.games-grid-game-icon{
     width: 100%;
     height: 100%;
 }
 
-div.games-grid-game-summary{
-    font-size: 0.8em;
+.games-grid-game-description p{
+    margin:6px 0 0 0;
+    font-size:1.2em;
+}
+
+.games-grid-game-info a{
+    float:right;
+    display:block;
+    margin:0 0 0 10px;
+    width:46px;
+    height:46px;
+    line-height:44px;
+    font-size:2.2em;
+    font-weight:bold;
+    text-align:center;
+    border:1px solid #fff;
+    border-radius:50%;
+    text-decoration:none;
+}
+
+.games-grid-game-demo-options{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:50px;
+    background-color:#14334a;
+
+    .games-grid-game-demo-title{
+        position:relative;
+        display:block;
+        float:left;
+        height:100%;
+        padding:0 5px 0 15px;
+        margin-right:20px;
+        background-color:#007dbe;
+        text-transform:uppercase;
+        vertical-align:middle;
+        line-height:50px;
+
+        &:after{
+            position:absolute;
+            content:"";
+            right:-10px;
+            width:0;
+            height:0;
+            border-style:solid;
+            border-width:25px 0 25px 10px;
+            border-color:transparent transparent transparent #007dbe;
+        }
+    }
+
+    .games-grid-game-demo{
+        display:inline-block;
+        margin:8px 10px;
+        width:34px;
+        height:34px;
+        border:none;
+        overflow:hidden;
+        text-indent:-100em;
+        background-color:transparent;
+        background-size:contain;
+        background-repeat:no-repeat;
+        background-position:center center;
+
+        &_desktop{
+            background-image:url(../../assets/images/icon-desktop.png);
+        }
+
+        &_mobile{
+            background-image:url(../../assets/images/icon-mobile.png);
+        }
+    }
+
+    .or{
+        vertical-align:middle;
+        color:#fff;
+    }
 }
 
 .game-demo-modal-container{

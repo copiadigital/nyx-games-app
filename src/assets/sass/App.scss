@@ -7,9 +7,12 @@
 @import "./forms.scss";
 @import "./buttons.scss";
 
+body *{
+  box-sizing:border-box;
+}
+
 body{
   font-size:10px;
-  box-sizing:border-box;
   background:#000102 url(assets/images/bg-lightning-gems.png) center 50px no-repeat;
   background-size:100% auto;
   font-family:Lato, Arial, sans-serif;
@@ -25,7 +28,8 @@ body{
 
 .wrapper{
   margin:0 auto;
-  padding:0 $gutter/3;
+//  padding:0 $gutter/3;
+  padding:0;
   max-width:$wrapper-small;
 }
 
@@ -60,7 +64,7 @@ body{
 }
 
 .app-body{
-  padding:30px 14px 150px 30px;
+  padding:20px 14px 150px 30px;
   background:#fff;
 }
 

@@ -1,71 +1,155 @@
 .game-filter{
-//    display:flex;
     padding-bottom:20px;
     margin-bottom:20px;
-}
 
-.game-filter fieldset{
-	width:100%;
-	margin:0;
-	padding:0;
-	border:none;
-}
-
-.game-filter .row:first-child{
-	border-bottom:2px solid $color-grey;
-}
-
-.game-filter .row fieldset{
-	display:inline-block;
-	width:20%;
-	color:$color-blue;
-}
-
-.game-filter label{
-	display:block;
-	padding:0 0 8px 15px;
-	font-size:1.4em;
-}
-
-.game-filter .rw-widget-input{
-	max-width:90%;
-	font-size:1.6em;
-	border:1px solid $color-blue;
-	border-radius:25px;
-	cursor:pointer;
-	color:$color-grey-dark;
-
-	.rw-btn{
-			color:$color-blue;
+	fieldset{
+		width:100%;
+		margin:0;
+		padding:0;
+		border:none;
 	}
 
-	&:hover{
-		background:$color-blue;
-		color:#fff;
+	.row{
+		padding:15px 0 10px 0;
 
-		.rw-btn{
-			color:#fff;
+		&:first-child{
+			border-bottom:2px solid $color-grey;
+		}
+	}
+
+	.row fieldset{
+		display:inline-block;
+		margin-bottom:10px;
+		width:50%;
+		color:$color-blue;
+
+		@include respond(small){
+			width:50%;
 		}
 
+		@include respond(medium){
+			width:33%;
+		}
+
+		@include respond(large){
+			width:18%;
+		}
 	}
-}
 
-.game-filter .rw-widget-input .rw-input{
-	color:inherit;
-}
+	label{
+		display:block;
+		padding:0 0 8px 15px;
+		font-size:1.4em;
+	}
 
-.game-filter .rw-widget-input .rw-popup{
-	background:$color-blue;
-	color:#fff;
-}
+	.rw-widget-input{
+		max-width:90%;
+		font-size:1.5em;
+		border:1px solid $color-blue;
+		border-radius:25px;
+		cursor:pointer;
+		color:$color-grey-dark;
 
-.game-filter #search{
-	float:right;
-	padding:5px 0;
-	border:none;
-	border-bottom:4px solid $color-blue;
-	background:url(assets/images/icon-search.png) no-repeat right center;
-	color:$color-grey-light;
-	font-style:italic;
-	font-size:0.8rem;
+		.rw-btn{
+				color:$color-blue;
+		}
+
+		&:hover{
+			background:$color-blue;
+			color:#fff;
+
+			.rw-btn{
+				color:#fff;
+			}
+
+		}
+	}
+
+	.rw-widget .rw-input{
+		color:inherit;
+	}
+
+	.rw-widget .rw-popup-container{
+		right:12px;
+	}
+
+	.rw-widget .rw-popup{
+		font-size:1.4em;
+		background:$color-blue;
+		color:#fff;
+		border:none;
+		border-radius:0 0 4px 4px;
+
+		.rw-list-option{
+			color:lighten($color-blue, 50%);
+
+			&:hover{
+				color:darken($color-blue, 20%);				
+			}
+		}
+	}
+
+	.filter-reset{
+		display:inline-block;
+
+		a{
+			font-size:1.4em;
+			color:$color-grey-dark;
+		}
+	}
+
+	.sort-search{
+		label{
+			display:inline-block;
+			padding-right:8px;
+			color:$color-grey-dark;
+		}
+
+		.sort-widget{
+			position:relative;
+			display:inline-block;
+			padding-right:15px;
+		}
+
+		a{
+			display:inline-block;
+			font-size:1.4em;
+			color:$color-blue;
+			text-decoration:none;
+		}
+
+		.arrow{
+			position:absolute;
+			right:0;
+			top:3px;
+			width:0;
+			height:0;
+			font-size:0;
+			text-indent:-100em;
+			border-style:solid;
+			border-width:0 5px 5px 5px;
+			border-color:transparent transparent $color-grey transparent;
+
+			&--desc{
+				top:auto;
+				bottom:3px;
+				transform:rotate(180deg);
+			}
+
+			&-active{
+				border-bottom-color:$color-blue;
+			}
+		}
+	}
+
+	 #search{
+		float:right;
+		padding:5px 0;
+		border:none;
+		border-bottom:4px solid $color-blue;
+		background:url(assets/images/icon-search.png) no-repeat right center;
+		color:$color-grey-light;
+		font-style:italic;
+		font-size:0.8rem;
+	}
 }
