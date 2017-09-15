@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import _ from 'underscore';
 import ImageLoader from '../utilities/ImageLoader';
 import LoadingImage from '../utilities/LoadingImage';
 
@@ -23,11 +24,22 @@ class GameListGame extends Component {
     }
     playDemoButtonHandler(channel){
         var self = this;
-        return function(){
+
+        if(_.isEmpty(channel)){
+            channel = null;
+        }
+
+        return function(e){
+            e.preventDefault();
             self.playDemo(channel);
         }
     }
     playDemo(channel){
+        if(_.isEmpty(channel)){
+            var game = this.props.game;
+            channel = (game.channels.indexOf('desktop') > -1) ? 'desktop' : 'mobile';
+        }
+
         this.props.openDemoModal(channel);
     }
     renderHighlight(game) {
@@ -35,16 +47,22 @@ class GameListGame extends Component {
             <div>
                 <div className="games-grid-game-name">{game.name}</div>
                 <div className="games-grid-game-info">
-                    <Link className="btn-white" to={`/game/${game.id}/${game.slug}`}>i</Link>
+                    <a className="btn-white" href="#info" onClick={this.playDemoButtonHandler()}>i</a>
                 </div>
                 <div className="games-grid-game-description">
                     <p>Lorem ipsum dolor...</p>
                 </div>
                 <div className="games-grid-game-demo-options">
                     <span className="games-grid-game-demo-title">Play Demo</span>
+<<<<<<< HEAD
                     { ( (game.channels.indexOf('desktop') > -1) ? <button className="games-grid-game-demo games-grid-game-demo_desktop" onClick={this.playDemoButtonHandler('desktop')}>Desktop</button> : '' ) }
                     { ( (game.channels.indexOf('mobile') > -1) ? <span className="or">or</span> : '' ) }
                     { ( (game.channels.indexOf('mobile') > -1) ? <button className="games-grid-game-demo games-grid-game-demo_mobile" onClick={this.playDemoButtonHandler('mobile')}>Mobile</button> : '' ) }
+=======
+                    { ( (game.channels.indexOf('desktop') > -1) ? <button className="btn btn-white games-grid-game-demo games-grid-game-demo_desktop" onClick={this.playDemoButtonHandler('desktop')}>Desktop</button> : '' ) }
+                    { ( (game.channels.length > 1) ? <span className="or">or</span> : '' ) }
+                    { ( (game.channels.indexOf('mobile') > -1) ? <button className="btn btn-white games-grid-game-demo games-grid-game-demo_mobile" onClick={this.playDemoButtonHandler('mobile')}>Mobile</button> : '' ) }
+>>>>>>> caaca7064342893975e05559c9e4d2bc8dd4e640
                 </div>
 
             </div>

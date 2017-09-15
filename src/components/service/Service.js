@@ -5,7 +5,7 @@ class Service extends Component {
     render() {
         return (
             <div className="page-service">
-                <iframe src="https://gamesdesk.nyxgg.com/" width="100%" height="600" title="Self service" />
+                <iframe src="https://gamesdesk.nyxgg.com/" width="100%" height="1200" title="Self service" />
             </div>
         );
     }
