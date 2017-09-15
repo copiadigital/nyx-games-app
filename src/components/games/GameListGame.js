@@ -54,15 +54,9 @@ class GameListGame extends Component {
                 </div>
                 <div className="games-grid-game-demo-options">
                     <span className="games-grid-game-demo-title">Play Demo</span>
-<<<<<<< HEAD
                     { ( (game.channels.indexOf('desktop') > -1) ? <button className="games-grid-game-demo games-grid-game-demo_desktop" onClick={this.playDemoButtonHandler('desktop')}>Desktop</button> : '' ) }
-                    { ( (game.channels.indexOf('mobile') > -1) ? <span className="or">or</span> : '' ) }
-                    { ( (game.channels.indexOf('mobile') > -1) ? <button className="games-grid-game-demo games-grid-game-demo_mobile" onClick={this.playDemoButtonHandler('mobile')}>Mobile</button> : '' ) }
-=======
-                    { ( (game.channels.indexOf('desktop') > -1) ? <button className="btn btn-white games-grid-game-demo games-grid-game-demo_desktop" onClick={this.playDemoButtonHandler('desktop')}>Desktop</button> : '' ) }
                     { ( (game.channels.length > 1) ? <span className="or">or</span> : '' ) }
-                    { ( (game.channels.indexOf('mobile') > -1) ? <button className="btn btn-white games-grid-game-demo games-grid-game-demo_mobile" onClick={this.playDemoButtonHandler('mobile')}>Mobile</button> : '' ) }
->>>>>>> caaca7064342893975e05559c9e4d2bc8dd4e640
+                    { ( (game.channels.indexOf('mobile') > -1) ? <button className="games-grid-game-demo games-grid-game-demo_mobile" onClick={this.playDemoButtonHandler('mobile')}>Mobile</button> : '' ) }
                 </div>
 
             </div>
