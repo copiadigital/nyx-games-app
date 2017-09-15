@@ -41,7 +41,7 @@ class DemoModal extends Component {
                 </div>
                 <div className="game-demo-modal-detail" style={ { width: detailWidth } }>
                     <div className="game-demo-modal-title">{game.name}</div>
-                    <p className="game-demo-modal-description">{game.description}</p>
+                    <p className="game-demo-modal-description">Lorem ipsum dolor sit amet consectituer adipiscing elit nam. {game.description}</p>
                     <dl>
                         <dt>Channel</dt><dd><ChannelList channels={game.channels} glue=" | " /></dd>
                         <dt>Lines</dt><dd>##</dd>

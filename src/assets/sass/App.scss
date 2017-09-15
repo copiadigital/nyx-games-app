@@ -78,31 +78,12 @@ body{
   color: white;
 }
 
-a.btn{
-  margin: 5px;
-  padding: 0 15px;
-  background-color: #000000;
-  border: 5px #000000 solid;
-  border-radius: 15px;
-}
-
-a.btn.btn-white{
-  background-color: #ffffff;
-  border-color: #fff;
-}
-
-a.btn.btn-blue{
-  background-color: #007dba;
-  border-color: #007dba;
-  color: #fff;
-}
-
 .col-6{
   display: inline-block;
   width: 50%;
 }
 
-.modal {
+.modal{
   position: absolute;
   max-height: calc(100% - 100px);
   top: 50%;
@@ -118,4 +99,12 @@ a.btn.btn-blue{
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
+}
+
+:focus{
+    outline:none;
+}
+
+button{
+  border:none;
 }

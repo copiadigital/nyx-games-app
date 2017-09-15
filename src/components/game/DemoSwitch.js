@@ -17,8 +17,8 @@ class DemoSwitch extends Component {
         const game = this.props.game;
         const channel = this.props.channel;
 
-        var desktopClasses = ['btn', 'game-demo-switch-choice', 'game-demo-switch-choice__desktop'];
-        var mobileClasses = ['btn', 'game-demo-switch-choice', 'game-demo-switch-choice__mobile'];
+        var desktopClasses = ['game-demo-switch-choice', 'game-demo-switch-choice__desktop'];
+        var mobileClasses = ['game-demo-switch-choice', 'game-demo-switch-choice__mobile'];
 
         if(channel === 'desktop'){
             desktopClasses.push('active');
@@ -27,9 +27,11 @@ class DemoSwitch extends Component {
         }
 
         return (
-            <div>
-                { ( (game.channels.indexOf('desktop') > -1) ? <button className={ desktopClasses.join(' ') } onClick={this.clickHandlerBuild('desktop')}>Desktop</button> : '' ) }
-                { ( (game.channels.indexOf('mobile') > -1) ? <button className={ mobileClasses.join(' ') } onClick={this.clickHandlerBuild('mobile')}>Mobile</button> : '') }
+            <div className="game-demo-switch-container">
+                <div className="game-demo-switch-button-container">
+                    { ( (game.channels.indexOf('desktop') > -1) ? <button className={ desktopClasses.join(' ') } onClick={this.clickHandlerBuild('desktop')}>Desktop</button> : '' ) }
+                    { ( (game.channels.indexOf('mobile') > -1) ? <button className={ mobileClasses.join(' ') } onClick={this.clickHandlerBuild('mobile')}>Mobile</button> : '') }
+                </div>
             </div>
         );
     }
