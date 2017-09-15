@@ -34,14 +34,14 @@ class GameListGame extends Component {
         return (
             <div>
                 <div className="games-grid-game-name">{game.name}</div>
+                <div className="games-grid-game-info">
+                    <Link className="btn-white" to={`/game/${game.id}/${game.slug}`}>i</Link>
+                </div>
                 <div className="games-grid-game-description">
                     <p>Lorem ipsum dolor...</p>
                 </div>
-                <div className="games-grid-game-info">
-                    <Link className="btn-white" to={`/game/${game.id}/${game.slug}`}>Info</Link>
-                </div>
                 <div className="games-grid-game-demo-options">
-                    <span className="games-grid-game-demo-title">Demo</span>
+                    <span className="games-grid-game-demo-title">Play Demo</span>
                     { ( (game.channels.indexOf('desktop') > -1) ? <button className="btn btn-white games-grid-game-demo games-grid-game-demo_desktop" onClick={this.playDemoButtonHandler('desktop')}>Desktop</button> : '' ) }
                     { ( (game.channels.indexOf('mobile') > -1) ? <button className="btn btn-white games-grid-game-demo games-grid-game-demo_mobile" onClick={this.playDemoButtonHandler('mobile')}>Mobile</button> : '' ) }
                 </div>

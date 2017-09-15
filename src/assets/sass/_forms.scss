@@ -10,7 +10,7 @@
 	}
 
 	.row{
-		padding:15px 0 20px 0;
+		padding:15px 0 10px 0;
 
 		&:first-child{
 			border-bottom:2px solid $color-grey;
@@ -19,7 +19,8 @@
 
 	.row fieldset{
 		display:inline-block;
-		width:100%;
+		margin-bottom:10px;
+		width:50%;
 		color:$color-blue;
 
 		@include respond(small){
@@ -43,7 +44,7 @@
 
 	.rw-widget-input{
 		max-width:90%;
-		font-size:1.6em;
+		font-size:1.5em;
 		border:1px solid $color-blue;
 		border-radius:25px;
 		cursor:pointer;
@@ -64,13 +65,28 @@
 		}
 	}
 
-	.rw-widget-input .rw-input{
+	.rw-widget .rw-input{
 		color:inherit;
 	}
 
-	.rw-widget-input .rw-popup{
+	.rw-widget .rw-popup-container{
+		right:12px;
+	}
+
+	.rw-widget .rw-popup{
+		font-size:1.4em;
 		background:$color-blue;
 		color:#fff;
+		border:none;
+		border-radius:0 0 4px 4px;
+
+		.rw-list-option{
+			color:lighten($color-blue, 50%);
+
+			&:hover{
+				color:darken($color-blue, 20%);				
+			}
+		}
 	}
 
 	.filter-reset{
