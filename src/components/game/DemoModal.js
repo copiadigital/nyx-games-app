@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ChannelList from "../utilities/ChannelList";
 import LinkButton from "../utilities/LinkButton";
+import ImageLoader from "../utilities/ImageLoader";
 import DemoIFrame from "./DemoIFrame";
 import DemoSwitch from "./DemoSwitch";
 
@@ -42,13 +43,30 @@ class DemoModal extends Component {
                 <div className="game-demo-modal-detail" style={ { width: detailWidth } }>
                     <div className="game-demo-modal-title">{game.name}</div>
                     <p className="game-demo-modal-description">{game.description}</p>
+
+                    <ImageLoader
+                        src={"/static/images/icons/providers/" + game.provider + ".png"}
+                        loading={<div />}
+                        className="game-provider-icon"
+                        error={<span>{game.provider} logo</span>}
+                    />
+
                     <dl>
                         <dt>Channel</dt><dd><ChannelList channels={game.channels} glue=" | " /></dd>
                         <dt>Lines</dt><dd>##</dd>
                         <dt>RTP</dt><dd>##%</dd>
                         <dt>Volatility</dt><dd>???????</dd>
                     </dl>
-                    <LinkButton className="btn-blue" to={`/game/${game.id}/${game.slug}`}>View game info</LinkButton>
+
+                    <dl>
+                        <dt>GameID</dt><dd>OGS: {game.id}</dd>
+                        <dt>Studio</dt><dd>{game.provider}</dd>
+                    </dl>
+
+                    <h3>Downloads</h3>
+                    <a href="#example">Example file</a>
+
+                    {/*<LinkButton className="btn-blue" to={`/game/${game.id}/${game.slug}`}>View game info</LinkButton>*/}
 
                     <DemoSwitch game={game} channel={channel} setChannel={this.setChannel} />
                 </div>
