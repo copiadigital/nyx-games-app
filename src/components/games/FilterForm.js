@@ -45,7 +45,7 @@ class FilterForm extends Component {
                             setFilter={ this.props.setFilter }
                         />
                     </fieldset>
-                    <fieldset className="row">
+                    <fieldset className="row sort-search">
                         <label>Sort by:</label>
                         <SortLink
                             field="name"
