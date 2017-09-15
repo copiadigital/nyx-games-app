@@ -85,6 +85,7 @@
         float:left;
         height:100%;
         padding:0 5px 0 15px;
+        margin-right:20px;
         background-color:#007dbe;
         text-transform:uppercase;
         vertical-align:middle;
@@ -104,8 +105,13 @@
 
     .games-grid-game-demo{
         display:inline-block;
-        width:50px;
-        height:45px;
+        margin:8px 10px;
+        width:34px;
+        height:34px;
+        border:none;
+        overflow:hidden;
+        text-indent:-100em;
+        background-color:transparent;
         background-size:contain;
         background-repeat:no-repeat;
         background-position:center center;
@@ -117,7 +123,11 @@
         &_mobile{
             background-image:url(../../assets/images/icon-mobile.png);
         }
+    }
 
+    .or{
+        vertical-align:middle;
+        color:#fff;
     }
 }
 
