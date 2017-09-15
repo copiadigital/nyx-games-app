@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import './Service.css';
 
 class Service extends Component {
-    constructor(props){
-        super(props);
-        //this.startPollHeight = this.startPollHeight.bind(this);
-    }
     render() {
         return (
             <div className="page-service">
