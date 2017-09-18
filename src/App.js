@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import logo from './assets/images/logo.svg';
-import './App.css';
 import Games from './components/games/Games';
 import Service from './components/service/Service';
 import {
     BrowserRouter,
     Redirect,
     Route,
-} from 'react-router-dom'
+} from 'react-router-dom';
+import './assets/sass/App.css';
 
 class App extends Component {
   render() {
