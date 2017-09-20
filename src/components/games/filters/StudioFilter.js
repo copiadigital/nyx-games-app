@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { DropdownList } from 'react-widgets';
-import providers from '../../../data/providers';
+import studios from '../../../data/studios';
 import 'react-widgets/dist/css/react-widgets.css';
 
-class ProviderFilter extends Component {
+class StudioFilter extends Component {
     constructor(props) {
         super(props);
 
@@ -20,7 +20,7 @@ class ProviderFilter extends Component {
     loadOptions(props) {
         this.setState({ loading: true });
 
-        providers.all({
+        studios.all({
             params: {
                 itemsPerPage: 100,
                 sort: 'name'
@@ -29,24 +29,24 @@ class ProviderFilter extends Component {
             .then((res) => {
                 this.setState({
                     loading: false,
-                    options: res.data.providers
+                    options: res.data.studios
                 });
             });
     }
     onChangeHandler(value) {
-        var providerId = (value.id === '*')? null : value.id;
-        this.props.setFilter({ provider: providerId });
+        var studioId = (value.id === '*')? null : value.id;
+        this.props.setFilter({ studio: studioId });
     }
     render() {
         // force to number for strict matching
-        const provider = this.props.provider? Number(this.props.provider) : null;
+        const studio = this.props.studio? this.props.studio : null;
         const options = [{id: '*', name: 'All Studios'}, ...this.state.options];
 
         return (
             <fieldset>
                 <label>Studio:</label>
                 <DropdownList
-                    value={provider}
+                    value={studio}
                     data={options}
                     valueField="id"
                     textField="name"
@@ -58,4 +58,4 @@ class ProviderFilter extends Component {
     }
 }
 
-export default ProviderFilter;
+export default StudioFilter;

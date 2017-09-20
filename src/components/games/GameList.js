@@ -66,7 +66,7 @@ class GameList extends Component {
                 featured: (props.filter.featured)? 1 : 0,
                 category: props.filter.category,
                 jurisdiction: props.filter.jurisdiction,
-                provider: props.filter.provider,
+                studio: props.filter.studio,
                 channel: props.filter.channel,
                 sort: props.filter.sort ? props.filter.sort : defaultSort,
                 order: props.filter.order ? props.filter.order : defaultOrder

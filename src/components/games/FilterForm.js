@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FeaturedFilter from './filters/FeaturedFilter';
 import JurisdictionFilter from './filters/JurisdictionFilter';
 import CategoryFilter from './filters/CategoryFilter';
-import ProviderFilter from "./filters/ProviderFilter";
+import StudioFilter from "./filters/StudioFilter";
 import ChannelFilter from "./filters/ChannelFilter";
 import ResetFilter from "./filters/ResetFilter";
 import SearchFilter from "./filters/SearchFilter";
@@ -31,8 +31,8 @@ class FilterForm extends Component {
                             setFilter={ this.props.setFilter }
                             disabled={ filtersDisabled }
                         />
-                        <ProviderFilter
-                            provider={ this.props.filter.provider }
+                        <StudioFilter
+                            studio={ this.props.filter.studio }
                             setFilter={ this.props.setFilter }
                             disabled={ filtersDisabled }
                         />

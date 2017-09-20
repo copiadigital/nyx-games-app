@@ -45,10 +45,10 @@ class DemoModal extends Component {
                     <p className="game-demo-modal-description">Lorem ipsum dolor sit amet consectituer adipiscing elit nam. {game.description}</p>
 
                     <ImageLoader
-                        src={"/static/images/icons/providers/" + game.provider + ".png"}
+                        src={"/static/images/icons/providers/" + game.studio.id + ".png"}
                         loading={<div />}
                         className="game-provider-icon"
-                        error={<span>{game.provider} logo</span>}
+                        error={<span>{game.studio.name} logo</span>}
                     />
 
                     <dl>
@@ -60,7 +60,7 @@ class DemoModal extends Component {
 
                     <dl>
                         <dt>GameID</dt><dd>OGS: {game.id}</dd>
-                        <dt>Studio</dt><dd>{game.provider}</dd>
+                        <dt>Studio</dt><dd>{game.studio.name}</dd>
                     </dl>
 
                     <h3>Downloads</h3>
