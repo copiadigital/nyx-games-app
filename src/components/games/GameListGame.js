@@ -19,6 +19,10 @@ class GameListGame extends Component {
     componentWillReceiveProps(nextProps){
         this.setState({ highlight: nextProps.highlight });
     }
+    shouldComponentUpdate(nextProps, nextState){
+        // speeds up hover state changes immensely, by only firing update for highlight state
+        return (this.state.highlight !== nextState.highlight);
+    }
     mouseEnter() {
         if(!this.state.highlight){
             this.props.highlightGame(this.props.game);
