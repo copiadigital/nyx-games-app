@@ -69,7 +69,7 @@ class GameListGame extends Component {
                     src={"https://dga1sy052ek6h.cloudfront.net/icons/200x127/" + game.id + ".jpg"}
                     loading={<LoadingImage width="35" height="35" />}
                     className="games-grid-game-icon"
-                    error={<span>{game.name}</span>}
+                    error={<span className="games-grid-game-icon-placeholder">{game.name}</span>}
                 />
             </div>
         );

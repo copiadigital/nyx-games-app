@@ -51,6 +51,15 @@
     height: 100%;
 }
 
+.games-grid-game .games-grid-game-icon-placeholder{
+    display: block;
+    color: #ffffff;
+    font-size: 1.4em;
+    font-weight:bold;
+    text-align:center;
+    padding: 15px 5px;
+}
+
 .games-grid-game-description p{
     margin:6px 0 0 0;
     font-size:1.2em;
