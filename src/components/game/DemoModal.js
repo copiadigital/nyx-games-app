@@ -53,14 +53,13 @@ class DemoModal extends Component {
 
                     <dl>
                         <dt>Channel</dt><dd><ChannelList channels={game.channels} glue=" | " /></dd>
-                        <dt>Lines</dt><dd>##</dd>
-                        <dt>RTP</dt><dd>##%</dd>
-                        <dt>Volatility</dt><dd>???????</dd>
-                    </dl>
-
-                    <dl>
-                        <dt>GameID</dt><dd>OGS: {game.id}</dd>
+                        <dt>RTP</dt><dd>???</dd>
+                        <dt>Volatility</dt><dd>???</dd>
+                        <dt>Game ID</dt><dd>OGS {game.id}</dd>
                         <dt>Studio</dt><dd>{game.studio.name}</dd>
+                        <dt>Branded</dt><dd>???</dd>
+                        <dt>Jackpot</dt><dd>???</dd>
+                        <dt>Free Spins</dt><dd>???</dd>
                     </dl>
 
                     <h3>Downloads</h3>
