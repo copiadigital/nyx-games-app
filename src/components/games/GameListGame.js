@@ -9,18 +9,25 @@ class GameListGame extends Component {
         super(props);
 
         this.state = {
-            highlight: false
+            highlight: props.highlight
         };
 
         this.mouseEnter = this.mouseEnter.bind(this);
         this.mouseLeave = this.mouseLeave.bind(this);
         this.playDemoButtonHandler = this.playDemoButtonHandler.bind(this);
     }
+    componentWillReceiveProps(nextProps){
+        this.setState({ highlight: nextProps.highlight });
+    }
     mouseEnter() {
-        this.setState({ highlight: true });
+        if(!this.state.highlight){
+            this.props.highlightGame(this.props.game);
+        }
     }
     mouseLeave() {
-        this.setState({ highlight: false });
+        if(this.state.highlight){
+            this.props.highlightGame(null);
+        }
     }
     playDemoButtonHandler(channel){
         var self = this;

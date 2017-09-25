@@ -16,11 +16,13 @@ class GameList extends Component {
             more: false,
             currentPage: 1,
             games: [],
+            highlightedGame: (props.highlightedGame)? props.highlightedGame : null,
             isDemoModalOpen: (props.demoModal)? true : false,
             demoModal: (props.demoModal)? props.demoModal : null
         };
 
         this.loadMoreGames = this.loadMoreGames.bind(this);
+        this.highlightGame = this.highlightGame.bind(this);
         this.openDemoModal = this.openDemoModal.bind(this);
         this.closeDemoModal = this.closeDemoModal.bind(this);
     }
@@ -88,6 +90,11 @@ class GameList extends Component {
         // increment currentPage and call load games
         this.setState((state) => ({currentPage : state.currentPage + 1}), () => ( this.loadGames(this.props) ));
     }
+    highlightGame(game){
+        this.setState((prevState) => {
+            return ((prevState.highlightedGame === null && game !== null) || (game === null && prevState.highlightedGame !== null) || (prevState.highlightedGame.id !== game.id))? {highlightedGame: game} : null;
+        });
+    }
     openDemoModal(game, channel){
         this.props.openDemoModal(game, channel);
     }
@@ -98,6 +105,7 @@ class GameList extends Component {
         const loading = this.state.loading;
         const more = this.state.more;
         const games = this.state.games;
+        const highlightedGameId = this.state.highlightedGame? this.state.highlightedGame.id : null;
 
         if(loading && games.length === 0){
             return <Loading />;
@@ -106,7 +114,13 @@ class GameList extends Component {
         }
 
         const gameNode = games.map((game) => {
-            return (<GameListGame game={game} key={game.id} openDemoModal={(channel) => (this.openDemoModal(game, channel))}/>)
+            return (<GameListGame
+                game={game}
+                key={game.id}
+                highlight={(game.id === highlightedGameId)}
+                highlightGame={this.highlightGame}
+                openDemoModal={(channel) => (this.openDemoModal(game, channel))}
+            />)
         });
 
         return (
