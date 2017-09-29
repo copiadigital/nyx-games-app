@@ -56,9 +56,11 @@ class GameListGame extends Component {
         return (
             <div>
                 <div className="games-grid-game-name">{game.name}</div>
+                { /*
                 <div className="games-grid-game-info">
                     <a className="btn-white" href="#info" onClick={this.playDemoButtonHandler()}>i</a>
                 </div>
+                */ }
                 <div className="games-grid-game-description">
                     <p>Lorem ipsum dolor...</p>
                 </div>
