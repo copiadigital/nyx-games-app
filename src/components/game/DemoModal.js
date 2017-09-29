@@ -35,7 +35,7 @@ class DemoModal extends Component {
         var viewportHeight = viewportWidth * (600/960);
 
         var forceContent = function(val){
-          return _.isEmpty(val)? 'n/a' : val;
+          return (!_.isNumber(val) && _.isEmpty(val))? 'n/a' : val;
         };
 
         return (
