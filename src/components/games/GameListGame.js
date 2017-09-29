@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import _ from 'underscore';
 import ImageLoader from '../utilities/ImageLoader';
 import LoadingImage from '../utilities/LoadingImage';
@@ -77,7 +76,7 @@ class GameListGame extends Component {
         return (
             <div>
                 <ImageLoader
-                    src={"https://dga1sy052ek6h.cloudfront.net/icons/200x127/" + game.id + ".jpg"}
+                    src={"https://dga1sy052ek6h.cloudfront.net/icons/200x127/" + game.id + ".png"}
                     loading={<LoadingImage width="35" height="35" />}
                     className="games-grid-game-icon"
                     error={<span className="games-grid-game-icon-placeholder">{game.name}</span>}
