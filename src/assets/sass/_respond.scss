@@ -6,6 +6,9 @@
     @if $point == small {
         @media (min-width: $width-mobile) and (max-width: $width-small) { @content; }
     }
+    @if $point == small-only {
+        @media (min-width: 0) and (max-width: $width-medium) { @content; }
+    }
     @else if $point == medium {
         @media (min-width: $width-medium)  { @content; }
     }

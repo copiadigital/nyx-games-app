@@ -142,10 +142,22 @@
     }
 }
 
+
+.modal-overlay{
+    @include respond(small-only){
+        overflow:scroll;
+    }
+}
+
 .game-demo-modal-container{
     display:flex;
     width:100%;
+    background:#000;
     border:3px solid #fff;
+
+    @include respond(small-only){
+        display:block;
+    }
 }
 
 .game-demo-modal-close{
@@ -165,12 +177,23 @@
     border-radius:50%;
     cursor:pointer;
     padding:0 4px 3px 4px;
+
+    @include respond(small-only){
+        top:-15px;
+        right:-15px;
+        background:#fff;
+    }
 }
 
 .game-demo-viewport{
     display:table-cell;
     flex:1;
     overflow:hidden;
+
+    @include respond(small-only){
+        display:block;
+        flex:none;
+    }
 
     iframe{
         margin:0;
@@ -184,7 +207,13 @@
     display:table-cell;
     width:200px;
     padding:40px 30px;
-    background-left:2px solid white;
+    background:#fff;
+//    border-left:2px solid white;
+
+    @include respond(small-only){
+        width:100% !important;
+        display:block;
+    }
 
     .game-demo-modal-title{
         font-size:2.2em;
@@ -219,14 +248,31 @@
         }
     }
 
+    dl{
+        margin-bottom:0;
+    }
+
+    dl + dl{
+        margin-top:0;
+    }
+
     dt,dd{
         display:inline-block;
         width:30%;
         margin:0;
-        padding:8px 0;
-        font-size:1.4em;
+        padding:6px 0;
+        font-size:1.3em;
         color:$color-grey-dark;
         border-bottom:1px solid $color-grey;
+
+        @include respond(large){
+            padding:8px 0;
+            font-size:1.4em;
+        }
+
+        &:empty:after{
+            content:"\00a0";
+        }
     }
 
     dt{

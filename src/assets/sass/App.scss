@@ -28,9 +28,16 @@ body{
 
 .wrapper{
   margin:0 auto;
-//  padding:0 $gutter/3;
   padding:0;
-  max-width:$wrapper-small;
+  max-width:$wrapper-mobile;
+}
+
+@include respond(small){
+  .wrapper{
+    padding:0 $gutter;
+    max-width:$wrapper-small;
+    display:none;
+  }
 }
 
 @include respond(medium){
