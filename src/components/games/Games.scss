@@ -330,3 +330,21 @@
         }
     }
 }
+
+@include respond(medium-only){
+    .game-demo-container{
+        max-width:100%;
+    }
+
+    .game-demo-viewport{
+        display:block;
+        flex:none;
+        width:100%;
+    }
+
+    .game-demo-modal-detail{
+        position:relative;
+        display:block;
+        width:100%;
+    }
+}
