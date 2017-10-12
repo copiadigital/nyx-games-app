@@ -89,9 +89,17 @@ class GameListGame extends Component {
     render() {
         const game = this.props.game;
 
+        var classes = ['games-grid-game'];
+        classes.push(this.state.highlight ? 'games-grid-game__highlight' : 'games-grid-game__default');
+
+        if(game.high_quality){
+            console.log('yup hq');
+            classes.push('games-grid-game__hq');
+        }
+
         return (
             <li className="games-grid-game-container" onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-                <div className={"games-grid-game" + (this.state.highlight ? " games-grid-game__highlight" : "")}>
+                <div className={ classes.join(' ') }>
                     {this.state.highlight ? this.renderHighlight(game) : this.renderNormal(game) }
                 </div>
             </li>
