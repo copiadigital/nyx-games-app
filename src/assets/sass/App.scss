@@ -36,7 +36,6 @@ body{
   .wrapper{
     padding:0 $gutter;
     max-width:$wrapper-small;
-    display:none;
   }
 }
 
@@ -50,6 +49,12 @@ body{
 @include respond(large){
   .wrapper{
     max-width:$wrapper-large;
+  }
+}
+
+@include respond(extra-large){
+  .wrapper{
+    max-width:$wrapper-extra-large;
   }
 }
 

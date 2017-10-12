@@ -4,7 +4,7 @@
         @media (min-width: 0) and (max-width: $width-mobile) { @content; }
     }
     @if $point == small {
-        @media (min-width: $width-mobile) and (max-width: $width-small) { @content; }
+        @media (min-width: $width-small) { @content; }
     }
     @if $point == small-only {
         @media (min-width: 0) and (max-width: $width-medium) { @content; }
@@ -20,6 +20,9 @@
     }
     @if $point == large {
         @media (min-width: $width-large) { @content; }
+    }
+    @if $point == extra-large {
+        @media (min-width: $width-extra-large) { @content; }
     }
     @else if $point == large-only {
         @media (min-width: $width-large) and (max-width: 1280px) { @content; }
