@@ -67,7 +67,10 @@ class DemoModal extends Component {
                     </dl>
 
                     <h3>Downloads</h3>
-                    <a href="#example">Example file</a>
+                    <ul>
+                        <li><a href={`https://dga1sy052ek6h.cloudfront.net/ogsmarketing/${game.id}.zip`} target="_blank">Marketing pack</a></li>
+                        <li><a href={`https://dga1sy052ek6h.cloudfront.net/ogscertificates/${game.id}.zip`} target="_blank">Certificate pack</a></li>
+                    </ul>
 
                     {/*<LinkButton className="btn-blue" to={`/game/${game.id}/${game.slug}`}>View game info</LinkButton>*/}
 
