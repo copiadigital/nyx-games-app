@@ -20,9 +20,10 @@ class App extends Component {
                     <h2 className="app-title">Game Portal</h2>
                     <ul className="nav">
                         <li><a href="/games">Games</a></li>
-                        <li><a href="/news">News</a></li>
-                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/technical-documentation">Tech docs</a></li>
                         <li><a href="/service">Self service</a></li>
+                        <li><a href="http://www.nyxgaminggroup.com/news">News</a></li>
+                        <li><a href="http://www.nyxgaminggroup.com/contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
