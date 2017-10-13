@@ -27,7 +27,7 @@ class DemoIFrame extends Component {
         }
 
         return 'https://nogs-gl-stage.nyxmalta.com/game/?' + queryString.stringify({
-                nogsoperatorid: 894,
+                nogsoperatorid: 241,
                 nogsgameid: game.id,
                 nogsmode: 'demo',
                 nogslang: 'en_us',
