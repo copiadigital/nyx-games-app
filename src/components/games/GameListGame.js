@@ -93,7 +93,6 @@ class GameListGame extends Component {
         classes.push(this.state.highlight ? 'games-grid-game__highlight' : 'games-grid-game__default');
 
         if(game.high_quality){
-            console.log('yup hq');
             classes.push('games-grid-game__hq');
         }
 
