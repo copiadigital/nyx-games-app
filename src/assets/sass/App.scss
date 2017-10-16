@@ -113,6 +113,27 @@ body{
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+.share-url-tool-modal{
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+
+  input{
+    width: 100%;
+    padding: 7px 8px 8px 7px;
+    font-size: 13px;
+    vertical-align: middle;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-top: -7px;
+    margin-right: -40px;
+    padding-right: 48px;
+  }
+}
+
 :focus{
     outline:none;
 }

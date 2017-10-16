@@ -173,14 +173,13 @@
     }
 }
 
-.game-demo-modal-close{
+.game-demo-modal-icon{
     display:block;
     z-index:2;
     position:absolute;
-    top:15px;
-    right:15px;
     width:26px;
     height:26px;
+
     font-size:16px;
     line-height:24px;
     text-align:center;
@@ -192,9 +191,27 @@
     padding:0 4px 3px 4px;
 
     @include respond(small-only){
+        background:#fff;
+    }
+}
+
+.game-demo-modal-close{
+    top:15px;
+    right:15px;
+
+    @include respond(small-only){
         top:-15px;
         right:-15px;
-        background:#fff;
+    }
+}
+
+.game-demo-modal-share{
+    top:15px;
+    right:45px;
+
+    @include respond(small-only){
+        top:-15px;
+        right:15px;
     }
 }
 

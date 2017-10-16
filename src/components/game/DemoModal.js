@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ChannelList from "../utilities/ChannelList";
 import ImageLoader from "../utilities/ImageLoader";
+import ShareUrlTool from "../utilities/ShareUrlTool";
 import DemoIFrame from "./DemoIFrame";
 import DemoSwitch from "./DemoSwitch";
 import _ from 'underscore';
@@ -40,10 +41,13 @@ class DemoModal extends Component {
 
         return (
             <div className="game-demo-modal-container">
-                <div className="game-demo-modal-close" onClick={this.props.closeDemoModal}>x</div>
+                <ShareUrlTool className="game-demo-modal-icon game-demo-modal-share" url={window.location.toString()} />
+                <div className="game-demo-modal-icon game-demo-modal-close" onClick={this.props.closeDemoModal} title="Close">&#10060;</div>
+
                 <div className="game-demo-viewport" style={ { width: viewportWidth, height: viewportHeight  } }>
                     <DemoIFrame game={game} channel={channel} />
                 </div>
+
                 <div className="game-demo-modal-detail" style={ { width: detailWidth } }>
                     <div className="game-demo-modal-title">{game.name}</div>
                     <p className="game-demo-modal-description">Lorem ipsum dolor sit amet consectituer adipiscing elit nam. {game.description}</p>
