@@ -56,7 +56,7 @@ class ImageLoader extends Component {
         }
 
         return (
-            <div>
+            <div className={this.props.containerClassName}>
                 <img src={this.src} alt={this.alt} className={this.props.className} />
             </div>
         );

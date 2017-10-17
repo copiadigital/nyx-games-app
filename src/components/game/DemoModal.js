@@ -54,6 +54,7 @@ class DemoModal extends Component {
                     <ImageLoader
                         src={"https://dga1sy052ek6h.cloudfront.net/icons/gplogos/" + game.studio.name + ".png"}
                         loading={<div />}
+                        containerClassName="game-demo-modal-provider"
                         className="game-provider-icon"
                         error={<span>{game.studio.name} logo</span>}
                     />
