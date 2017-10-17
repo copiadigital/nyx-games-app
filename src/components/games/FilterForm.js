@@ -13,7 +13,7 @@ class FilterForm extends Component {
         const filtersDisabled = (this.props.filter.searchQuery && this.props.filter.searchQuery.length > 0);
 
         return (
-            <div className="wrapper wrapper--thin">
+            <div className="wrapper">
                 <form className="game-filter">
                     <fieldset className="row">
                         <FeaturedFilter
