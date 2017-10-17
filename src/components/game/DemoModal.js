@@ -30,11 +30,6 @@ class DemoModal extends Component {
         const game = this.state.game;
         const channel = this.state.channel;
 
-        var maxWidth = Math.min(window.innerWidth * 0.9, 1280);
-        var detailWidth = Math.max(100, maxWidth * 0.25);
-        var viewportWidth = maxWidth - detailWidth;
-        var viewportHeight = viewportWidth * (600/960);
-
         var forceContent = function(val){
           return (!_.isNumber(val) && _.isEmpty(val))? 'n/a' : val;
         };
@@ -44,11 +39,11 @@ class DemoModal extends Component {
                 <ShareUrlTool className="game-demo-modal-icon game-demo-modal-share" url={window.location.toString()} />
                 <div className="game-demo-modal-icon game-demo-modal-close" onClick={this.props.closeDemoModal} title="Close">&#10060;</div>
 
-                <div className="game-demo-viewport" style={ { width: viewportWidth, height: viewportHeight  } }>
+                <div className="game-demo-viewport">
                     <DemoIFrame game={game} channel={channel} />
                 </div>
 
-                <div className="game-demo-modal-detail" style={ { width: detailWidth } }>
+                <div className="game-demo-modal-detail">
                     <div className="game-demo-modal-title">{game.name}</div>
                     <p className="game-demo-modal-description">Lorem ipsum dolor sit amet consectituer adipiscing elit nam. {game.description}</p>
 
