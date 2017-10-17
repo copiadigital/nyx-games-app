@@ -40,7 +40,11 @@ class DemoModal extends Component {
                 <div className="game-demo-modal-icon game-demo-modal-close" onClick={this.props.closeDemoModal} title="Close">&#10060;</div>
 
                 <div className="game-demo-viewport">
-                    <DemoIFrame game={game} channel={channel} />
+                    <div className="game-demo-viewport-frame">
+                        <div className="game-demo-viewport-frame-holder">
+                            <DemoIFrame game={game} channel={channel} />
+                        </div>
+                    </div>
                 </div>
 
                 <div className="game-demo-modal-detail">

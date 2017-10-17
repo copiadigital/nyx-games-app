@@ -155,10 +155,18 @@
     }
 }
 
-
 .modal-overlay{
     @include respond(small-only){
         overflow:scroll;
+    }
+}
+
+.game-demo-modal{
+    width: calc(100% - 50px);
+    max-width: 1280px;
+
+    @include respond(small-only){
+        width: 100%;
     }
 }
 
@@ -216,32 +224,52 @@
 }
 
 .game-demo-viewport{
-    display:table-cell;
-    flex:1;
-    overflow:hidden;
+    flex: 3;
+    overflow: hidden;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    @include respond(small-only){
-        display:block;
-        flex:none;
+    @include respond(small-only) {
+        display: block;
+        flex: none;
     }
 
-    iframe{
-        margin:0;
-        padding:0;
-        border:none !important;
-    } 
+    .game-demo-viewport-frame {
+        width: 100%;
+
+        .game-demo-viewport-frame-holder {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 59%;
+
+            iframe {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0;
+                padding: 0;
+                border: none !important;
+            }
+        }
+    }
 }
 
 .game-demo-modal-detail{
-    position:relative;
-    display:table-cell;
-    width:200px;
-    padding:20px 30px 40px 30px;
+    display: table-cell;
+    flex: 1;
+    position: relative;
+    padding:20px 30px 60px 30px;
+    margin-bottom: 3px;
     background:#fff;
 //    border-left:2px solid white;
 
     @include respond(small-only){
-        width:100% !important;
+        width:100%;
         display:block;
     }
 
@@ -346,39 +374,5 @@
                 color:#fff;
             }
         }
-    }
-}
-
-@include respond(medium-only){
-
-    .modal{
-        width:90%;
-    }
-    
-    .game-demo-container{
-        max-width:100%;
-    }
-
-    .game-demo-viewport{
-        position:relative;
-        display:block;
-        flex:none;
-        width: 100% !important;
-        height:0;
-        padding:0 0 75% 0;
-
-        iframe{
-            position:absolute;
-            top:0;
-            bottom:0;
-            left:0;
-            right:0;
-        }
-    }
-
-    .game-demo-modal-detail{
-        position:relative;
-        display:block;
-        width:100%;
     }
 }

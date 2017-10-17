@@ -134,7 +134,7 @@ class GameList extends Component {
                     isOpen={this.state.isDemoModalOpen}
                     onRequestClose={this.closeDemoModal}
                     contentLabel="Game demo modal"
-                    className="modal"
+                    className="modal game-demo-modal"
                     overlayClassName="modal-overlay"
                 >
                     {(this.state.isDemoModalOpen? <DemoModal
