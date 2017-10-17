@@ -70,7 +70,7 @@ class DemoModal extends Component {
                     </dl>
 
                     <h3>Downloads</h3>
-                    <ul>
+                    <ul className="downloads">
                         <li><a href={`https://dga1sy052ek6h.cloudfront.net/ogsmarketing/${game.id}.zip`} target="_blank">Marketing pack</a></li>
                         <li><a href={`https://dga1sy052ek6h.cloudfront.net/ogscertificates/${game.id}.zip`} target="_blank">Certificate pack</a></li>
                     </ul>
