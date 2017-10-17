@@ -27,11 +27,9 @@ class DemoSwitch extends Component {
         }
 
         return (
-            <div className="game-demo-switch-container">
-                <div className="game-demo-switch-button-container">
-                    { ( (game.channels.indexOf('desktop') > -1) ? <button className={ desktopClasses.join(' ') } onClick={this.clickHandlerBuild('desktop')}>Desktop</button> : '' ) }
-                    { ( (game.channels.indexOf('mobile') > -1) ? <button className={ mobileClasses.join(' ') } onClick={this.clickHandlerBuild('mobile')}>Mobile</button> : '') }
-                </div>
+            <div className="game-demo-switch-button-container">
+                { ( (game.channels.indexOf('desktop') > -1) ? <button className={ desktopClasses.join(' ') } onClick={this.clickHandlerBuild('desktop')}>Desktop</button> : '' ) }
+                { ( (game.channels.indexOf('mobile') > -1) ? <button className={ mobileClasses.join(' ') } onClick={this.clickHandlerBuild('mobile')}>Mobile</button> : '') }
             </div>
         );
     }

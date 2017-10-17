@@ -77,7 +77,10 @@ class DemoModal extends Component {
 
                     {/*<LinkButton className="btn-blue" to={`/game/${game.id}/${game.slug}`}>View game info</LinkButton>*/}
 
-                    <DemoSwitch game={game} channel={channel} setChannel={this.setChannel} />
+                    <div className="game-demo-switch-container">
+                        <DemoSwitch game={game} channel={channel} setChannel={this.setChannel} />
+                        <span>Demo options</span>
+                    </div>
                 </div>
             </div>
         )
