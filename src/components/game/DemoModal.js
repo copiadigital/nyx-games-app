@@ -67,7 +67,7 @@ class DemoModal extends Component {
 
                 <div className="game-demo-modal-detail">
                     <div className="game-demo-modal-title">{game.name}</div>
-                    <p className="game-demo-modal-description">Lorem ipsum dolor sit amet consectituer adipiscing elit nam. {game.description}</p>
+                    <p className="game-demo-modal-description">{game.description}</p>
 
                     <ImageLoader
                         src={"https://dga1sy052ek6h.cloudfront.net/icons/gplogos/" + game.studio.name + ".png"}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'underscore';
 import ImageLoader from '../utilities/ImageLoader';
 import LoadingImage from '../utilities/LoadingImage';
+import StringTrim from '../utilities/StringTrim';
 
 class GameListGame extends Component {
     constructor(props) {
@@ -62,7 +63,7 @@ class GameListGame extends Component {
                 </div>
                 */ }
                 <div className="games-grid-game-description">
-                    <p>Lorem ipsum dolor...</p>
+                    <p>{StringTrim(game.description, 70, '...')}</p>
                 </div>
                 <div className="games-grid-game-demo-options">
                     <span className="games-grid-game-demo-title">Play Demo</span>
