@@ -34,7 +34,7 @@ class DemoModal extends Component {
             return <DemoIFrame game={game} channel={channel}/>;
         }else{
             return <ImageLoader
-                src={"https://dga1sy052ek6h.cloudfront.net/icons/200x127/" + game.id + ".png"}
+                src={"https://dga1sy052ek6h.cloudfront.net/icons/livegames/" + game.id + ".png"}
                 loading={<div />}
                 containerClassName="game-demo-icon-placeholder"
                 className="game-demo-icon-placeholder-image"
