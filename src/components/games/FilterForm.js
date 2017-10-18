@@ -55,6 +55,14 @@ class FilterForm extends Component {
                             order={ (this.props.filter.order === 'desc')? 'desc' : 'asc' }
                             setFilter={ this.props.setFilter }
                             />
+                        <SortLink
+                            field="released"
+                            label="Date"
+                            disabled={ filtersDisabled }
+                            active={ this.props.filter.sort === 'released' }
+                            order={ (this.props.filter.order === 'desc')? 'desc' : 'asc' }
+                            setFilter={ this.props.setFilter }
+                        />
 
                         <SearchFilter
                             value={ this.props.filter.searchQuery }
