@@ -92,7 +92,8 @@ class GamesFiltered extends Component {
                 query: filter.searchQuery
             };
         }else {
-            path = '/games/' + ((filter.featured && filter.explicitFeatured) ? 'featured' : ((filter.featured)? '' : 'all'));
+            var hasFilters = (_.size(_.reject(_.omit(filter, ['featured', 'explicitFeatured']), _.isEmpty)) > 0);
+            path = '/games/' + ((filter.featured && filter.explicitFeatured) ? 'featured' : ((filter.featured && !hasFilters)? '' : 'all'));
             queryStringData = {
                 category: filter.category,
                 channel: filter.channel,
