@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import update from 'immutability-helper';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
-import games from '../../data/games';
+import Games from './../../data/model/Games';
 
 var queryStringOptions = {
     arrayFormat: 'bracket'
@@ -20,6 +20,8 @@ class GamesFiltered extends Component {
         this.state = {
             filter: filter
         };
+
+        this.gamesModel = new Games();
 
         this.setFilter = this.setFilter.bind(this);
         this.openDemoModal = this.openDemoModal.bind(this);
@@ -49,9 +51,9 @@ class GamesFiltered extends Component {
         var hash = props.location.hash;
         var match = hash.match(/^#game([0-9]+)-([a-z]+)/i);
         if(match){
-            games.getById(match[1])
-                .then((res) => {
-                    var game = res.data.game;
+            this.gamesModel.getById(match[1])
+                .then((data) => {
+                    var game = data.game;
 
                     this.setState({
                         demoModal: {

@@ -52,7 +52,9 @@ class ImageLoader extends Component {
         }
 
         if(this.state.error && this.errorOutput !== false){
-            return <div>{this.errorOutput}</div>;
+            return <div className={this.props.containerClassName}>
+                {this.errorOutput}
+            </div>;
         }
 
         return (

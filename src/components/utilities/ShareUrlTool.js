@@ -33,11 +33,10 @@ class ShareUrlTool extends Component {
     render() {
         const className = this.props.className? this.props.className : 'url-share-tool';
         const title = this.props.title? this.props.title : 'Share URL';
-        const open = (this.state.open);
 
         return (
             <div className={className} title={title} onClick={this.open}>
-                <span alt="Share">&#10138;</span>
+                <span role="img" aria-label="Share">&#10138;</span>
                 {this.renderModal()}
             </div>
         );

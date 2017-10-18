@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import Waypoint from 'react-waypoint';
 import _ from 'underscore';
-import games from '../../data/games';
+import Games from './../../data/model/Games';
 import GameListGame from './GameListGame';
 import Loading from "../utilities/Loading";
 import DemoModal from "../game/DemoModal";
@@ -20,6 +20,8 @@ class GameList extends Component {
             isDemoModalOpen: (props.demoModal)? true : false,
             demoModal: (props.demoModal)? props.demoModal : null
         };
+
+        this.gamesModel = new Games();
 
         this.loadMoreGames = this.loadMoreGames.bind(this);
         this.highlightGame = this.highlightGame.bind(this);
@@ -60,7 +62,7 @@ class GameList extends Component {
         var defaultSort = (props.filter.searchQuery)? '_score' : 'name';
         var defaultOrder = (props.filter.searchQuery)? 'desc' : 'asc';
 
-        games.all({
+        this.gamesModel.all({
             params: {
                 page: this.state.currentPage,
                 itemsPerPage: 25,
@@ -74,15 +76,15 @@ class GameList extends Component {
                 order: props.filter.order ? props.filter.order : defaultOrder
             }
         })
-        .then((res) => {
-            var currentPage = res.data.meta.currentPage;
-            var totalPages = res.data.meta.totalPages;
+        .then((data) => {
+            var currentPage = data.meta.currentPage;
+            var totalPages = data.meta.totalPages;
 
             this.setState((prevState) => ({
                 loading: false,
                 more: (currentPage < totalPages),
                 currentPage: currentPage,
-                games: (currentPage > 1)? [ ...prevState.games, ...res.data.games ] : res.data.games
+                games: (currentPage > 1)? [ ...prevState.games, ...data.games ] : data.games
             }));
         });
     }

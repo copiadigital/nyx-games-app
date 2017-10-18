@@ -26,6 +26,22 @@ class DemoModal extends Component {
     setChannel(channel) {
         this.props.openDemoModal(this.props.game, channel);
     }
+    renderDemo() {
+        const game = this.state.game;
+        const channel = this.state.channel;
+
+        if(game.hasDemo()) {
+            return <DemoIFrame game={game} channel={channel}/>;
+        }else{
+            return <ImageLoader
+                src={"https://dga1sy052ek6h.cloudfront.net/icons/200x127/" + game.id + ".png"}
+                loading={<div />}
+                containerClassName="game-demo-icon-placeholder"
+                className="game-demo-icon-placeholder-image"
+                error={<span>Demo unavailable</span>}
+            />;
+        }
+    }
     render() {
         const game = this.state.game;
         const channel = this.state.channel;
@@ -37,12 +53,14 @@ class DemoModal extends Component {
         return (
             <div className="game-demo-modal-container">
                 <ShareUrlTool className="game-demo-modal-icon game-demo-modal-share" url={window.location.toString()} />
-                <div className="game-demo-modal-icon game-demo-modal-close" onClick={this.props.closeDemoModal} title="Close">&#10060;</div>
+                <div className="game-demo-modal-icon game-demo-modal-close" onClick={this.props.closeDemoModal} title="Close">
+                    <span role="img" aria-label="Close">&#10060;</span>
+                </div>
 
                 <div className="game-demo-viewport">
                     <div className="game-demo-viewport-frame">
                         <div className="game-demo-viewport-frame-holder">
-                            <DemoIFrame game={game} channel={channel} />
+                            {this.renderDemo()}
                         </div>
                     </div>
                 </div>
