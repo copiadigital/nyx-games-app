@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ChannelList from "../utilities/ChannelList";
+import Downloads from "../utilities/Downloads";
+import Download from "../utilities/Download";
 import ImageLoader from "../utilities/ImageLoader";
 import ShareUrlTool from "../utilities/ShareUrlTool";
 import DemoIFrame from "./DemoIFrame";
@@ -88,11 +90,10 @@ class DemoModal extends Component {
                         <dt>Free Spins</dt><dd>{forceContent(game.freerounds_enabled)}</dd>
                     </dl>
 
-                    <h3>Downloads</h3>
-                    <ul className="downloads">
-                        <li><a href={`https://dga1sy052ek6h.cloudfront.net/ogsmarketing/${game.id}.zip`} target="_blank">Marketing pack</a></li>
-                        <li><a href={`https://dga1sy052ek6h.cloudfront.net/ogscertificates/${game.id}.zip`} target="_blank">Certificate pack</a></li>
-                    </ul>
+                    <Downloads title="Downloads" className="downloads">
+                        <Download href={`https://dga1sy052ek6h.cloudfront.net/ogsmarketing/${game.id}.zip`} title="Marketing pack" />
+                        <Download href={`https://dga1sy052ek6h.cloudfront.net/ogscertificates/${game.id}.zip`} title="Certificate pack" />
+                    </Downloads>
 
                     {/*<LinkButton className="btn-blue" to={`/game/${game.id}/${game.slug}`}>View game info</LinkButton>*/}
 
