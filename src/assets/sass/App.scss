@@ -34,7 +34,7 @@ body{
 
 @include respond(small){
   .wrapper{
-    padding:0 $gutter;
+    padding:0;
     max-width:$wrapper-small;
   }
 }
