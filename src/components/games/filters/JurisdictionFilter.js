@@ -42,6 +42,7 @@ class JurisdictionFilter extends Component {
                     data={this.state.options}
                     valueField="id"
                     textField="name"
+                    placeholder="Select.."
                     onChange={ (value) => this.props.setFilter({ jurisdiction: value.map(function(a){ return a.id }) }) }
                     disabled={ this.props.disabled }
                 />

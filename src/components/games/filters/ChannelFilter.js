@@ -4,7 +4,7 @@ import 'react-widgets/dist/css/react-widgets.css';
 
 class ChannelFilter extends Component {
     render() {
-        const channel = this.props.channel? this.props.channel : [];
+        const channel = this.props.channel? this.props.channel : []
         const channels = [
             { id: 'desktop', name: 'Desktop' },
             { id: 'mobile', name: 'Mobile' },
@@ -18,6 +18,7 @@ class ChannelFilter extends Component {
                     data={channels}
                     valueField="id"
                     textField="name"
+                    placeholder="Select.."
                     onChange={ (value) => this.props.setFilter({ channel: value.map(function(a){ return a.id }) }) }
                     disabled={ this.props.disabled }
                 />

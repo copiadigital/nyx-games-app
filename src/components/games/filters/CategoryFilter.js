@@ -38,7 +38,7 @@ class CategoryFilter extends Component {
         this.props.setFilter({ category: categoryId });
     }
     render() {
-        const category = this.props.category? this.props.category : [];
+        const category = this.props.category? this.props.category : null;
         const options = [{id: '*', name: 'All Categories'}, ...this.state.options];
 
         return (
