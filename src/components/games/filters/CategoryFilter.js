@@ -49,6 +49,7 @@ class CategoryFilter extends Component {
                     data={ options }
                     valueField="id"
                     textField="name"
+                    placeholder="Select.."
                     onChange={ this.onChangeHandler }
                     disabled={ this.props.disabled }
                 />
