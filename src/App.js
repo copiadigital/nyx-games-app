@@ -39,8 +39,27 @@ class App extends Component {
             </div>
             <div className="app-footer">
               <div className="app-footer__slope"></div>
-              <p>&copy; 2017</p>
+                <div className="app-footer__social">
+                    <a href="https://www.facebook.com/nyxgg/" title="NYX Gaming on Facebook" target="_blank">
+                        <span class="footer__social-icon icon icon--facebook">Facebook</span>
+                    </a>
+                    <a href="https://www.twitter.com/NYXGG" title="NYX Gaming on Twitter" target="_blank">
+                        <span class="footer__social-icon icon icon--twitter">Twitter</span>
+                    </a>
+                    <a href="https://www.linkedin.com/company/3136237" title="NYX Gaming on LinkedIn" target="_blank">
+                        <span class="footer__social-icon icon icon--linkedin">LinkedIn</span>
+                    </a>
+                </div>
+                <div className="app-footer__contact">
+                    <p>Contact us: <a href="mailto:sales@nyxgg.com">sales@nyxgg.com</a></p>
+                </div>
             </div>
+              <div className="app-legal">
+                  <p>
+                      <a href="https://secure.gamblingcommission.gov.uk/PublicRegister/Search/Detail/40129" target="_blank">NYX Gaming Group is licensed and regulated by the United Kingdom Gambling Commission. Our license status can be viewed by clicking this phrase.</a><br />
+                      Copyright 2017 NYX Gaming Group - All Rights Reserved
+                  </p>
+              </div>
           </div>
         </BrowserRouter>
     );
