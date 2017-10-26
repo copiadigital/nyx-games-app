@@ -39,20 +39,22 @@ class App extends Component {
             </div>
             <div className="app-footer">
               <div className="app-footer__slope"></div>
+              <div className="wrapper">
                 <div className="app-footer__social">
                     <a href="https://www.facebook.com/nyxgg/" title="NYX Gaming on Facebook" target="_blank">
-                        <span class="footer__social-icon icon icon--facebook">Facebook</span>
+                        <span className="footer__social-icon icon icon--facebook">Facebook</span>
                     </a>
                     <a href="https://www.twitter.com/NYXGG" title="NYX Gaming on Twitter" target="_blank">
-                        <span class="footer__social-icon icon icon--twitter">Twitter</span>
+                        <span className="footer__social-icon icon icon--twitter">Twitter</span>
                     </a>
                     <a href="https://www.linkedin.com/company/3136237" title="NYX Gaming on LinkedIn" target="_blank">
-                        <span class="footer__social-icon icon icon--linkedin">LinkedIn</span>
+                        <span className="footer__social-icon icon icon--linkedin">LinkedIn</span>
                     </a>
                 </div>
                 <div className="app-footer__contact">
                     <p>Contact us: <a href="mailto:sales@nyxgg.com">sales@nyxgg.com</a></p>
                 </div>
+              </div>
             </div>
               <div className="app-legal">
                   <p>

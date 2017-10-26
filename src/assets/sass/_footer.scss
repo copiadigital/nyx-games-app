@@ -1,6 +1,11 @@
 .app-footer{
 	position:relative;
 	background:$color-blue-dark;
+
+	> *{
+		position:relative;
+		z-index:2;
+	}
 }
 
 .app-footer__slope{
@@ -8,6 +13,7 @@
 	top:-3%;
 	left:-10%;
 	width:110%;
+	z-index:1;
 	padding-bottom:10%;
 	background:$color-blue-dark;
 
@@ -24,15 +30,50 @@
 	}
 }
 
-.app-legal{
-	background: #fff;
-	color: $color-grey-dark;
-	font-size: 1.5em;
-	text-align: center;
-	margin: 30px 0 0 0;
-	padding: 15px;
+.app-footer__social{
+	float:left;
+	width:100%;
+}
 
-	a, a:visited, a:active{
-		color: $color-grey-dark;
+.app-footer__contact{
+	float:left;
+	width:100%;
+
+	p{
+		font-size:14px;
+		color:#fff;
+
+		a{
+			color:inherit;
+			opacity:0.8;
+		}
 	}
+}
+
+.app-legal{
+	background:#fff;
+	color:$color-grey-dark;
+	font-size:1.5em;
+	text-align:center;
+	margin:0 0 0 0;
+	padding:15px;
+	line-height:1.3em;
+
+	a{
+		text-decoration:none;
+		color:$color-grey-dark;
+
+		&:hover{
+			color:$color-blue;
+			text-decoration:underline;
+		}
+	}
+}
+
+.footer__social-icon{
+	display: block;
+    width:auto;
+    height:26px;
+    background-position:50% 50%;
+    background-size:contain;
 }
