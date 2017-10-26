@@ -15,14 +15,26 @@ class Downloads extends Component {
     checkItemsAreValid(){
         var self = this;
         var items = this.state.items;
+        var CancelToken = axios.CancelToken;
 
         React.Children.forEach(items, function(child, i){
             axios({
                 url: child.props.href,
                 method: 'head',
-                responseType:'stream'
+                timeout: 2000,
+                responseType:'stream',
+                // cancelToken: new CancelToken(function executor(c) {
+                //     // Cancel the request if it is taking more than 500ms
+                //     setTimeout(c, 500);
+                // })
+            }).then(function(response){
+                response.data.abort();
             }).catch(function(error){
-                self.removeItemByHref(child.props.href);
+                if (axios.isCancel(error)) {
+                    console.log('Request canceled', error.message);
+                } else {
+                    self.removeItemByHref(child.props.href);
+                }
             });
         });
     }
