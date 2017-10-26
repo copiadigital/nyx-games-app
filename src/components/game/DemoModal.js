@@ -75,7 +75,7 @@ class DemoModal extends Component {
                         loading={<div />}
                         containerClassName="game-demo-modal-provider"
                         className="game-provider-icon"
-                        error={<span>{game.studio.name} logo</span>}
+                        error={<span>by {game.studio.name}</span>}
                     />
 
                     <dl>

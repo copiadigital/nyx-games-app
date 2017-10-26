@@ -15,7 +15,7 @@ class Downloads extends Component {
     checkItemsAreValid(){
         var self = this;
         var items = this.state.items;
-        var CancelToken = axios.CancelToken;
+        // var CancelToken = axios.CancelToken;
 
         React.Children.forEach(items, function(child, i){
             axios({
