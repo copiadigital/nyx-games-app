@@ -273,12 +273,14 @@
     }
 
     .game-demo-modal-description{
-        margin:10px 0 15px 0;
+        margin:15px 0;
         font-size:1.4em;
+        color:$color-grey-dark;
+        text-align: justify;
     }
 
     .game-demo-modal-provider{
-        text-align: center;
+        margin: 15px 0;
 
         .game-provider-icon{
             max-height:50px;

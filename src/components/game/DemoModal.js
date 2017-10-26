@@ -69,7 +69,6 @@ class DemoModal extends Component {
 
                 <div className="game-demo-modal-detail">
                     <div className="game-demo-modal-title">{game.name}</div>
-                    <p className="game-demo-modal-description">{game.description}</p>
 
                     <ImageLoader
                         src={"https://dga1sy052ek6h.cloudfront.net/icons/gplogos/" + game.studio.name + ".png"}
@@ -94,6 +93,8 @@ class DemoModal extends Component {
                         <Download href={`https://dga1sy052ek6h.cloudfront.net/ogsmarketing/${game.id}.zip`} title="Marketing pack" />
                         <Download href={`https://dga1sy052ek6h.cloudfront.net/ogscertificates/${game.id}.zip`} title="Certificate pack" />
                     </Downloads>
+
+                    <p className="game-demo-modal-description">{game.description}</p>
 
                     {/*<LinkButton className="btn-blue" to={`/game/${game.id}/${game.slug}`}>View game info</LinkButton>*/}
 
