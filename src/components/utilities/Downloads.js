@@ -18,7 +18,7 @@ class Downloads extends Component {
 
         React.Children.forEach(items, function(child, i){
             var url = child.props.href;
-            
+
             axios({
                 url: url,
                 method: 'head',
