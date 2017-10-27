@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Multiselect } from 'react-widgets';
 import jurisdictions from '../../../data/jurisdictions';
 import 'react-widgets/dist/css/react-widgets.css';
+import CheckboxMultiselect from "./CheckboxMultiselect";
 
 class JurisdictionFilter extends Component {
     constructor(props) {
@@ -31,20 +31,32 @@ class JurisdictionFilter extends Component {
                 });
             });
     }
+    renderListItem(options){
+        const checked = (options.item.selected);
+
+        return (
+            <span>
+                <input type="checkbox" checked={checked} />
+                <span>{options.text} {checked}</span>
+          </span>
+        );
+    }
     render() {
         const jurisdiction = this.props.jurisdiction? this.props.jurisdiction : [];
 
         return (
             <fieldset>
                 <label>Jurisdiction:</label>
-                <Multiselect
+                <CheckboxMultiselect
+                    allOption="All jurisdictions"
                     value={jurisdiction}
                     data={this.state.options}
                     valueField="id"
                     textField="name"
-                    placeholder="Select.."
-                    onChange={ (value) => this.props.setFilter({ jurisdiction: value.map(function(a){ return a.id }) }) }
+                    placeholder="Select..."
+                    onChange={ (values) => this.props.setFilter({ jurisdiction: values }) }
                     disabled={ this.props.disabled }
+                    itemComponent={this.renderListItem}
                 />
             </fieldset>
         );

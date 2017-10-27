@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Multiselect } from 'react-widgets';
 import 'react-widgets/dist/css/react-widgets.css';
+import CheckboxMultiselect from "./CheckboxMultiselect";
 
 class ChannelFilter extends Component {
     render() {
@@ -13,14 +13,16 @@ class ChannelFilter extends Component {
         return (
             <fieldset>
                 <label>Channel:</label>
-                <Multiselect
+                <CheckboxMultiselect
+                    allOption="All channels"
                     value={channel}
                     data={channels}
                     valueField="id"
                     textField="name"
-                    placeholder="Select.."
-                    onChange={ (value) => this.props.setFilter({ channel: value.map(function(a){ return a.id }) }) }
+                    placeholder="Select..."
+                    onChange={ (values) => this.props.setFilter({ channel: values }) }
                     disabled={ this.props.disabled }
+                    itemComponent={this.renderListItem}
                 />
             </fieldset>
         );
