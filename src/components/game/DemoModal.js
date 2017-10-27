@@ -40,7 +40,7 @@ class DemoModal extends Component {
                 loading={<div />}
                 containerClassName="game-demo-icon-placeholder"
                 className="game-demo-icon-placeholder-image"
-                error={<span>Demo unavailable</span>}
+                error={<span>Demo unavailable, please contact your account manager for more information.</span>}
             />;
         }
     }

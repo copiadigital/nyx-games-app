@@ -431,6 +431,10 @@
     }
 
     > span{
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
         font-size: 2em;
     }
 }
