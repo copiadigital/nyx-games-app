@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import { Multiselect } from 'react-widgets';
 
 class CheckboxMultiselect extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            open: (props.open)
+        };
+
+        this.toggleDisplay = this.toggleDisplay.bind(this);
+    }
     renderListItem(options){
         const checked = (options.item.selected);
         const onChange = function(arg){
@@ -28,6 +37,12 @@ class CheckboxMultiselect extends Component {
           </span>
         );
     }
+    toggleDisplay(open){
+        this.setState({ open: open });
+    }
+    close() {
+        this.setState({ open: false });
+    }
     render() {
         const self = this;
         const values = this.props.value? this.props.value : [];
@@ -51,6 +66,7 @@ class CheckboxMultiselect extends Component {
 
             if(item[valueField] === '*'){
                 newValues = [];
+                self.close();
             }else {
                 newValues = values;
 
@@ -73,7 +89,9 @@ class CheckboxMultiselect extends Component {
                 value={ [] }
                 placeholder={ placeholder }
                 onChange={ toggleValue }
+                onToggle={this.toggleDisplay}
                 itemComponent={this.renderListItem}
+                open={this.state.open}
             />
         );
     }
