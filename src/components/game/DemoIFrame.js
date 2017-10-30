@@ -31,7 +31,7 @@ class DemoIFrame extends Component {
                 nogsgameid: game.id,
                 nogsmode: 'demo',
                 nogslang: 'en_us',
-                nogscurrency: 'EUR',
+                nogscurrency: 'USD',
                 clienttype: clientType
             });
     }
