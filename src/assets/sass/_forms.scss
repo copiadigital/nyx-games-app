@@ -154,3 +154,13 @@
 		font-size:0.8rem;
 	}
 }
+
+.cbms-item{
+	> *{
+		vertical-align:top;
+	}
+
+	input + span{
+		padding-left:3px;
+	}
+}
