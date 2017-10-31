@@ -52,6 +52,7 @@ class CategoryFilter extends Component {
                     placeholder="Select.."
                     onChange={ this.onChangeHandler }
                     disabled={ this.props.disabled }
+                    className="ddl__hasAllOption"
                 />
             </fieldset>
         );

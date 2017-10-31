@@ -155,7 +155,22 @@
 	}
 }
 
+.ddl__hasAllOption{
+	ul.rw-list{
+		li:first-child{
+			padding-top: 6px;
+			padding-bottom: 6px;
+		}
+	}
+}
+
 .cbms-item{
+	&.cbms-item__all{
+		display: block;
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+
 	> *{
 		vertical-align:top;
 	}
