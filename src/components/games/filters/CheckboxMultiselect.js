@@ -16,17 +16,11 @@ class CheckboxMultiselect extends Component {
         const onChange = function(arg){
             console.warn('Checkbox onChange should not be called');
         };
-
-        if(options.item.all){
-            return (
-                <span className="cbms-item cbms-item__all">
-                    <span>{options.text}</span>
-                </span>
-            )
-        }
-
+        
         var classes = ['cbms-item'];
-        if(checked){
+        if(options.item.all){
+            classes.push('cbms-item__all');
+        }else if(checked){
             classes.push('cbms-item__selected');
         }
 
