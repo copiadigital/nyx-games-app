@@ -20,7 +20,16 @@ class GamesFiltered extends Component {
         this.closeDemoModal = this.closeDemoModal.bind(this);
     }
     componentWillMount(){
-        var filterManager = this.filterManager = new FilterManager(this.context.router);
+        var filterManager = this.filterManager = new FilterManager(this.context.router, {
+            basePath: function(filter){
+                if(filter.searchQuery){
+                    return '/games/all';
+                }else {
+                    var hasFilters = filterManager.hasFilters(filter);
+                    return '/games/' + ((filter.featured && filter.explicitFeatured) ? 'featured' : ((filter.featured && !hasFilters)? '' : 'all'));
+                }
+            }
+        });
 
         filterManager.registerFilterUpdateCallback(this.setFilter);
         filterManager.assume({
