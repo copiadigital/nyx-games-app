@@ -42,7 +42,7 @@ class StudioFilter extends Component {
             return null;
         }
 
-        return <span>{((group.item)? 'In-house studios' : '3rd party studios')}</span>
+        return <span>{((group.item)? 'NYX studios' : 'Partner studios')}</span>
     }
     render() {
         // force to number for strict matching
