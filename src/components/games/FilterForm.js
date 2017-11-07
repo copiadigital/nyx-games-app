@@ -7,42 +7,67 @@ import ChannelFilter from "./filters/ChannelFilter";
 import ResetFilter from "./filters/ResetFilter";
 import SearchFilter from "./filters/SearchFilter";
 import SortLink from "./filters/SortLink";
+import PropTypes from 'prop-types';
+
 
 class FilterForm extends Component {
+    constructor(props){
+        super(props);
+
+        this.state = {
+            filter: {}
+        };
+
+        this.clearFilter = this.clearFilter.bind(this);
+        this.setFilter = this.setFilter.bind(this);
+    }
+    componentWillReceiveProps(nextProps){
+        if(nextProps.filter) {
+            this.setState({
+                filter: nextProps.filter
+            });
+        }
+    }
+    setFilter(data) {
+        this.props.filterManager.setFilter(data);
+    }
+    clearFilter() {
+        this.props.filterManager.clearFilter();
+    }
     render() {
-        const filtersDisabled = (this.props.filter.searchQuery && this.props.filter.searchQuery.length > 0);
+        const filtersDisabled = (this.state.filter.searchQuery && this.state.filter.searchQuery.length > 0);
 
         return (
             <div className="wrapper">
                 <form className="game-filter">
                     <fieldset className="row">
                         <FeaturedFilter
-                            featured={ this.props.filter.featured }
-                            setFilter={ this.props.setFilter }
+                            featured={ this.state.filter.featured }
+                            setFilter={ this.setFilter }
                             disabled={ filtersDisabled }
                         />
                         <JurisdictionFilter
-                            jurisdiction={ this.props.filter.jurisdiction }
-                            setFilter={ this.props.setFilter }
+                            jurisdiction={ this.state.filter.jurisdiction }
+                            setFilter={ this.setFilter }
                             disabled={ filtersDisabled }
                         />
                         <CategoryFilter
-                            category={ this.props.filter.category }
-                            setFilter={ this.props.setFilter }
+                            category={ this.state.filter.category }
+                            setFilter={ this.setFilter }
                             disabled={ filtersDisabled }
                         />
                         <StudioFilter
-                            studio={ this.props.filter.studio }
-                            setFilter={ this.props.setFilter }
+                            studio={ this.state.filter.studio }
+                            setFilter={ this.setFilter }
                             disabled={ filtersDisabled }
                         />
                         <ChannelFilter
-                            channel={ this.props.filter.channel }
-                            setFilter={ this.props.setFilter }
+                            channel={ this.state.filter.channel }
+                            setFilter={ this.setFilter }
                             disabled={ filtersDisabled }
                         />
                         <ResetFilter
-                            setFilter={ this.props.setFilter }
+                            reset={ this.clearFilter }
                         />
                     </fieldset>
                     <fieldset className="row sort-search">
@@ -51,23 +76,23 @@ class FilterForm extends Component {
                             field="name"
                             label="A-Z"
                             disabled={ filtersDisabled }
-                            active={ this.props.filter.sort === 'name' }
-                            order={ (this.props.filter.order === 'desc')? 'desc' : 'asc' }
-                            setFilter={ this.props.setFilter }
+                            active={ this.state.filter.sort === 'name' }
+                            order={ (this.state.filter.order === 'desc')? 'desc' : 'asc' }
+                            setFilter={ this.setFilter }
                             />
                         <SortLink
                             field="released"
                             label="Date"
                             disabled={ filtersDisabled }
-                            active={ this.props.filter.sort === 'released' }
-                            order={ (this.props.filter.order === 'desc')? 'desc' : 'asc' }
-                            setFilter={ this.props.setFilter }
+                            active={ this.state.filter.sort === 'released' }
+                            order={ (this.state.filter.order === 'desc')? 'desc' : 'asc' }
+                            setFilter={ this.setFilter }
                         />
 
                         <SearchFilter
-                            value={ this.props.filter.searchQuery }
+                            value={ this.state.filter.searchQuery }
                             minLength={ 2 }
-                            setFilter={ this.props.setFilter }
+                            setFilter={ this.setFilter }
                             />
                     </fieldset>
                 </form>
@@ -75,5 +100,9 @@ class FilterForm extends Component {
         );
     }
 }
+
+FilterForm.contextTypes = {
+    router: PropTypes.object
+};
 
 export default FilterForm;
