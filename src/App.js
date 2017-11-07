@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import logo from './assets/images/logo.svg';
 import Games from './components/games/Games';
+import Portfolio from './components/portfolio/Portfolio';
 import Service from './components/service/Service';
 import {
     BrowserRouter,
     Redirect,
     Route,
+    Switch
 } from 'react-router-dom';
 import './assets/sass/App.css';
 
@@ -32,9 +34,12 @@ class App extends Component {
             </div>
             <div className="wrapper">
                 <div className="app-body">
-                    <Route path="/" exact={true} render={() => <Redirect to="/games" />} />
-                    <Route path="/games" component={Games} />
-                    <Route path="/service" component={Service} />
+                    <Switch>
+                        <Route path="/" exact={true} render={() => <Redirect to="/games" />} />
+                        <Route path="/games" component={Games} />
+                        <Route path="/portfolio" component={Portfolio} />
+                        <Route path="/service" component={Service} />
+                    </Switch>
                 </div>
             </div>
             <div className="app-footer">
