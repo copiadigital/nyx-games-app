@@ -15,7 +15,7 @@ class ResetFilter extends Component {
     render() {
         return (
             <div className="filter-reset">
-                <a href="#" className="reset" onClick={this.onReset}>Reset Filters</a>
+                <a href="#reset" className="reset" onClick={this.onReset}>Reset Filters</a>
             </div>
         );
     }
