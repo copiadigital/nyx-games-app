@@ -155,11 +155,18 @@
 	}
 }
 
+/* Making the all option in dropdowns a bit bigger, but avoiding the empty group heading li */
 .ddl__hasAllOption{
 	ul.rw-list{
-		li:first-child{
+		li:first-child,
+		li.rw-list-optgroup:first-child + li{
+		{
 			padding-top: 6px;
 			padding-bottom: 6px;
+		}
+
+		li.rw-list-optgroup:first-child{
+			padding: 0;
 		}
 	}
 }

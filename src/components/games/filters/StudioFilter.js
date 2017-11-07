@@ -23,7 +23,7 @@ class StudioFilter extends Component {
         studios.all({
             params: {
                 itemsPerPage: 100,
-                sort: 'name'
+                sort: {'inHouse': 'desc', 'order': 'asc', 'name': 'asc' }
             }
         })
             .then((res) => {
@@ -37,10 +37,17 @@ class StudioFilter extends Component {
         var studioId = (value.id === '*')? null : value.id;
         this.props.setFilter({ studio: studioId });
     }
+    renderGroupHeading(group){
+        if(group.item === '*'){
+            return null;
+        }
+
+        return <span>{((group.item)? 'In-house studios' : '3rd party studios')}</span>
+    }
     render() {
         // force to number for strict matching
         const studio = this.props.studio? this.props.studio : null;
-        const options = [{id: '*', name: 'All Studios'}, ...this.state.options];
+        const options = [{id: '*', name: 'All Studios', inHouse: '*'}, ...this.state.options];
 
         return (
             <fieldset>
@@ -51,6 +58,8 @@ class StudioFilter extends Component {
                     valueField="id"
                     textField="name"
                     placeholder="Select.."
+                    groupComponent={this.renderGroupHeading}
+                    groupBy={studio => studio.inHouse}
                     onChange={ this.onChangeHandler }
                     disabled={ this.props.disabled }
                     className="ddl__hasAllOption"
