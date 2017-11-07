@@ -101,8 +101,7 @@ class FilterManager {
         });
 
         var query = queryString.stringify(queryStringData, queryStringOptions);
-        var hash = (demoModal)? 'game' + demoModal.game.id + '-' + demoModal.channel : null;
-        return path + '?' + query + (hash? '#' + hash : '');
+        return path + '?' + query;
     }
     updateUrl(filter, demoModal){
         var newUrl = this.buildUrl(filter, demoModal);
