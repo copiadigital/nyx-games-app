@@ -7,8 +7,11 @@ var queryStringOptions = {
 };
 
 class FilterManager {
-    constructor(router){
+    constructor(router, config){
         this.router = router;
+        this.config = _.defaults(config, {
+            basePath: '/'
+        });
         this.filterUpdateCallbacks = [];
         this.state = {
             filter: {},
@@ -24,13 +27,15 @@ class FilterManager {
     setFilter(data) {
         // set explicitFeatured if we've just changed to featured or its already set
         // needed to switch to a list of all games on filter change, unless user has actually asked for featured games
-        data.explicitFeatured = (this.state.filter.explicitFeatured || data.featured);
+        if('featured' in data) {
+            data.explicitFeatured = (data.featured);
+        }
 
         var filter = update(this.state.filter, { $merge: data });
 
         // determine featured
-        var hasFilters = (_.size(_.reject(_.omit(filter, ['featured', 'explicitFeatured']), _.isEmpty)) > 0);
-        filter.featured = (filter.explicitFeatured || !hasFilters);
+        var hasFilters = this.hasFilters(filter);
+        filter.featured = (data.featured !== false && (filter.explicitFeatured || !hasFilters));
 
         this.state.filter = filter;
 
@@ -74,17 +79,18 @@ class FilterManager {
 
         return filter;
     }
+    hasFilters(filter){
+        return (_.size(_.reject(_.omit(filter, ['featured', 'explicitFeatured']), _.isEmpty)) > 0);
+    }
     buildUrl(filter, demoModal) {
-        var path, queryStringData;
+        var queryStringData;
+        var path = this.resolveBasePath(filter, this);
 
         if(filter.searchQuery){
-            path = '/games/all';
             queryStringData = {
                 query: filter.searchQuery
             };
         }else {
-            var hasFilters = (_.size(_.reject(_.omit(filter, ['featured', 'explicitFeatured']), _.isEmpty)) > 0);
-            path = '/games/' + ((filter.featured && filter.explicitFeatured) ? 'featured' : ((filter.featured && !hasFilters)? '' : 'all'));
             queryStringData = {
                 category: filter.category,
                 channel: filter.channel,
@@ -106,6 +112,15 @@ class FilterManager {
     updateUrl(filter, demoModal){
         var newUrl = this.buildUrl(filter, demoModal);
         this.router.history.push(newUrl);
+    }
+    resolveBasePath(filter){
+        var basePath = this.config.basePath;
+
+        if(typeof(basePath) === 'function'){
+            return basePath(filter);
+        }
+
+        return basePath;
     }
 }
 
