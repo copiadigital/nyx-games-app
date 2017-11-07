@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class ResetFilter extends Component {
+    constructor(props){
+        super(props);
+        this.onReset = this.onReset.bind(this);
+    }
+    onReset(e){
+        this.reset();
+        e.preventDefault();
+    }
+    reset(){
+        this.props.reset();
+    }
     render() {
         return (
             <div className="filter-reset">
-                <Link to="/games" className="reset">Reset Filters</Link>
+                <a href="#" className="reset" onClick={this.onReset}>Reset Filters</a>
             </div>
         );
     }
