@@ -70,6 +70,12 @@ class GamesFiltered extends Component {
              demoModal: null
         }, () => (this.updateUrl(this.state.filter, this.state.demoModal)));
     }
+    updateUrl(filter, demoModal){
+        var filterUrl = this.filterManager.buildUrl(filter);
+        var hash = (demoModal)? 'game' + demoModal.game.id + '-' + demoModal.channel : null;
+        var newUrl = filterUrl + (hash? '#' + hash : '');
+        this.context.router.history.push(newUrl);
+    }
     render() {
         return (
             <div>
