@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Table from './Table';
+import PaginatedAxiosDataProvider from './PaginatedAxiosDataProvider';
 import FilterForm from "../games/FilterForm";
 import FilterManager from './../../FilterManager';
+import Games from './../../data/model/Games';
 
 class Portfolio extends Component {
     constructor(props) {
@@ -29,10 +31,17 @@ class Portfolio extends Component {
         this.setState({filter: filter});
     }
     render() {
+        var games = new Games();
+        var dataProvider = new PaginatedAxiosDataProvider(games, {
+            responseParse: function(data){
+                return { items: data.games, total: data.meta.total };
+            }
+        });
+
         return (
             <div className="page-portfolio">
                 <FilterForm filter={this.state.filter} filterManager={this.filterManager} />
-                <Table filter={this.state.filter} />
+                <Table filter={this.state.filter} dataProvider={ dataProvider } />
             </div>
         );
     }
