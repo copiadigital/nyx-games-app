@@ -58,7 +58,7 @@ class HamburgerResponsive extends Component {
         return null;
     }
     render() {
-        return <div className="hamburger__container" data-hamburger-open={ this.state.open }>
+        return <div className="hamburger__container" data-hamburger-active={ this.state.required } data-hamburger-open={ this.state.open }>
             {this.renderToggleButton()}
             <div className="hamburger__navContainer">
                 {this.props.children}
