@@ -15,7 +15,7 @@ class FilterForm extends Component {
         super(props);
 
         this.state = {
-            filter: {}
+            filter: props.filter || {}
         };
 
         this.clearFilter = this.clearFilter.bind(this);
