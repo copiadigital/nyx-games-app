@@ -136,8 +136,10 @@ class Table extends Component {
                     {'}'}
                 </style>
                 <table className={classes.join(' ')} cellPadding={0} cellSpacing={0}>
-                    <tbody style={ { display: 'block', overflowX: 'scroll', overflowY: 'scroll', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
+                    <thead>
                         <this.props.tableHeadRow />
+                    </thead>
+                    <tbody style={ { display: 'block', overflowX: 'scroll', overflowY: 'scroll', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
                         <tr style={ { height: topPadding } }>
                             <td></td>
                         </tr>
