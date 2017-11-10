@@ -21,10 +21,14 @@ class GamesFiltered extends Component {
     }
     componentWillMount(){
         var filterManager = this.filterManager = new FilterManager(this.context.router, {
-            basePath: function(filter){
+            basePath: function(filter, queryParams){
                 if(filter.searchQuery){
                     return '/games/all';
                 }else {
+                    // remove featured from query params, as it will be in the URL
+                    queryParams.featured = null;
+
+                    // adjust the URL based on featured
                     var hasFilters = filterManager.hasFilters(filter);
                     return '/games/' + ((filter.featured && filter.explicitFeatured) ? 'featured' : ((filter.featured && !hasFilters)? '' : 'all'));
                 }
