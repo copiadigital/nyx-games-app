@@ -3,8 +3,10 @@ import logo from './assets/images/logo.svg';
 import Games from './components/games/Games';
 import Portfolio from './components/portfolio/Portfolio';
 import Service from './components/service/Service';
+import HamburgerResponsive from "./components/utilities/HamburgerResponsive";
 import {
     BrowserRouter,
+    Link,
     Redirect,
     Route,
     Switch
@@ -20,13 +22,18 @@ class App extends Component {
                 <div className="wrapper wrapper--thin">
                     <img src={logo} className="app-logo" alt="NYX logo" />
                     <h2 className="app-title">Game Portal</h2>
-                    <ul className="nav">
-                        <li><a href="/games">Games</a></li>
-                        <li><a href="/portfolio">Portfolio</a></li>
-                        <li><a href="/service">Self service</a></li>
-                        <li><a href="http://www.nyxgaminggroup.com/news">News</a></li>
-                        <li><a href="http://www.nyxgaminggroup.com/contact">Contact</a></li>
-                    </ul>
+                    <HamburgerResponsive
+                        maxWidth="800"
+                        toggleComponent={<span>Toggle stuff</span>}
+                        >
+                        <ul className="nav">
+                            <li><Link to="/games">Games</Link></li>
+                            <li><Link to="/portfolio">Portfolio</Link></li>
+                            <li><Link to="/service">Self service</Link></li>
+                            <li><a href="http://www.nyxgaminggroup.com/news">News</a></li>
+                            <li><a href="http://www.nyxgaminggroup.com/contact">Contact</a></li>
+                        </ul>
+                    </HamburgerResponsive>
                 </div>
             </div>
             <div className="banner">
