@@ -61,9 +61,13 @@ body{
   }
 }
 
+.wrapper--indent{
+  padding:0 120px;  
+}
+
 .wrapper--thin{
   max-width:$wrapper-small;
-  padding:0;
+  padding:0 80px;
 }
 
 @include respond(medium){
@@ -74,7 +78,7 @@ body{
 
 @include respond(large){
   .wrapper--thin{
-    padding:0 $gutter;
+    padding:0;
   }
 }
 

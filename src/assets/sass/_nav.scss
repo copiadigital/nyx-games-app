@@ -5,7 +5,7 @@
     cursor:pointer;
     border:none;
     background:none;
-    opacity:0.5;
+    opacity:1;
 
     .icon-bar{
         position:relative;
@@ -17,24 +17,24 @@
         border-radius:2px;
         @include transition(opacity, transform, $main-menu-toggle-bar-time);
 
-        .page-head.open &:nth-child(1){
+        .hamburger__container[data-hamburger-open='true'] &:nth-child(1){
             @include transform(translateY(13px));
             @include transform(rotate(135deg));
             top:$main-menu-toggle-bar-open-postion;
         }
 
-        .page-head.open &:nth-child(2){
+        .hamburger__container[data-hamburger-open='true'] &:nth-child(2){
             opacity:0;
         }
 
-        .page-head.open &:nth-child(3){
+        .hamburger__container[data-hamburger-open='true'] &:nth-child(3){
             @include transform(translateY(-13px));
             @include transform(rotate(-135deg));
             bottom:$main-menu-toggle-bar-open-postion;
         }
     }
 
-    @include respond(medium){
+    @include respond(large){
         display:none;
     }
 }
@@ -50,28 +50,27 @@
 .hamburger__container{
     float:right;
     display:inline-block;
-    padding-top:33px;
+    padding-top:15px;
     margin:0;
+
+    @include respond(large){
+        padding-top:33px;
+    }
 }
 
 .nav{
-    float:none;
-    display:block;
+    display:none;
     text-align:right;
     padding:0;
-    margin:-10px 0 0 0;
-
-    @include respond(medium){
-        float:right;
-        display:inline-block;
-        margin:0;
-    }
+    float:right;
+    display:inline-block;
+    margin:0;
 }
 
 .nav li{
     display:inline-block;
-    margin-left:8px;
-    font-size:0.7rem;
+    margin-left:4px;
+    font-size:1rem;
 
     @include respond(medium){
         margin-left:20px;
@@ -83,4 +82,40 @@
     padding:2px;
     color:white;
     text-decoration:none;
+}
+
+.hamburger__container[data-hamburger-open='false']{
+    .hamburger__navContainer{
+        display:none;
+    }
+}
+
+.hamburger__container[data-hamburger-open='true']{
+    .hamburger__navContainer{
+        display:block;
+        overflow:auto;
+        clear:both;
+        padding:8px;
+        background:rgba(black,0.8);
+    }
+
+    .nav__toggle{
+        background:rgba(black,0.8);
+    }
+
+    .nav li{
+        float:right;
+        display:block;
+        clear:both;
+        margin:2px;
+    }
+}
+
+@include respond(large){
+    .hamburger__container,
+    .hamburger__container[data-hamburger-open='false']{
+        .hamburger__navContainer{
+            display:block;
+        }
+    }
 }

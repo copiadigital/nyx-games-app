@@ -23,8 +23,12 @@ class App extends Component {
                     <img src={logo} className="app-logo" alt="NYX logo" />
                     <h2 className="app-title">Game Portal</h2>
                     <HamburgerResponsive
-                        maxWidth="800"
-                        toggleComponent={<span>Toggle stuff</span>}
+                        maxWidth="1150"
+                        toggleComponent={<button type="button" className="nav__toggle">
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                    </button>}
                         >
                         <ul className="nav">
                             <li><Link to="/games">Games</Link></li>
