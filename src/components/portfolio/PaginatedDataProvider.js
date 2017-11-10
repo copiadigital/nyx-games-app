@@ -1,26 +1,23 @@
 import Promise from 'promise';
 import _ from 'underscore';
 
-class PaginatedAxiosDataProvider{
-    constructor(model, settings){
+class PaginatedDataProvider{
+    constructor(settings){
         if(!settings){
             settings = {};
         };
 
         _.defaults(settings, {
             itemsPerPage: 25,
-            responseParse: null,
+            getPage: function(page, itemsPerPage){
+                throw new Error('getPage method not supplied');
+            },
         });
 
-        this.model = model;
         this.settings = settings;
         this.pendingRequests = [];
         this.data = [];
         this.total = 0;
-    }
-
-    setParams(params){
-        this.params = params;
     }
 
     getItems(start, end){
@@ -56,7 +53,7 @@ class PaginatedAxiosDataProvider{
         var blockEnd = Math.ceil(end/itemsPerPage)*itemsPerPage;
 
         var rangesRequired = [];
-        for(var i = blockStart; i <= blockEnd; i+=itemsPerPage){
+        for(var i = blockStart; i < blockEnd; i+=itemsPerPage){
             var rangeStart = i;
             var rangeEnd = i + itemsPerPage;
 
@@ -93,21 +90,13 @@ class PaginatedAxiosDataProvider{
             return this.pendingRequests[requestStart];
         }
 
-        var params = _.extend({}, this.params);
-        params.page = page;
-        params.itemsPerPage = itemsPerPage;
-
-        var requestPromise = self.model.all({
-            params: params
-        }).then((data) => {
-            var result = self.settings.responseParse ? self.settings.responseParse(data) : data;
-
+        var requestPromise = this.settings.getPage(page, itemsPerPage).then((result) => {
             if ('items' in result === false) {
-                throw 'Reponse must include items key';
+                throw new Error('Reponse must include items key');
             }
 
             if ('total' in result === false) {
-                throw 'Reponse must include total key';
+                throw new Error('Reponse must include total key');
             }
 
             self.storeItems(requestStart, result.items);
@@ -136,4 +125,4 @@ class PaginatedAxiosDataProvider{
     }
 }
 
-export default PaginatedAxiosDataProvider;
+export default PaginatedDataProvider;

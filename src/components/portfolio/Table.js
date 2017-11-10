@@ -1,17 +1,11 @@
 import React, {Component} from 'react';
-import RandomDataProvider from './RandomDataProvider';
+import PropTypes from 'prop-types';
 import _ from 'underscore';
 
 
 class Table extends Component {
     constructor(props) {
         super(props);
-
-        this.rowHeight = this.props.rowHeight || 25;
-        this.rowsToRender = this.props.rowsToRender || 25;
-        this.rowBuffer = this.props.rowBuffer || 25;
-        this.dataProvider = this.props.dataProvider || new RandomDataProvider(1000);
-        this.scrollDebounce = this.props.scrollDebounce || 100;
 
         this.state = {
             offset: 0,
@@ -22,9 +16,32 @@ class Table extends Component {
         this.onScroll = this.onScroll.bind(this);
     }
 
-    componentWillMount(){
+    reset(){
+        var self = this;
+        this.clear(function(){
+            self.draw();
+        });
+    }
+
+    clear(callback){
+        this.setState({
+            offset: 0,
+            totalItems: 0,
+            data: []
+        }, callback);
+    }
+
+    draw(){
         var range = this.getCurrentRowRange();
         this.updateRowsForRange(range);
+    }
+
+    componentWillMount(){
+        this.draw();
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.reset();
     }
 
     getCurrentRowRange(){
@@ -32,11 +49,11 @@ class Table extends Component {
     }
 
     getRowRangeForOffset(offset){
-        var start = Math.floor(offset / this.rowHeight);
-        var end = start + this.rowsToRender;
+        var start = Math.floor(offset / this.props.rowHeight);
+        var end = start + this.props.rowsToRender;
 
-        var bufferStart = Math.max(0, start - this.rowBuffer);
-        var bufferEnd = end + this.rowBuffer;
+        var bufferStart = Math.max(0, start - this.props.rowBuffer);
+        var bufferEnd = end + this.props.rowBuffer;
 
         return { start: start, end: end, bufferStart: bufferStart, bufferEnd: bufferEnd };
     }
@@ -44,7 +61,7 @@ class Table extends Component {
     updateRowsForRange(range){
         var self = this;
 
-        this.dataProvider.getItems(range.bufferStart, range.bufferEnd).then(function(result){
+        this.props.dataProvider.getItems(range.bufferStart, range.bufferEnd).then(function(result){
             self.setState({
                 data: result.items,
                 totalItems: result.total,
@@ -77,7 +94,7 @@ class Table extends Component {
     getDelayedScrollOffsetTrigger(){
         if(!this._delayedScrollOffsetTrigger){
             var trigger = this.getScrollOffsetTrigger();
-            this._delayedScrollOffsetTrigger = (this.scrollDebounce > 0)? _.debounce(trigger, this.scrollDebounce) : trigger;
+            this._delayedScrollOffsetTrigger = (this.props.scrollDebounce > 0)? _.debounce(trigger, this.props.scrollDebounce) : trigger;
         }
 
         return this._delayedScrollOffsetTrigger;
@@ -94,16 +111,16 @@ class Table extends Component {
     render() {
         const range = this.getCurrentRowRange();
         const total = this.state.totalItems;
-        const visibleHeight = this.rowHeight * this.rowsToRender;
-        const topPadding = range.bufferStart * this.rowHeight;
-        const bottomPadding = Math.max(0, (total - range.bufferEnd)) * this.rowHeight;
+        const visibleHeight = this.props.rowHeight * this.props.rowsToRender;
+        const topPadding = range.bufferStart * this.props.rowHeight;
+        const bottomPadding = Math.max(0, (total - range.bufferEnd)) * this.props.rowHeight;
 
         let rows = this.state.data.map(item => {
             return (
                 <TableRow
                     key={item.id}
                     data={item}
-                    rowHeight={this.rowHeight}
+                    rowHeight={this.props.rowHeight}
                 />
             );
         });
@@ -143,6 +160,21 @@ class Table extends Component {
         );
     }
 }
+
+Table.defaultProps = {
+    rowHeight: 25,
+    rowsToRender: 25,
+    rowBuffer: 25,
+    scrollDebounce: 100
+};
+
+Table.propTypes = {
+    dataProvider: PropTypes.object.isRequired,
+    rowHeight: PropTypes.number,
+    rowsToRender: PropTypes.number,
+    rowBuffer: PropTypes.number,
+    scrollDebounce: PropTypes.number
+};
 
 const TableRow = (props) => {
     return (
