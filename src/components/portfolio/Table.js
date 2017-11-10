@@ -116,13 +116,7 @@ class Table extends Component {
         const bottomPadding = Math.max(0, (total - range.bufferEnd)) * this.props.rowHeight;
 
         let rows = this.state.data.map(item => {
-            return (
-                <TableRow
-                    key={item.id}
-                    data={item}
-                    rowHeight={this.props.rowHeight}
-                />
-            );
+            return <this.props.tableRow key={ item.id } rowHeight={ this.props.rowHeight } data={ item } />
         });
 
         return (
@@ -130,7 +124,7 @@ class Table extends Component {
                 <style>
                     .rb-dynamic-table tbody{'{'}
                         display: block;
-                        overflow-y: 'scroll'
+                        overflow: 'scroll'
                     {'}'}
 
                     .rb-dynamic-table thead, tbody tr{'{'}
@@ -141,10 +135,7 @@ class Table extends Component {
                 </style>
                 <table className="rb-dynamic-table">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                        </tr>
+                        <this.props.tableHeadRow />
                     </thead>
                     <tbody style={ { display: 'block', overflowY: 'scroll', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
                         <tr style={ { height: topPadding } }>
@@ -170,23 +161,12 @@ Table.defaultProps = {
 
 Table.propTypes = {
     dataProvider: PropTypes.object.isRequired,
+    tableHeadRow: PropTypes.element.isRequired,
+    tableRow: PropTypes.element.isRequired,
     rowHeight: PropTypes.number,
     rowsToRender: PropTypes.number,
     rowBuffer: PropTypes.number,
     scrollDebounce: PropTypes.number
-};
-
-const TableRow = (props) => {
-    return (
-    <tr style={ { height: props.rowHeight } }>
-        <td>
-        { props.data.id }
-        </td>
-        <td>
-        { props.data.name }
-        </td>
-    </tr>
-    );
 };
 
 export default Table;

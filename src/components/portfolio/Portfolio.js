@@ -67,7 +67,11 @@ class Portfolio extends Component {
         return (
             <div className="page-portfolio">
                 <FilterForm filter={this.state.filter} filterManager={this.filterManager} />
-                <Table dataProvider={ dataProvider } />
+                <Table
+                    dataProvider={ dataProvider }
+                    tableHeadRow={ GameTableHeadRow }
+                    tableRow={ GameTableRow }
+                />
             </div>
         );
     }
@@ -76,5 +80,61 @@ class Portfolio extends Component {
 Portfolio.contextTypes = {
     router: PropTypes.object
 };
+
+class GameTableHeadRow extends Component {
+    render(){
+        return (
+            <tr>
+                <th>Game name</th>
+                <th>Branded</th>
+                <th>Premium</th>
+                <th>Jackpot</th>
+                <th>Channel</th>
+                <th>Game type</th>
+                <th>Game model</th>
+                <th>Studio</th>
+                <th>Game ID</th>
+                <th>RTP %</th>
+                <th>Max exposure (inc. feature)</th>
+                <th>Min bet</th>
+                <th>Max bet</th>
+                <th>Volatility</th>
+                <th>Free rounds</th>
+            </tr>
+        );
+    }
+}
+
+class GameTableRow extends Component {
+    render(){
+        var props = this.props;
+        var data = props.data;
+        return (
+            <tr style={ { height: props.rowHeight } }>
+                <td>{ data.name }</td>
+                <td>{ data.brand_licensed }</td>
+                <td>{ data.high_quality }</td>
+                <td>{ data.jackpot_enabled }</td>
+                <td>{ data.channels.sort().map(uppercaseFirst).join(', ') }</td>
+                <td>{ uppercaseFirst(data.category) }</td>
+                <td>{ uppercaseFirst(data.model) }</td>
+                <td>{ data.studio.name }</td>
+                <td>{ data.id }</td>
+                <td>{ data.rtp.toFixed(2) }</td>
+                <td>{ data.max_exposure }</td>
+                <td>{ data.min_bet }</td>
+                <td>{ data.max_bet }</td>
+                <td>{ data.volatility }</td>
+                <td>{ data.freerounds_enabled }</td>
+
+            </tr>
+        );
+    }
+}
+
+function uppercaseFirst(input){
+    var string = input.toString();
+    return string[0].toUpperCase() + string.substr(1);
+}
 
 export default Portfolio;
