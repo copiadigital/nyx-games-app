@@ -119,12 +119,14 @@ class Table extends Component {
             return <this.props.tableRow key={ item.id } rowHeight={ this.props.rowHeight } data={ item } />
         });
 
+        let classes = this.props.className.split(' ');
+        classes.push('rb-dynamic-table');
+
         return (
             <div>
                 <style>
                     .rb-dynamic-table tbody{'{'}
                         display: block;
-                        overflow: 'scroll'
                     {'}'}
 
                     .rb-dynamic-table thead, tbody tr{'{'}
@@ -133,11 +135,9 @@ class Table extends Component {
                         table-layout:fixed;
                     {'}'}
                 </style>
-                <table className="rb-dynamic-table">
-                    <thead>
+                <table className={classes.join(' ')} cellPadding={0} cellSpacing={0}>
+                    <tbody style={ { display: 'block', overflowX: 'scroll', overflowY: 'scroll', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
                         <this.props.tableHeadRow />
-                    </thead>
-                    <tbody style={ { display: 'block', overflowY: 'scroll', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
                         <tr style={ { height: topPadding } }>
                             <td></td>
                         </tr>
@@ -161,8 +161,8 @@ Table.defaultProps = {
 
 Table.propTypes = {
     dataProvider: PropTypes.object.isRequired,
-    tableHeadRow: PropTypes.element.isRequired,
-    tableRow: PropTypes.element.isRequired,
+    tableHeadRow: PropTypes.func.isRequired,
+    tableRow: PropTypes.func.isRequired,
     rowHeight: PropTypes.number,
     rowsToRender: PropTypes.number,
     rowBuffer: PropTypes.number,

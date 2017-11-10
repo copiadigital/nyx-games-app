@@ -5,6 +5,7 @@ import PaginatedAxiosDataProvider from './PaginatedDataProvider';
 import FilterForm from "../games/FilterForm";
 import FilterManager from './../../FilterManager';
 import Games from './../../data/model/Games';
+import './Portfolio.css';
 
 class Portfolio extends Component {
     constructor(props) {
@@ -67,11 +68,14 @@ class Portfolio extends Component {
         return (
             <div className="page-portfolio">
                 <FilterForm filter={this.state.filter} filterManager={this.filterManager} />
-                <Table
-                    dataProvider={ dataProvider }
-                    tableHeadRow={ GameTableHeadRow }
-                    tableRow={ GameTableRow }
-                />
+                <div className="portfolio-table-container">
+                    <Table
+                        dataProvider={ dataProvider }
+                        tableHeadRow={ GameTableHeadRow }
+                        tableRow={ GameTableRow }
+                        className="portfolio"
+                    />
+                </div>
             </div>
         );
     }
@@ -85,21 +89,22 @@ class GameTableHeadRow extends Component {
     render(){
         return (
             <tr>
-                <th>Game name</th>
-                <th>Branded</th>
-                <th>Premium</th>
-                <th>Jackpot</th>
-                <th>Channel</th>
-                <th>Game type</th>
-                <th>Game model</th>
-                <th>Studio</th>
-                <th>Game ID</th>
-                <th>RTP %</th>
-                <th>Max exposure (inc. feature)</th>
-                <th>Min bet</th>
-                <th>Max bet</th>
-                <th>Volatility</th>
-                <th>Free rounds</th>
+                <th><div><span>Game name</span></div></th>
+                <th><div><span>Branded</span></div></th>
+                <th><div><span>Premium</span></div></th>
+                <th><div><span>Jackpot</span></div></th>
+                <th><div><span>Channel</span></div></th>
+                <th><div><span>Game type</span></div></th>
+                <th><div><span>Game model</span></div></th>
+                <th><div><span>Studio</span></div></th>
+                <th><div><span>Game ID</span></div></th>
+                <th><div><span>RTP %</span></div></th>
+                <th><div><span>Max exposure (inc. feature)</span></div></th>
+                <th><div><span>Min bet</span></div></th>
+                <th><div><span>Max bet</span></div></th>
+                <th><div><span>Volatility</span></div></th>
+                <th><div><span>Free rounds</span></div></th>
+                <th className="jurisdiction rotate"><div><span>Aldeney</span></div></th>
             </tr>
         );
     }
