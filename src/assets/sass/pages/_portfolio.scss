@@ -3,8 +3,12 @@ table.portfolio{
   font-size: 1.3em;
   width: 100%;
   table-layout:fixed;
+  margin-bottom: 20px;
 
   thead{
+    @include scrollbox-horizontal();
+
+
     tr{
       padding-right: 50px;
 
@@ -13,6 +17,8 @@ table.portfolio{
         padding: 5px 5px 5px 5px;
         text-align: left;
         vertical-align: bottom;
+        background-color: $color-blue;
+        color: #fff;
       }
 
       th.rotate {
@@ -33,6 +39,8 @@ table.portfolio{
   }
 
   tbody{
+    @include scrollbox-horizontal();
+
     tr{
 
       td{

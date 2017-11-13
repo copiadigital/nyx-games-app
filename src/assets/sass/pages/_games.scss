@@ -1,6 +1,3 @@
-@import "../../assets/sass/variables.scss";
-@import "../../assets/sass/respond.scss";
-
 .games-grid-container{
     margin-right:-16px;
 }
@@ -41,7 +38,7 @@
     content: "";
     width: 59px;
     height: 59px;
-    background-image: url("../../assets/images/banner-hq.png");
+    background-image: url("../images/banner-hq.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     bottom: 0;
@@ -141,11 +138,11 @@
         background-position:center center;
 
         &_desktop{
-            background-image:url(../../assets/images/icon-desktop.png);
+            background-image:url(../images/icon-desktop.png);
         }
 
         &_mobile{
-            background-image:url(../../assets/images/icon-mobile.png);
+            background-image:url(../images/icon-mobile.png);
         }
     }
 

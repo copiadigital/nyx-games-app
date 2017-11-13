@@ -149,15 +149,6 @@ class Table extends Component {
         return (
             <div>
                 <style>
-                    .rb-dynamic-table tbody{'{'}
-                        display: block;
-                    {'}'}
-
-                    .rb-dynamic-table thead{'{'}
-                        display: block;
-                        overflow: hidden;
-                    {'}'}
-
                     .rb-dynamic-table thead tr, tbody tr{'{'}
                         display:table;
                         width:100%;
@@ -165,12 +156,12 @@ class Table extends Component {
                     {'}'}
                 </style>
                 <table className={classes.join(' ')} cellPadding={0} cellSpacing={0}>
-                    <thead ref="thead">
+                    <thead ref="thead" style={ { display: 'block', overflow: 'hidden' }}>
                         <tr>
                             { headings }
                         </tr>
                     </thead>
-                    <tbody style={ { display: 'block', overflowX: 'scroll', overflowY: 'scroll', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
+                    <tbody style={ { display: 'block', overflowX: 'auto', overflowY: 'auto', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
                         <tr className="pad" style={ { height: topPadding } }>
                             <td></td>
                         </tr>

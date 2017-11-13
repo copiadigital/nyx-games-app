@@ -3,7 +3,6 @@ import Table from './Table';
 import PaginatedAxiosDataProvider from './PaginatedDataProvider';
 import Games from './../../data/model/Games';
 import jurisdictions from './../../data/jurisdictions';
-import './Portfolio.css';
 import Loading from "../utilities/Loading";
 import _ from 'underscore';
 
@@ -69,20 +68,20 @@ class PortfolioTable extends Component {
 
         var columns = [
             { id: 'name', width: 200, heading: 'Game name' },
-            { id: 'brand_licensed', width: 75, heading: 'Branded', content: (data => { return booleanElse(data.brand_licensed) }) },
-            { id: 'high_quality', width: 75, heading: 'Premium', content: (data => { return booleanElse(data.high_quality) })  },
-            { id: 'jackpot_enabled', width: 75, heading: 'Jackpot', content: (data => { return booleanElse(data.jackpot_enabled) })  },
+            { id: 'gameId', width: 75, heading: 'Game ID', content: (data => { return data.id }) },
             { id: 'channel', width: 120, heading: 'Channel', content: (data => { return data.channels.sort().map(uppercaseFirst).join(', ')}) },
             { id: 'category', width: 90, heading: 'Game type', content: (data => { return uppercaseFirst(data.category); }) },
             { id: 'model', width: 90, heading: 'Game model', content: (data => { return uppercaseFirst(data.model); }) },
             { id: 'studio', width: 140, heading: 'Studio', content: (data => { return data.studio.name }) },
-            { id: 'gameId', width: 75, heading: 'Game ID', content: (data => { return data.id }) },
             { id: 'rtp', width: 75, heading: 'RTP %', content: (data => { return data.rtp.toFixed(2) + '%'; }) },
             { id: 'max_exposure', width: 75, heading: 'Max exposure' },
             { id: 'min_bet', width: 75, heading: 'Min bet' },
             { id: 'max_bet', width: 75, heading: 'Max bet' },
             { id: 'volatility', width: 75, heading: 'Volatility' },
-            { id: 'freerounds_enabled', width: 75, heading: 'Free rounds' }
+            { id: 'freerounds_enabled', width: 75, heading: 'Free rounds' },
+            { id: 'brand_licensed', width: 75, heading: 'Branded', content: (data => { return booleanElse(data.brand_licensed) }) },
+            { id: 'high_quality', width: 75, heading: 'Premium', content: (data => { return booleanElse(data.high_quality) })  },
+            { id: 'jackpot_enabled', width: 75, heading: 'Jackpot', content: (data => { return booleanElse(data.jackpot_enabled) })  }
         ];
 
         var jurisdictions = this.state.jurisdictions;
