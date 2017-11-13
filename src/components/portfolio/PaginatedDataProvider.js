@@ -17,7 +17,7 @@ class PaginatedDataProvider{
         this.settings = settings;
         this.pendingRequests = [];
         this.data = [];
-        this.total = 0;
+        this.total = null;
     }
 
     getItems(start, end){
@@ -67,16 +67,19 @@ class PaginatedDataProvider{
 
     hasRange(start, end){
         var dataLength = this.data.length;
+        // once we know the total items, make sure we don't ask for more than the total!
+        // the first time this is called we don't know the total so just go with request size
+        var realEnd = Math.min(end, (this.total === null)? Infinity : this.total);
 
         if(dataLength === 0){
             return false;
         }
 
-        if(dataLength < end){
+        if(dataLength < realEnd){
             return false;
         }
 
-        return (this.data[start] !== null && this.data[end] !== null);
+        return (this.data[start] !== null && this.data[realEnd] !== null);
     }
 
     getItemsFromServer(start, end){

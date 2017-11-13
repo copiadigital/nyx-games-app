@@ -4,7 +4,10 @@ table.portfolio{
   width: 100%;
   table-layout:fixed;
 
+  thead{
     tr{
+      padding-right: 50px;
+
       th{
         margin: 0;
         padding: 5px 5px 5px 5px;
@@ -14,27 +17,36 @@ table.portfolio{
 
       th.rotate {
         /* Something you can count on */
-        height: 140px;
+        height: 75px;
         white-space: nowrap;
         vertical-align: inherit;
       }
 
       th.rotate > div {
-        transform: translate(25px, 51px) rotate(315deg);
-        width: 30px;
+        transform: translate(-25px, 35px) rotate(315deg);
+        width: 25px;
       }
       th.rotate > div > span {
-        padding: 5px 10px;
+        padding: 0 0 0 30px;
       }
     }
+  }
 
   tbody{
     tr{
-      min-width: 1500px;
 
       td{
         margin: 0;
-        padding: 2px 5px;
+        padding: 5px 5px 3px 5px;
+        border-bottom: 1px #c0c0c0 solid;
+      }
+
+      &.pad{
+        td{
+          margin: 0;
+          border: 0;
+          padding: 0;
+        }
       }
     }
   }
