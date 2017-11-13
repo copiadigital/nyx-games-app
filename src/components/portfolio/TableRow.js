@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
+import TableColumn from './TableColumn';
 
 class TableRow extends Component {
     render(){
-        var props = this.props;
+        const props = this.props;
+
+        let columns = props.columns.map(column => {
+            return <TableColumn key={ column.id } data={ props.data } { ...column } />
+        });
+
         return (
             <tr style={ { height: props.rowHeight } }>
-                <td>
-                    { props.data.id }
-                </td>
-                <td>
-                    { props.data.name }
-                </td>
+                { columns }
             </tr>
         );
     }

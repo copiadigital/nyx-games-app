@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import _ from 'underscore';
+import TableRow from './TableRow';
+import TableColumn from './TableColumn';
+import TableHeading from './TableHeading';
 
 
 class Table extends Component {
@@ -8,7 +11,8 @@ class Table extends Component {
         super(props);
 
         this.state = {
-            offset: 0,
+            offsetTop: 0,
+            offsetLeft: 0,
             totalItems: 0,
             data: []
         }
@@ -25,7 +29,8 @@ class Table extends Component {
 
     clear(callback){
         this.setState({
-            offset: 0,
+            offsetTop: 0,
+            offsetLeft: 0,
             totalItems: 0,
             data: []
         }, callback);
@@ -40,12 +45,17 @@ class Table extends Component {
         this.draw();
     }
 
+    componentDidUpdate(){
+        // offset headings to match tbody scroll
+        this.refs.thead.scrollLeft = this.state.offsetLeft;
+    }
+
     componentWillReceiveProps(nextProps){
         this.reset();
     }
 
     getCurrentRowRange(){
-        return this.getRowRangeForOffset(this.state.offset);
+        return this.getRowRangeForOffset(this.state.offsetTop);
     }
 
     getRowRangeForOffset(offset){
@@ -77,23 +87,33 @@ class Table extends Component {
     }
 
     onScroll(e, number, view){
-        var offset = e.target.scrollTop;
-        this.getDelayedScrollOffsetTrigger()(offset);
+        var offsetTop = e.target.scrollTop;
+        this.getDelayedTopScrollOffsetTrigger()(offsetTop);
+
+        var offsetLeft = e.target.scrollLeft;
+        this.getHorizontalOffsetTrigger()(offsetLeft);        
     }
 
-    getScrollOffsetTrigger(){
+    getHorizontalOffsetTrigger(){
         var self = this;
         return function(offset) {
-            self.setState({offset: offset, waitForRowUpdate: true}, function (newState) {
+            self.setState({offsetLeft: offset});
+        };
+    }
+
+    getTopScrollOffsetTrigger(){
+        var self = this;
+        return function(offset) {
+            self.setState({offsetTop: offset, waitForRowUpdate: true}, function (newState) {
                 var range = self.getCurrentRowRange();
                 self.updateRowsForRange(range);
             });
         };
     }
 
-    getDelayedScrollOffsetTrigger(){
+    getDelayedTopScrollOffsetTrigger(){
         if(!this._delayedScrollOffsetTrigger){
-            var trigger = this.getScrollOffsetTrigger();
+            var trigger = this.getTopScrollOffsetTrigger();
             this._delayedScrollOffsetTrigger = (this.props.scrollDebounce > 0)? _.debounce(trigger, this.props.scrollDebounce) : trigger;
         }
 
@@ -115,8 +135,12 @@ class Table extends Component {
         const topPadding = range.bufferStart * this.props.rowHeight;
         const bottomPadding = Math.max(0, (total - range.bufferEnd)) * this.props.rowHeight;
 
-        let rows = this.state.data.map(item => {
-            return <this.props.tableRow key={ item.id } rowHeight={ this.props.rowHeight } data={ item } />
+        let rows = this.state.data.map(data => {
+            return <TableRow key={ data.id } rowHeight={ this.props.rowHeight } tableColumn={ TableColumn } columns={ this.props.columns } data={ data } />
+        });
+
+        let headings = this.props.columns.map(column => {
+            return <TableHeading key={ column.id } {...column} />
         });
 
         let classes = this.props.className.split(' ');
@@ -129,22 +153,29 @@ class Table extends Component {
                         display: block;
                     {'}'}
 
-                    .rb-dynamic-table thead, tbody tr{'{'}
+                    .rb-dynamic-table thead{'{'}
+                        display: block;
+                        overflow: hidden;
+                    {'}'}
+
+                    .rb-dynamic-table thead tr, tbody tr{'{'}
                         display:table;
                         width:100%;
                         table-layout:fixed;
                     {'}'}
                 </style>
                 <table className={classes.join(' ')} cellPadding={0} cellSpacing={0}>
-                    <thead>
-                        <this.props.tableHeadRow />
+                    <thead ref="thead">
+                        <tr>
+                            { headings }
+                        </tr>
                     </thead>
                     <tbody style={ { display: 'block', overflowX: 'scroll', overflowY: 'scroll', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
-                        <tr style={ { height: topPadding } }>
+                        <tr className="pad" style={ { height: topPadding } }>
                             <td></td>
                         </tr>
                         { rows }
-                        <tr style={ { height: bottomPadding } }>
+                        <tr className="pad" style={ { height: bottomPadding } }>
                             <td></td>
                         </tr>
                     </tbody>
@@ -163,8 +194,9 @@ Table.defaultProps = {
 
 Table.propTypes = {
     dataProvider: PropTypes.object.isRequired,
-    tableHeadRow: PropTypes.func.isRequired,
-    tableRow: PropTypes.func.isRequired,
+    tableHeadRow: PropTypes.func,
+    tableRow: PropTypes.func,
+    tableColumn: PropTypes.func,
     rowHeight: PropTypes.number,
     rowsToRender: PropTypes.number,
     rowBuffer: PropTypes.number,
