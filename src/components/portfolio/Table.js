@@ -48,6 +48,9 @@ class Table extends Component {
     componentDidUpdate(){
         // offset headings to match tbody scroll
         this.refs.thead.scrollLeft = this.state.offsetLeft;
+
+        // offset fixed rows to match rows
+        this.refs.fixedBody.scrollTop = this.state.offsetTop;
     }
 
     componentWillReceiveProps(nextProps){
@@ -88,10 +91,10 @@ class Table extends Component {
 
     onScroll(e, number, view){
         var offsetTop = e.target.scrollTop;
-        this.getDelayedTopScrollOffsetTrigger()(offsetTop);
+        this.getTopScrollOffsetTrigger()(offsetTop);
 
         var offsetLeft = e.target.scrollLeft;
-        this.getHorizontalOffsetTrigger()(offsetLeft);        
+        this.getHorizontalOffsetTrigger()(offsetLeft);
     }
 
     getHorizontalOffsetTrigger(){
@@ -111,21 +114,27 @@ class Table extends Component {
         };
     }
 
-    getDelayedTopScrollOffsetTrigger(){
-        if(!this._delayedScrollOffsetTrigger){
-            var trigger = this.getTopScrollOffsetTrigger();
-            this._delayedScrollOffsetTrigger = (this.props.scrollDebounce > 0)? _.debounce(trigger, this.props.scrollDebounce) : trigger;
-        }
-
-        return this._delayedScrollOffsetTrigger;
-    }
-
     shouldComponentUpdate(nextProps, nextState){
         if(nextState.waitForRowUpdate === true){
             return false;
         }
 
         return true;
+    }
+
+    extractFixed(element){
+        var fixed = [];
+        var body = [];
+        
+        console.log('element', element);
+
+        _.each(element, function(item){
+            console.log('item', item);
+            fixed.push(React.cloneElement(item, {}, item.props.children.slice(0, 1)));
+            body.push(React.cloneElement(item, {}, item.props.children.slice(1)));
+        });
+
+        return [fixed, body];
     }
 
     render() {
@@ -135,11 +144,22 @@ class Table extends Component {
         const topPadding = range.bufferStart * this.props.rowHeight;
         const bottomPadding = Math.max(0, (total - range.bufferEnd)) * this.props.rowHeight;
 
+        var fixedColumnOptions = this.props.columns.slice(0, 1);
+        var columnOptions = this.props.columns.slice(1, this.props.columns.length);
+
         let rows = this.state.data.map(data => {
-            return <TableRow key={ data.id } rowHeight={ this.props.rowHeight } tableColumn={ TableColumn } columns={ this.props.columns } data={ data } />
+            return <TableRow key={ data.id } rowHeight={ this.props.rowHeight } tableColumn={ TableColumn } columns={ columnOptions } data={ data } />
         });
 
-        let headings = this.props.columns.map(column => {
+        let headings = columnOptions.map(column => {
+            return <TableHeading key={ column.id } {...column} />
+        });
+
+        let fixedRows = this.state.data.map(data => {
+            return <TableRow key={ data.id } rowHeight={ this.props.rowHeight } tableColumn={ TableColumn } columns={ fixedColumnOptions } data={ data } />
+        });
+
+        let fixedHeadings = fixedColumnOptions.map(column => {
             return <TableHeading key={ column.id } {...column} />
         });
 
@@ -147,7 +167,7 @@ class Table extends Component {
         classes.push('rb-dynamic-table');
 
         return (
-            <div>
+            <div className={classes.join(' ')} style={ { display: 'flex' } }>
                 <style>
                     .rb-dynamic-table thead tr, tbody tr{'{'}
                         display:table;
@@ -155,22 +175,44 @@ class Table extends Component {
                         table-layout:fixed;
                     {'}'}
                 </style>
-                <table className={classes.join(' ')} cellPadding={0} cellSpacing={0}>
-                    <thead ref="thead" style={ { display: 'block', overflow: 'hidden' }}>
+
+                <div className="fixed-container" style={ { width: 200 } }>
+                    <table className="fixed" cellPadding={0} cellSpacing={0}>
+                        <thead style={ { display: 'block', overflow: 'hidden' }}>
                         <tr>
-                            { headings }
+                            { fixedHeadings }
                         </tr>
-                    </thead>
-                    <tbody style={ { display: 'block', overflowX: 'auto', overflowY: 'auto', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
+                        </thead>
+                        <tbody ref="fixedBody" style={ { display: 'block', overflowX: 'scroll', overflowY: 'hidden', maxHeight: visibleHeight, width: 200} } >
                         <tr className="pad" style={ { height: topPadding } }>
                             <td></td>
                         </tr>
-                        { rows }
+                        { fixedRows }
                         <tr className="pad" style={ { height: bottomPadding } }>
                             <td></td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="body-container" style={ {} }>
+                    <table className="body" cellPadding={0} cellSpacing={0}>
+                        <thead ref="thead" style={ { display: 'block', overflow: 'hidden' }}>
+                            <tr>
+                                { headings }
+                            </tr>
+                        </thead>
+                        <tbody style={ { display: 'block', overflowX: 'auto', overflowY: 'auto', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
+                            <tr className="pad" style={ { height: topPadding } }>
+                                <td></td>
+                            </tr>
+                            { rows }
+                            <tr className="pad" style={ { height: bottomPadding } }>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }
@@ -179,8 +221,7 @@ class Table extends Component {
 Table.defaultProps = {
     rowHeight: 25,
     rowsToRender: 25,
-    rowBuffer: 25,
-    scrollDebounce: 100
+    rowBuffer: 25
 };
 
 Table.propTypes = {
@@ -190,8 +231,7 @@ Table.propTypes = {
     tableColumn: PropTypes.func,
     rowHeight: PropTypes.number,
     rowsToRender: PropTypes.number,
-    rowBuffer: PropTypes.number,
-    scrollDebounce: PropTypes.number
+    rowBuffer: PropTypes.number
 };
 
 export default Table;

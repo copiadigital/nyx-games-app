@@ -21,7 +21,7 @@ class TableColumn extends Component {
 
         return (
             <td style={ { width: width }}>
-                { content }
+                <div>{ content }</div>
             </td>
         );
     }

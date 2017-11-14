@@ -109,6 +109,7 @@ class PortfolioTable extends Component {
                     rowsToRender={20}
                     rowBuffer={20}
                     columns={ columns }
+                    fixedColumns={1}
                 />
     }
 }

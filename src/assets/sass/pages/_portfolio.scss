@@ -1,61 +1,77 @@
-table.portfolio{
+.portfolio {
+  table {
 
-  font-size: 1.3em;
-  width: 100%;
-  table-layout:fixed;
-  margin-bottom: 20px;
+    font-size: 1.3em;
+    width: 100%;
+    table-layout: fixed;
+    margin-bottom: 20px;
 
-  thead{
-    @include scrollbox-horizontal();
+    thead {
+      tr {
+        th {
+          margin: 0;
+          padding: 5px 5px 5px 5px;
+          text-align: left;
+          vertical-align: bottom;
+          background-color: $color-blue;
+          color: #fff;
+          height: 75px;
+        }
 
+        th.rotate {
+          /* Something you can count on */
+          height: 75px;
+          white-space: nowrap;
+          vertical-align: inherit;
+        }
 
-    tr{
-      padding-right: 50px;
-
-      th{
-        margin: 0;
-        padding: 5px 5px 5px 5px;
-        text-align: left;
-        vertical-align: bottom;
-        background-color: $color-blue;
-        color: #fff;
+        th.rotate > div {
+          transform: translate(-25px, 35px) rotate(315deg);
+          width: 25px;
+        }
+        th.rotate > div > span {
+          padding: 0 0 0 30px;
+        }
       }
+    }
 
-      th.rotate {
-        /* Something you can count on */
-        height: 75px;
-        white-space: nowrap;
-        vertical-align: inherit;
-      }
+    tbody {
+      tr {
 
-      th.rotate > div {
-        transform: translate(-25px, 35px) rotate(315deg);
-        width: 25px;
-      }
-      th.rotate > div > span {
-        padding: 0 0 0 30px;
+        td {
+          margin: 0;
+          padding: 5px 5px 3px 5px;
+          border-bottom: 1px #c0c0c0 solid;
+
+          div{
+            height: 25px;
+            line-height: 25px;
+          }
+        }
+
+        &.pad {
+          td {
+            margin: 0;
+            border: 0;
+            padding: 0;
+          }
+        }
       }
     }
   }
 
-  tbody{
-    @include scrollbox-horizontal();
+  table.body{
+    thead{
+      @include scrollbox-horizontal();
 
-    tr{
-
-      td{
-        margin: 0;
-        padding: 5px 5px 3px 5px;
-        border-bottom: 1px #c0c0c0 solid;
-      }
-
-      &.pad{
-        td{
-          margin: 0;
-          border: 0;
-          padding: 0;
-        }
+      tr{
+        padding-right: 50px;
       }
     }
+
+    tbody{
+      @include scrollbox-horizontal();
+    }
+
   }
 }
