@@ -249,7 +249,7 @@ Table.defaultProps = {
     rowHeight: 25,
     rowsToRender: 25,
     rowBuffer: 25,
-    scrollbarBorderColor: '#e6e6e6'
+    scrollbarBorderColor: '#a4a4a4'
 };
 
 Table.propTypes = {

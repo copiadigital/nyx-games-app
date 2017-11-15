@@ -116,7 +116,7 @@ class PortfolioTable extends Component {
                     className="portfolio"
                     rowHeight={25}
                     rowsToRender={20}
-                    rowBuffer={20}
+                    rowBuffer={5}
                     columns={ columns }
                     fixedColumns={1}
                 />
