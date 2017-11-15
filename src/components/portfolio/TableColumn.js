@@ -21,15 +21,17 @@ class TableColumn extends Component {
 
         return (
             <td style={ { width: width }}>
-                <div>{ content }</div>
+                <div style={ { width: width }}>{ content }</div>
             </td>
         );
     }
 }
 
+TableColumn.defaultWidth = 150;
+
 TableColumn.defaultProps = {
     content: null,
-    width: 150
+    width: TableColumn.defaultWidth
 };
 
 export default TableColumn;

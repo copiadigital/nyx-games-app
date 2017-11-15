@@ -17,7 +17,8 @@ class Table extends Component {
             data: []
         }
 
-        this.onScroll = this.onScroll.bind(this);
+        this.onScrollBody = this.onScrollBody.bind(this);
+        this.onScrollFixedBody = this.onScrollFixedBody.bind(this);
     }
 
     reset(){
@@ -41,6 +42,14 @@ class Table extends Component {
         this.updateRowsForRange(range);
     }
 
+    drawFixedBodyScrollBarBorder(){
+        // set border on tbody fixed to account for scrollbar
+        if(this.refs.fixedTBody) {
+            var scrollbarHeight = this.refs.tbody.offsetHeight - this.refs.tbody.clientHeight;
+            this.refs.fixedTBody.style.borderBottom = scrollbarHeight + 'px solid ' + this.props.scrollbarBorderColor;
+        }
+    }
+
     componentWillMount(){
         this.draw();
     }
@@ -50,7 +59,21 @@ class Table extends Component {
         this.refs.thead.scrollLeft = this.state.offsetLeft;
 
         // offset fixed rows to match rows
-        this.refs.fixedBody.scrollTop = this.state.offsetTop;
+        if(this.refs.fixedTBody && this.refs.fixedTBody.scrollTop !== this.state.offsetTop) {
+            this.preventScrollEvent = true;
+            this.refs.fixedTBody.scrollTop = this.state.offsetTop;
+        }
+
+        if(this.refs.tbody.scrollTop !== this.state.offsetTop) {
+            this.preventScrollEvent = true;
+            this.refs.tbody.scrollTop = this.state.offsetTop;
+        }
+
+        this.drawFixedBodyScrollBarBorder();
+    }
+
+    componentDidMount(){
+        this.drawFixedBodyScrollBarBorder();
     }
 
     componentWillReceiveProps(nextProps){
@@ -89,12 +112,27 @@ class Table extends Component {
         });
     }
 
-    onScroll(e, number, view){
+    onScrollBody(e, number, view){
+        if(this.preventScrollEvent){
+            this.preventScrollEvent = false;
+            return;
+        }
+
         var offsetTop = e.target.scrollTop;
-        this.getTopScrollOffsetTrigger()(offsetTop);
+        this.getTopScrollOffsetTrigger()(offsetTop, 'body');
 
         var offsetLeft = e.target.scrollLeft;
         this.getHorizontalOffsetTrigger()(offsetLeft);
+    }
+
+    onScrollFixedBody(e, number, view){
+        if(this.preventScrollEvent){
+            this.preventScrollEvent = false;
+            return;
+        }
+
+        var offsetTop = e.target.scrollTop;
+        this.getTopScrollOffsetTrigger()(offsetTop, 'fixedBody');
     }
 
     getHorizontalOffsetTrigger(){
@@ -106,8 +144,8 @@ class Table extends Component {
 
     getTopScrollOffsetTrigger(){
         var self = this;
-        return function(offset) {
-            self.setState({offsetTop: offset, waitForRowUpdate: true}, function (newState) {
+        return function(offset, actor) {
+            self.setState({offsetTop: offset, offsetTopActor: actor, waitForRowUpdate: true}, function (newState) {
                 var range = self.getCurrentRowRange();
                 self.updateRowsForRange(range);
             });
@@ -122,21 +160,6 @@ class Table extends Component {
         return true;
     }
 
-    extractFixed(element){
-        var fixed = [];
-        var body = [];
-        
-        console.log('element', element);
-
-        _.each(element, function(item){
-            console.log('item', item);
-            fixed.push(React.cloneElement(item, {}, item.props.children.slice(0, 1)));
-            body.push(React.cloneElement(item, {}, item.props.children.slice(1)));
-        });
-
-        return [fixed, body];
-    }
-
     render() {
         const range = this.getCurrentRowRange();
         const total = this.state.totalItems;
@@ -144,8 +167,9 @@ class Table extends Component {
         const topPadding = range.bufferStart * this.props.rowHeight;
         const bottomPadding = Math.max(0, (total - range.bufferEnd)) * this.props.rowHeight;
 
-        var fixedColumnOptions = this.props.columns.slice(0, 1);
-        var columnOptions = this.props.columns.slice(1, this.props.columns.length);
+        var fixedColumnOptions = this.props.columns.slice(0, this.props.fixedColumns);
+        var columnOptions = this.props.columns.slice(this.props.fixedColumns, this.props.columns.length);
+        var fixedColumnWidthTotal = _.reduce(_.pluck(fixedColumnOptions, 'width'), reduceTotalWithDefault(TableColumn.defaultWidth), 0); //200;
 
         let rows = this.state.data.map(data => {
             return <TableRow key={ data.id } rowHeight={ this.props.rowHeight } tableColumn={ TableColumn } columns={ columnOptions } data={ data } />
@@ -176,14 +200,15 @@ class Table extends Component {
                     {'}'}
                 </style>
 
-                <div className="fixed-container" style={ { width: 200 } }>
-                    <table className="fixed" cellPadding={0} cellSpacing={0}>
-                        <thead style={ { display: 'block', overflow: 'hidden' }}>
+                { (this.props.fixedColumns > 0) ?
+                <div className="fixed-container" style={ { width: fixedColumnWidthTotal } }>
+                    <table className="fixed" cellPadding={0} cellSpacing={0} style={ { width: fixedColumnWidthTotal } }>
+                        <thead style={ { display: 'block', overflow: 'hidden', width: fixedColumnWidthTotal + 20 }}>
                         <tr>
                             { fixedHeadings }
                         </tr>
                         </thead>
-                        <tbody ref="fixedBody" style={ { display: 'block', overflowX: 'scroll', overflowY: 'hidden', maxHeight: visibleHeight, width: 200} } >
+                        <tbody ref="fixedTBody" onScroll={ this.onScrollFixedBody } style={ { display: 'block', overflowX: 'hidden', overflowY: 'auto', maxHeight: visibleHeight, width: fixedColumnWidthTotal + 20 } } >
                         <tr className="pad" style={ { height: topPadding } }>
                             <td></td>
                         </tr>
@@ -194,6 +219,7 @@ class Table extends Component {
                         </tbody>
                     </table>
                 </div>
+                    : null }
 
                 <div className="body-container" style={ {} }>
                     <table className="body" cellPadding={0} cellSpacing={0}>
@@ -202,7 +228,7 @@ class Table extends Component {
                                 { headings }
                             </tr>
                         </thead>
-                        <tbody style={ { display: 'block', overflowX: 'auto', overflowY: 'auto', maxHeight: visibleHeight } } onScroll={ this.onScroll }>
+                        <tbody ref="tbody" style={ { display: 'block', overflowX: 'auto', overflowY: 'auto', maxHeight: visibleHeight } } onScroll={ this.onScrollBody }>
                             <tr className="pad" style={ { height: topPadding } }>
                                 <td></td>
                             </tr>
@@ -219,19 +245,33 @@ class Table extends Component {
 }
 
 Table.defaultProps = {
+    fixedColumns: 0,
     rowHeight: 25,
     rowsToRender: 25,
-    rowBuffer: 25
+    rowBuffer: 25,
+    scrollbarBorderColor: '#e6e6e6'
 };
 
 Table.propTypes = {
     dataProvider: PropTypes.object.isRequired,
+    fixedColumns: PropTypes.number,
     tableHeadRow: PropTypes.func,
     tableRow: PropTypes.func,
     tableColumn: PropTypes.func,
     rowHeight: PropTypes.number,
     rowsToRender: PropTypes.number,
-    rowBuffer: PropTypes.number
+    rowBuffer: PropTypes.number,
+    scrollbarBorderColor: PropTypes.string
+};
+
+var reduceTotalWithDefault = function(def){
+    return function(total, num){
+        if(isNaN(num)) {
+            num = def;
+        }
+
+        return total + num;
+    }
 };
 
 export default Table;
