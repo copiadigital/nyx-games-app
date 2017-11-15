@@ -14,6 +14,7 @@ class Table extends Component {
             offsetTop: 0,
             offsetLeft: 0,
             totalItems: 0,
+            range: null,
             data: []
         }
 
@@ -33,6 +34,7 @@ class Table extends Component {
             offsetTop: 0,
             offsetLeft: 0,
             totalItems: 0,
+            range: null,
             data: []
         }, callback);
     }
@@ -50,25 +52,28 @@ class Table extends Component {
         }
     }
 
+    scrollElements(left, top){
+        // offset headings to match tbody scroll
+        this.refs.thead.scrollLeft = left;
+
+        // offset fixed rows to match rows
+        if(this.refs.fixedTBody && this.refs.fixedTBody.scrollTop !== top) {
+            this.preventScrollEvent = true;
+            this.refs.fixedTBody.scrollTop = top;
+        }
+
+        if(this.refs.tbody.scrollTop !== top) {
+            this.preventScrollEvent = true;
+            this.refs.tbody.scrollTop = top;
+        }
+    }
+
     componentWillMount(){
         this.draw();
     }
 
     componentDidUpdate(){
-        // offset headings to match tbody scroll
-        this.refs.thead.scrollLeft = this.state.offsetLeft;
-
-        // offset fixed rows to match rows
-        if(this.refs.fixedTBody && this.refs.fixedTBody.scrollTop !== this.state.offsetTop) {
-            this.preventScrollEvent = true;
-            this.refs.fixedTBody.scrollTop = this.state.offsetTop;
-        }
-
-        if(this.refs.tbody.scrollTop !== this.state.offsetTop) {
-            this.preventScrollEvent = true;
-            this.refs.tbody.scrollTop = this.state.offsetTop;
-        }
-
+        // this.scrollElements(this.state.offsetLeft, this.state.offsetTop);
         this.drawFixedBodyScrollBarBorder();
     }
 
@@ -101,13 +106,15 @@ class Table extends Component {
             self.setState({
                 data: result.items,
                 totalItems: result.total,
-                waitForRowUpdate: false
+                range: range,
+                // waitForRowUpdate: false
             });
         }).catch(function(err){
             console.error('Error updating rows for range', err);
 
             self.setState({
-                waitForRowUpdate: false
+                data: [],
+                // waitForRowUpdate: false
             });
         });
     }
@@ -119,10 +126,11 @@ class Table extends Component {
         }
 
         var offsetTop = e.target.scrollTop;
-        this.getTopScrollOffsetTrigger()(offsetTop, 'body');
-
         var offsetLeft = e.target.scrollLeft;
+
+        this.getTopScrollOffsetTrigger()(offsetTop);
         this.getHorizontalOffsetTrigger()(offsetLeft);
+        this.scrollElements(offsetLeft, offsetTop);
     }
 
     onScrollFixedBody(e, number, view){
@@ -132,7 +140,10 @@ class Table extends Component {
         }
 
         var offsetTop = e.target.scrollTop;
-        this.getTopScrollOffsetTrigger()(offsetTop, 'fixedBody');
+        var offsetLeft = this.refs.tbody.scrollLeft;
+
+        this.getTopScrollOffsetTrigger()(offsetTop);
+        this.scrollElements(offsetLeft, offsetTop);
     }
 
     getHorizontalOffsetTrigger(){
@@ -145,19 +156,36 @@ class Table extends Component {
     getTopScrollOffsetTrigger(){
         var self = this;
         return function(offset, actor) {
-            self.setState({offsetTop: offset, offsetTopActor: actor, waitForRowUpdate: true}, function (newState) {
-                var range = self.getCurrentRowRange();
-                self.updateRowsForRange(range);
+            self.setState({offsetTop: offset}, function () {
+                var prevRange = self.state.range;
+                var currentRange = self.getCurrentRowRange();
+
+                // only update if we're outside the buffers
+                if(prevRange === null || currentRange.start < prevRange.bufferStart || currentRange.end > prevRange.bufferEnd) {
+                    self.updateRowsForRange(currentRange);
+                }
             });
         };
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        if(nextState.waitForRowUpdate === true){
-            return false;
+        if(false === _.isEqual(nextProps, this.props)){
+            return true;
         }
 
-        return true;
+        if(nextState.data !== this.state.data){
+            return true;
+        }
+
+        if(nextState.totalItems !== this.state.totalItems){
+            return true;
+        }
+
+        if(false === _.isEqual(nextState.range, this.state.range)){
+            return true;
+        }
+
+        return false;
     }
 
     render() {

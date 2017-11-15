@@ -56,7 +56,7 @@ class PortfolioTable extends Component {
 
         var games = new Games();
         var dataProvider = new PaginatedAxiosDataProvider({
-            itemsPerPage: 75,
+            itemsPerPage: 100,
             getPage: function(page, itemsPerPage){
 
                 var requestParams = getParams();
@@ -116,7 +116,7 @@ class PortfolioTable extends Component {
                     className="portfolio"
                     rowHeight={25}
                     rowsToRender={20}
-                    rowBuffer={5}
+                    rowBuffer={15}
                     columns={ columns }
                     fixedColumns={1}
                 />
