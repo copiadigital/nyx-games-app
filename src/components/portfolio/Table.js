@@ -106,15 +106,13 @@ class Table extends Component {
             self.setState({
                 data: result.items,
                 totalItems: result.total,
-                range: range,
-                // waitForRowUpdate: false
+                range: range
             });
         }).catch(function(err){
             console.error('Error updating rows for range', err);
 
             self.setState({
-                data: [],
-                // waitForRowUpdate: false
+                data: []
             });
         });
     }
