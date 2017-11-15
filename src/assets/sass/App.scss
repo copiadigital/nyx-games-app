@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
 @import "./variables.scss";
 @import "./css3.scss";
+@import "./mixins.scss";
 @import "./respond.scss";
 @import "./header.scss";
 @import "./nav.scss";
@@ -9,6 +10,9 @@
 @import "./forms.scss";
 @import "./icons.scss";
 @import "./buttons.scss";
+
+@import './pages/games.scss';
+@import './pages/portfolio.scss';
 
 body *{
   box-sizing:border-box;

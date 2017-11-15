@@ -48,7 +48,9 @@ class App extends Component {
                     <Switch>
                         <Route path="/" exact={true} render={() => <Redirect to="/games" />} />
                         <Route path="/games" component={Games} />
-                        <Route path="/portfolio" component={Portfolio} />
+                        <Route exact path="/portfolio/all" render={(props) => <Portfolio {...props} featured={false} explicitFeatured={false} />} />
+                        <Route exact path="/portfolio/featured" render={(props) => <Portfolio {...props} featured={true} explicitFeatured={true} />} />
+                        <Route exact path="/portfolio" render={(props) => <Portfolio {...props} featured={true} explicitFeatured={false} />} />
                         <Route path="/service" component={Service} />
                     </Switch>
                 </div>

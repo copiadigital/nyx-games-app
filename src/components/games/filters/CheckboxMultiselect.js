@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Multiselect } from 'react-widgets';
+import _ from 'underscore';
 
 class CheckboxMultiselect extends Component {
     constructor(props){
@@ -62,11 +63,10 @@ class CheckboxMultiselect extends Component {
                 newValues = [];
                 self.close();
             }else {
-                newValues = values;
-
                 if (item.selected) {
-                    delete newValues[newValues.indexOf(item[valueField])];
+                    newValues = _.without(values, item[valueField]);
                 } else {
+                    newValues = values;
                     newValues.push(item[valueField]);
                 }
             }
