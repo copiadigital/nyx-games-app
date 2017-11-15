@@ -84,6 +84,16 @@
     text-decoration:none;
 }
 
+.hamburger__container{
+    position:absolute;
+    right:25px;
+    top:0;
+
+    @include respond(medium){
+        position:relative;
+    }
+}
+
 .hamburger__container[data-hamburger-open='false']{
     .hamburger__navContainer{
         display:none;

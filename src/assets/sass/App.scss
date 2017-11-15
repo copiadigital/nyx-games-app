@@ -66,13 +66,15 @@ body{
 }
 
 .wrapper--thin{
+  position:relative;
   max-width:$wrapper-small;
-  padding:0 80px;
+  padding:0 30px;
 }
 
 @include respond(medium){
   .wrapper--thin{
     max-width:$wrapper-medium;
+    padding:0 80px;
   }
 }
 

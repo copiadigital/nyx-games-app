@@ -15,8 +15,16 @@
 }
 
 .app-title{
-	display:inline-block;
+	display:none;
 	vertical-align:middle;
-	font-size:1.2rem;
+	font-size:1.0rem;
 	margin-bottom:0;
+
+	@include respond(medium){
+		font-size:1.2rem;
+	}
+
+	@include respond(360px){
+		display:inline-block;
+	}
 }
