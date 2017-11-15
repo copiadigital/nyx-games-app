@@ -28,6 +28,15 @@ class PortfolioTable extends Component {
         });
     }
 
+    renderChannels(data){
+        var children = data.channels.sort().map(function(channel){
+            var title = uppercaseFirst(channel);
+            return <span key={channel} className={"icon icon--channel-" + channel} title={ title }>{ title }</span>;
+        });
+
+        return React.createElement('div', {}, children);
+    }
+
     render() {
         var self = this;
 
@@ -69,7 +78,7 @@ class PortfolioTable extends Component {
         var columns = [
             { id: 'name', width: 200, heading: 'Game name' },
             { id: 'gameId', width: 75, heading: 'Game ID', content: (data => { return data.id }) },
-            { id: 'channel', width: 120, heading: 'Channel', content: (data => { return data.channels.sort().map(uppercaseFirst).join(', ')}) },
+            { id: 'channel', width: 90, heading: 'Channel', content: this.renderChannels },
             { id: 'category', width: 90, heading: 'Game type', content: (data => { return uppercaseFirst(data.category); }) },
             { id: 'model', width: 90, heading: 'Game model', content: (data => { return uppercaseFirst(data.model); }) },
             { id: 'studio', width: 140, heading: 'Studio', content: (data => { return data.studio.name }) },
