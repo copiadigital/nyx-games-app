@@ -94,7 +94,8 @@ class Table extends Component {
         var end = start + this.props.rowsToRender;
 
         var bufferStart = Math.max(0, start - this.props.rowBuffer);
-        var bufferEnd = end + this.props.rowBuffer;
+        var bufferStartDiff = bufferStart - start;
+        var bufferEnd = end + this.props.rowBuffer * 2 + bufferStartDiff;
 
         return { start: start, end: end, bufferStart: bufferStart, bufferEnd: bufferEnd };
     }
@@ -126,7 +127,7 @@ class Table extends Component {
         var offsetTop = e.target.scrollTop;
         var offsetLeft = e.target.scrollLeft;
 
-        this.getTopScrollOffsetTrigger()(offsetTop);
+        this.getDelayedTopScrollOffsetTrigger()(offsetTop);
         this.getHorizontalOffsetTrigger()(offsetLeft);
         this.scrollElements(offsetLeft, offsetTop);
     }
@@ -140,7 +141,7 @@ class Table extends Component {
         var offsetTop = e.target.scrollTop;
         var offsetLeft = this.refs.tbody.scrollLeft;
 
-        this.getTopScrollOffsetTrigger()(offsetTop);
+        this.getDelayedTopScrollOffsetTrigger()(offsetTop);
         this.scrollElements(offsetLeft, offsetTop);
     }
 
@@ -153,17 +154,26 @@ class Table extends Component {
 
     getTopScrollOffsetTrigger(){
         var self = this;
-        return function(offset, actor) {
+        return function(offset) {
             self.setState({offsetTop: offset}, function () {
                 var prevRange = self.state.range;
                 var currentRange = self.getCurrentRowRange();
+                var buffer = self.props.rowBuffer;
 
-                // only update if we're outside the buffers
-                if(prevRange === null || currentRange.start < prevRange.bufferStart || currentRange.end > prevRange.bufferEnd) {
+                // only update if we're near the buffers
+                if(prevRange === null || buffer === 0 || currentRange.start < prevRange.start - prevRange.bufferStart * 0.2 || currentRange.end > prevRange.bufferEnd - prevRange.end * 0.2) {
                     self.updateRowsForRange(currentRange);
                 }
             });
         };
+    }
+
+    getDelayedTopScrollOffsetTrigger(){
+        if(typeof this.delayedTopScrollOffsetTrigger !== 'function'){
+            this.delayedTopScrollOffsetTrigger = _.debounce(this.getTopScrollOffsetTrigger(), 100);
+        }
+
+        return this.delayedTopScrollOffsetTrigger;
     }
 
     shouldComponentUpdate(nextProps, nextState){

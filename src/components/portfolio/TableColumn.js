@@ -20,7 +20,7 @@ class TableColumn extends Component {
         const content = this.resolveContent();
 
         return (
-            <td style={ { width: width }}>
+            <td className={props.className} style={ { width: width }}>
                 <div style={ { width: width }}>{ content }</div>
             </td>
         );
@@ -31,6 +31,7 @@ TableColumn.defaultWidth = 150;
 
 TableColumn.defaultProps = {
     content: null,
+    className: null,
     width: TableColumn.defaultWidth
 };
 

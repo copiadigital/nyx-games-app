@@ -20,7 +20,7 @@ class TableColumn extends Component {
         const content = this.resolveContent();
 
         return (
-            <th style={ { width: width }} className={ props.className }>
+            <th style={ { width: width }} className={ props.headingClassName }>
                 <div style={ { width: width }}><span>{ content }</span></div>
             </th>
         );
@@ -29,6 +29,7 @@ class TableColumn extends Component {
 
 TableColumn.defaultProps = {
     heading: null,
+    headingClassName: null,
     width: 150
 };
 

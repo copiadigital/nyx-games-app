@@ -56,7 +56,7 @@ class PortfolioTable extends Component {
 
         var games = new Games();
         var dataProvider = new PaginatedAxiosDataProvider({
-            itemsPerPage: 100,
+            itemsPerPage: 75,
             getPage: function(page, itemsPerPage){
 
                 var requestParams = getParams();
@@ -78,7 +78,7 @@ class PortfolioTable extends Component {
         var columns = [
             { id: 'name', width: 200, heading: 'Game name' },
             { id: 'gameId', width: 75, heading: 'Game ID', content: (data => { return data.id }) },
-            { id: 'channel', width: 90, heading: 'Channel', content: this.renderChannels },
+            { id: 'channel', width: 90, heading: 'Channel', content: this.renderChannels, className: 'channel' },
             { id: 'category', width: 90, heading: 'Game type', content: (data => { return uppercaseFirst(data.category); }) },
             { id: 'model', width: 90, heading: 'Game model', content: (data => { return uppercaseFirst(data.model); }) },
             { id: 'studio', width: 140, heading: 'Studio', content: (data => { return data.studio.name }) },
@@ -105,7 +105,8 @@ class PortfolioTable extends Component {
                 id: 'jurisdiction_' + jurisdiction.id,
                 width: 25,
                 heading: jurisdiction.name,
-                className: 'jurisdiction rotate',
+                headingClassName: 'jurisdiction rotate',
+                className: 'jurisdiction',
                 jurisdiction: jurisdiction.id,
                 content: hasJurisdiction,
             });
@@ -116,7 +117,7 @@ class PortfolioTable extends Component {
                     className="portfolio"
                     rowHeight={25}
                     rowsToRender={20}
-                    rowBuffer={15}
+                    rowBuffer={40}
                     columns={ columns }
                     fixedColumns={1}
                 />
