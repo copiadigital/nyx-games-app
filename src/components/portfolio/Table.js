@@ -158,10 +158,11 @@ class Table extends Component {
             self.setState({offsetTop: offset}, function () {
                 var prevRange = self.state.range;
                 var currentRange = self.getCurrentRowRange();
-                var buffer = self.props.rowBuffer;
+                var buffer = self.props.rowsToRender / 2;
 
                 // only update if we're near the buffers
-                if(prevRange === null || buffer === 0 || currentRange.start < prevRange.start - prevRange.bufferStart * 0.2 || currentRange.end > prevRange.bufferEnd - prevRange.end * 0.2) {
+                if(prevRange === null || buffer === 0 || currentRange.start < prevRange.bufferStart + buffer || currentRange.end > prevRange.bufferEnd - buffer) {
+                    console.log('update rows', currentRange.start, prevRange.bufferStart + buffer, currentRange.end, prevRange.bufferEnd - buffer);
                     self.updateRowsForRange(currentRange);
                 }
             });
@@ -197,6 +198,7 @@ class Table extends Component {
     }
 
     render() {
+        console.log('render');
         const range = this.getCurrentRowRange();
         const total = this.state.totalItems;
         const visibleHeight = this.props.rowHeight * this.props.rowsToRender;
