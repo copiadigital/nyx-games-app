@@ -28,6 +28,7 @@ class Table extends Component {
     reset(){
         var self = this;
         this.clear(function(){
+            self.scrollElements(0, 0);
             self.draw();
         });
     }
@@ -83,6 +84,8 @@ class Table extends Component {
         var self = this;
 
         this.props.dataProvider.getItems(range.bufferStart, range.bufferEnd).then(function(result){
+            self.events.emit('updateItems', result, range);
+
             self.setState({
                 range: range
             });
@@ -95,7 +98,7 @@ class Table extends Component {
         var offsetTop = e.target.scrollTop;
         var offsetLeft = e.target.scrollLeft;
 
-        this.getDelayedTopScrollOffsetTrigger()(offsetTop);
+        this.getThrottledTopScrollOffsetTrigger()(offsetTop);
         this.getHorizontalOffsetTrigger()(offsetLeft);
         this.scrollElements(offsetLeft, offsetTop);
     }
@@ -108,7 +111,7 @@ class Table extends Component {
 
         var offsetTop = e.target.scrollTop;
 
-        this.getDelayedTopScrollOffsetTrigger()(offsetTop);
+        this.getThrottledTopScrollOffsetTrigger()(offsetTop);
         this.scrollElements(this.state.offsetLeft, offsetTop);
     }
 
@@ -135,9 +138,9 @@ class Table extends Component {
         };
     }
 
-    getDelayedTopScrollOffsetTrigger(){
+    getThrottledTopScrollOffsetTrigger(){
         if(typeof this.delayedTopScrollOffsetTrigger !== 'function'){
-            this.delayedTopScrollOffsetTrigger = _.debounce(this.getTopScrollOffsetTrigger(), 100);
+            this.delayedTopScrollOffsetTrigger = _.throttle(this.getTopScrollOffsetTrigger(), 300, { leading: false });
         }
 
         return this.delayedTopScrollOffsetTrigger;
@@ -188,7 +191,7 @@ class Table extends Component {
                         <TableBody
                             columns={fixedColumnOptions}
                             dataProvider={this.props.dataProvider}
-                            offsetTop={this.state.offsetTop}
+                            range={this.state.range}
                             rowHeight={this.props.rowHeight}
                             rowsToRender={this.props.rowsToRender}
                             rowBuffer={this.props.rowBuffer}
@@ -211,7 +214,7 @@ class Table extends Component {
                         <TableBody
                             columns={columnOptions}
                             dataProvider={this.props.dataProvider}
-                            offsetTop={this.state.offsetTop}
+                            range={this.state.range}
                             rowHeight={this.props.rowHeight}
                             rowsToRender={this.props.rowsToRender}
                             rowBuffer={this.props.rowBuffer}

@@ -28,6 +28,10 @@ class PortfolioTable extends Component {
         });
     }
 
+    componentWillReceiveProps(nextProps){
+        this.getDataProvider().reset();
+    }
+
     renderChannels(data){
         var children = data.channels.sort().map(function(channel){
             var title = uppercaseFirst(channel);
@@ -37,39 +41,48 @@ class PortfolioTable extends Component {
         return React.createElement('div', {}, children);
     }
 
-    render() {
-        var self = this;
+    getDataProvider(){
+        if(!this.dataProvider) {
+            var self = this;
 
-        var getParams = function() {
-            var filter = self.props.filter;
-            return {
-                q: filter.searchQuery,
-                featured: (filter.featured) ? 1 : 0,
-                category: filter.category,
-                jurisdiction: filter.jurisdiction,
-                studio: filter.studio,
-                channel: filter.channel,
-                sort: filter.sort ? filter.sort : 'name',
-                order: filter.order ? filter.order : 'asc'
+            var getParams = function() {
+                var filter = self.props.filter;
+                return {
+                    q: filter.searchQuery,
+                    featured: (filter.featured) ? 1 : 0,
+                    category: filter.category,
+                    jurisdiction: filter.jurisdiction,
+                    studio: filter.studio,
+                    channel: filter.channel,
+                    sort: filter.sort ? filter.sort : 'name',
+                    order: filter.order ? filter.order : 'asc'
+                };
             };
-        };
 
-        var games = new Games();
-        var dataProvider = new PaginatedAxiosDataProvider({
-            itemsPerPage: 75,
-            getPage: function(page, itemsPerPage){
+            var games = new Games();
+            this.dataProvider = new PaginatedAxiosDataProvider({
+                itemsPerPage: 75,
+                getPage: function (page, itemsPerPage) {
 
-                var requestParams = getParams();
-                requestParams.page = page;
-                requestParams.itemsPerPage = itemsPerPage;
+                    var requestParams = getParams();
+                    requestParams.page = page;
+                    requestParams.itemsPerPage = itemsPerPage;
 
-                return games.all({
-                    params: requestParams
-                }).then((data) => {
-                    return { items: data.games, total: data.meta.total };
-                });
-            }
-        });
+                    return games.all({
+                        params: requestParams
+                    }).then((data) => {
+                        return {items: data.games, total: data.meta.total};
+                    });
+                }
+            });
+        }
+
+        return this.dataProvider;
+    }
+
+    render() {
+        // needs to be shared to keep updates going through
+        var dataProvider = this.getDataProvider();
 
         if(this.state.jurisdictions === null){
             return <Loading />

@@ -24,6 +24,11 @@ class PaginatedDataProvider extends EventEmitter{
         this.events = [];
     }
 
+    reset(){
+        this.data = [];
+        this.total = null;
+    }
+
     getItems(start, end){
         var self = this;
 
@@ -76,7 +81,7 @@ class PaginatedDataProvider extends EventEmitter{
         var dataLength = this.data.length;
         // once we know the total items, make sure we don't ask for more than the total!
         // the first time this is called we don't know the total so just go with request size
-        var realEnd = Math.min(end, (this.total === null)? Infinity : this.total);
+        var realEnd = Math.min(end, (this.total === null)? Infinity : this.total - 1);
 
         if(dataLength === 0){
             return false;
