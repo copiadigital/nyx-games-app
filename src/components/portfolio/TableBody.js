@@ -28,6 +28,16 @@ class TableBody extends Component {
         this.props.table.events.addListener('offsetUpdate', function(offset){
            self.scrollTo(offset);
         });
+
+        this.props.table.events.addListener('scrollBarHeight', function(height, table){
+            self.drawScrollBarBorder(height, table);
+        });
+    }
+    componentDidUpdate(){
+        this.emitScrollBarHeight();
+    }
+    componentDidMount(){
+        this.emitScrollBarHeight();
     }
     shouldComponentUpdate(nextProps, nextState){
         if(false === _.isEqual(nextProps, this.props)){
@@ -44,6 +54,15 @@ class TableBody extends Component {
 
         return false;
     }
+    emitScrollBarHeight(){
+        var scrollbarHeight = this.refs.tbody.offsetHeight - this.refs.tbody.clientHeight;
+        this.props.table.events.emit('scrollBarHeight', scrollbarHeight, this);
+    }
+    drawScrollBarBorder(height, table){
+        if(this.props.overflowX === 'hidden' && this !== table && this.refs.tbody){
+            this.refs.tbody.style.borderBottom = height + 'px solid ' + this.props.scrollbarBorderColor;
+        }
+    }
     onScroll(e){
         if(this.preventScrollBodyEvent){
             this.preventScrollBodyEvent = false;
@@ -53,12 +72,12 @@ class TableBody extends Component {
         this.props.onScroll(e);
     }
     scrollTo(offset){
-        if(this.refs.tbody.scrollLeft !== offset.left) {
+        if(this.refs.tbody && this.refs.tbody.scrollLeft !== offset.left) {
             this.preventScrollBodyEvent = true;
             this.refs.tbody.scrollLeft = offset.left;
         }
 
-        if(this.refs.tbody.scrollTop !== offset.top) {
+        if(this.refs.tbody && this.refs.tbody.scrollTop !== offset.top) {
             this.preventScrollBodyEvent = true;
             this.refs.tbody.scrollTop = offset.top;
         }
@@ -72,7 +91,7 @@ class TableBody extends Component {
     }
     getRowRangeForOffset(offset){
         var start = Math.floor(offset / this.props.rowHeight);
-        var end = start + this.props.rowsToRender;
+        var end = start + this.props.rowsToRender - 1;
 
         var bufferStart = Math.max(0, start - this.props.rowBuffer);
         var bufferStartDiff = bufferStart - start;
@@ -84,13 +103,10 @@ class TableBody extends Component {
         const props = this.props;
 
         const range = this.getCurrentRowRange();
-        console.log('render tbody', range);
         const total = this.state.totalItems;
         const visibleHeight = props.rowHeight * props.rowsToRender;
-        const topPadding = range.bufferStart * this.props.rowHeight;
-        const bottomPadding = Math.max(0, (total - range.bufferEnd)) * this.props.rowHeight;
-
-        console.log('eights', visibleHeight, topPadding, bottomPadding);
+        const topPadding = range.bufferStart * props.rowHeight;
+        const bottomPadding = Math.max(0, (total - range.bufferEnd)) * props.rowHeight;
 
         let rows = this.state.data.map(data => {
             return <TableRow key={ data.id } rowHeight={ props.rowHeight } tableColumn={ TableColumn } columns={ props.columns } data={ data } />
@@ -117,6 +133,7 @@ TableBody.defaultProps = {
     rowBuffer: 0,
     rowHeight: 25,
     rowsToRender: 20,
+    scrollbarBorderColor: '#a4a4a4',
     width: null
 }
 

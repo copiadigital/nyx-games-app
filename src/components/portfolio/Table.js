@@ -47,43 +47,17 @@ class Table extends Component {
         this.updateRowsForRange(range);
     }
 
-    drawFixedBodyScrollBarBorder(){
-        // set border on tbody fixed to account for scrollbar
-        // if(this.refs.fixedTBody) {
-        //     var scrollbarHeight = this.refs.tbody.offsetHeight - this.refs.tbody.clientHeight;
-        //     this.refs.fixedTBody.style.borderBottom = scrollbarHeight + 'px solid ' + this.props.scrollbarBorderColor;
-        // }
-    }
-
     scrollElements(left, top){
         // offset headings to match tbody scroll
-        this.refs.thead.scrollLeft = left;
-
-        // offset fixed rows to match rows
-        // if(this.refs.fixedTBody && this.refs.fixedTBody.scrollTop !== top) {
-        //     this.preventScrollEvent = true;
-        //     this.refs.fixedTBody.scrollTop = top;
-        // }
-
-        // if(this.refs.tbody.scrollTop !== top) {
-        //     this.preventScrollEvent = true;
-        //     this.refs.tbody.scrollTop = top;
-        // }
+        if(this.refs.thead) {
+            this.refs.thead.scrollLeft = left;
+        }
 
         this.events.emit('offsetUpdate', { left: left, top: top });
     }
 
     componentWillMount(){
         this.draw();
-    }
-
-    componentDidUpdate(){
-        // this.scrollElements(this.state.offsetLeft, this.state.offsetTop);
-        this.drawFixedBodyScrollBarBorder();
-    }
-
-    componentDidMount(){
-        this.drawFixedBodyScrollBarBorder();
     }
 
     componentWillReceiveProps(nextProps){
@@ -96,7 +70,7 @@ class Table extends Component {
 
     getRowRangeForOffset(offset){
         var start = Math.floor(offset / this.props.rowHeight);
-        var end = start + this.props.rowsToRender;
+        var end = start + this.props.rowsToRender - 1;
 
         var bufferStart = Math.max(0, start - this.props.rowBuffer);
         var bufferStartDiff = bufferStart - start;
@@ -154,8 +128,7 @@ class Table extends Component {
                 var buffer = self.props.rowsToRender / 2;
 
                 // only update if we're near the buffers
-                if(prevRange === null || buffer === 0 || currentRange.start < prevRange.bufferStart + buffer || currentRange.end > prevRange.bufferEnd - buffer) {
-                    console.log('update rows', currentRange.start, prevRange.bufferStart + buffer, currentRange.end, prevRange.bufferEnd - buffer);
+                if(prevRange === null || buffer < 2 || currentRange.start < prevRange.bufferStart + buffer || currentRange.end > prevRange.bufferEnd - buffer) {
                     self.updateRowsForRange(currentRange);
                 }
             });
@@ -179,11 +152,9 @@ class Table extends Component {
     }
 
     render() {
-        const range = this.getCurrentRowRange();
-        const total = this.state.totalItems;
         var fixedColumnOptions = this.props.columns.slice(0, this.props.fixedColumns);
         var columnOptions = this.props.columns.slice(this.props.fixedColumns, this.props.columns.length);
-        var fixedColumnWidthTotal = _.reduce(_.pluck(fixedColumnOptions, 'width'), reduceTotalWithDefault(TableColumn.defaultWidth), 0) + 20; //200;
+        var fixedColumnWidthTotal = _.reduce(_.pluck(fixedColumnOptions, 'width'), reduceTotalWithDefault(TableColumn.defaultWidth), 0);
 
         let headings = columnOptions.map(column => {
             return <TableHeading key={ column.id } {...column} />
@@ -222,8 +193,9 @@ class Table extends Component {
                             rowsToRender={this.props.rowsToRender}
                             rowBuffer={this.props.rowBuffer}
                             onScroll={this.onScrollFixedBody}
+                            overflowX="hidden"
                             table={this}
-                            width={fixedColumnWidthTotal}
+                            width={fixedColumnWidthTotal + 20}
                         />
                     </table>
                 </div>

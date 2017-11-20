@@ -115,9 +115,9 @@ class PortfolioTable extends Component {
         return <Table
                     dataProvider={ dataProvider }
                     className="portfolio"
-                    rowHeight={25}
-                    rowsToRender={20}
-                    rowBuffer={40}
+                    rowHeight={34}
+                    rowsToRender={15}
+                    rowBuffer={10}
                     columns={ columns }
                     fixedColumns={1}
                 />

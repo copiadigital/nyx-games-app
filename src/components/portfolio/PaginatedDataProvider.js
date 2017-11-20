@@ -62,7 +62,7 @@ class PaginatedDataProvider extends EventEmitter{
         var rangesRequired = [];
         for(var i = blockStart; i < blockEnd; i+=itemsPerPage){
             var rangeStart = i;
-            var rangeEnd = i + itemsPerPage;
+            var rangeEnd = i + itemsPerPage - 1;
 
             if(!this.hasRange(rangeStart, rangeEnd)){
                 rangesRequired.push([rangeStart, rangeEnd]);
@@ -82,7 +82,7 @@ class PaginatedDataProvider extends EventEmitter{
             return false;
         }
 
-        if(dataLength < realEnd){
+        if(dataLength - 1 < realEnd){
             return false;
         }
 
