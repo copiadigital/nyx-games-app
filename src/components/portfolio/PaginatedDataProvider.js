@@ -1,8 +1,11 @@
 import Promise from 'promise';
 import _ from 'underscore';
+import {EventEmitter} from 'fbemitter';
 
-class PaginatedDataProvider{
+class PaginatedDataProvider extends EventEmitter{
     constructor(settings){
+        super();
+
         if(!settings){
             settings = {};
         };
@@ -18,6 +21,7 @@ class PaginatedDataProvider{
         this.pendingRequests = [];
         this.data = [];
         this.total = null;
+        this.events = [];
     }
 
     getItems(start, end){
@@ -30,6 +34,9 @@ class PaginatedDataProvider{
             };
 
             return output;
+        }).then(function(result){
+            self.emit('updateItems', result);
+            return result;
         });
     }
 

@@ -4,6 +4,8 @@ import _ from 'underscore';
 import TableRow from './TableRow';
 import TableColumn from './TableColumn';
 import TableHeading from './TableHeading';
+import TableBody from "./TableBody";
+import {EventEmitter} from "fbemitter";
 
 
 class Table extends Component {
@@ -20,6 +22,7 @@ class Table extends Component {
 
         this.onScrollBody = this.onScrollBody.bind(this);
         this.onScrollFixedBody = this.onScrollFixedBody.bind(this);
+        this.events = new EventEmitter();
     }
 
     reset(){
@@ -46,10 +49,10 @@ class Table extends Component {
 
     drawFixedBodyScrollBarBorder(){
         // set border on tbody fixed to account for scrollbar
-        if(this.refs.fixedTBody) {
-            var scrollbarHeight = this.refs.tbody.offsetHeight - this.refs.tbody.clientHeight;
-            this.refs.fixedTBody.style.borderBottom = scrollbarHeight + 'px solid ' + this.props.scrollbarBorderColor;
-        }
+        // if(this.refs.fixedTBody) {
+        //     var scrollbarHeight = this.refs.tbody.offsetHeight - this.refs.tbody.clientHeight;
+        //     this.refs.fixedTBody.style.borderBottom = scrollbarHeight + 'px solid ' + this.props.scrollbarBorderColor;
+        // }
     }
 
     scrollElements(left, top){
@@ -57,15 +60,17 @@ class Table extends Component {
         this.refs.thead.scrollLeft = left;
 
         // offset fixed rows to match rows
-        if(this.refs.fixedTBody && this.refs.fixedTBody.scrollTop !== top) {
-            this.preventScrollEvent = true;
-            this.refs.fixedTBody.scrollTop = top;
-        }
+        // if(this.refs.fixedTBody && this.refs.fixedTBody.scrollTop !== top) {
+        //     this.preventScrollEvent = true;
+        //     this.refs.fixedTBody.scrollTop = top;
+        // }
 
-        if(this.refs.tbody.scrollTop !== top) {
-            this.preventScrollEvent = true;
-            this.refs.tbody.scrollTop = top;
-        }
+        // if(this.refs.tbody.scrollTop !== top) {
+        //     this.preventScrollEvent = true;
+        //     this.refs.tbody.scrollTop = top;
+        // }
+
+        this.events.emit('offsetUpdate', { left: left, top: top });
     }
 
     componentWillMount(){
@@ -105,25 +110,14 @@ class Table extends Component {
 
         this.props.dataProvider.getItems(range.bufferStart, range.bufferEnd).then(function(result){
             self.setState({
-                data: result.items,
-                totalItems: result.total,
                 range: range
             });
         }).catch(function(err){
             console.error('Error updating rows for range', err);
-
-            self.setState({
-                data: []
-            });
         });
     }
 
-    onScrollBody(e, number, view){
-        if(this.preventScrollEvent){
-            this.preventScrollEvent = false;
-            return;
-        }
-
+    onScrollBody(e){
         var offsetTop = e.target.scrollTop;
         var offsetLeft = e.target.scrollLeft;
 
@@ -132,17 +126,16 @@ class Table extends Component {
         this.scrollElements(offsetLeft, offsetTop);
     }
 
-    onScrollFixedBody(e, number, view){
-        if(this.preventScrollEvent){
-            this.preventScrollEvent = false;
+    onScrollFixedBody(e){
+        if(this.preventScrollFixedBodyEvent){
+            this.preventScrollFixedBodyEvent = false;
             return;
         }
 
         var offsetTop = e.target.scrollTop;
-        var offsetLeft = this.refs.tbody.scrollLeft;
 
         this.getDelayedTopScrollOffsetTrigger()(offsetTop);
-        this.scrollElements(offsetLeft, offsetTop);
+        this.scrollElements(this.state.offsetLeft, offsetTop);
     }
 
     getHorizontalOffsetTrigger(){
@@ -182,43 +175,18 @@ class Table extends Component {
             return true;
         }
 
-        if(nextState.data !== this.state.data){
-            return true;
-        }
-
-        if(nextState.totalItems !== this.state.totalItems){
-            return true;
-        }
-
-        if(false === _.isEqual(nextState.range, this.state.range)){
-            return true;
-        }
-
         return false;
     }
 
     render() {
-        console.log('render');
         const range = this.getCurrentRowRange();
         const total = this.state.totalItems;
-        const visibleHeight = this.props.rowHeight * this.props.rowsToRender;
-        const topPadding = range.bufferStart * this.props.rowHeight;
-        const bottomPadding = Math.max(0, (total - range.bufferEnd)) * this.props.rowHeight;
-
         var fixedColumnOptions = this.props.columns.slice(0, this.props.fixedColumns);
         var columnOptions = this.props.columns.slice(this.props.fixedColumns, this.props.columns.length);
-        var fixedColumnWidthTotal = _.reduce(_.pluck(fixedColumnOptions, 'width'), reduceTotalWithDefault(TableColumn.defaultWidth), 0); //200;
-
-        let rows = this.state.data.map(data => {
-            return <TableRow key={ data.id } rowHeight={ this.props.rowHeight } tableColumn={ TableColumn } columns={ columnOptions } data={ data } />
-        });
+        var fixedColumnWidthTotal = _.reduce(_.pluck(fixedColumnOptions, 'width'), reduceTotalWithDefault(TableColumn.defaultWidth), 0) + 20; //200;
 
         let headings = columnOptions.map(column => {
             return <TableHeading key={ column.id } {...column} />
-        });
-
-        let fixedRows = this.state.data.map(data => {
-            return <TableRow key={ data.id } rowHeight={ this.props.rowHeight } tableColumn={ TableColumn } columns={ fixedColumnOptions } data={ data } />
         });
 
         let fixedHeadings = fixedColumnOptions.map(column => {
@@ -246,15 +214,17 @@ class Table extends Component {
                             { fixedHeadings }
                         </tr>
                         </thead>
-                        <tbody ref="fixedTBody" onScroll={ this.onScrollFixedBody } style={ { display: 'block', overflowX: 'hidden', overflowY: 'auto', maxHeight: visibleHeight, width: fixedColumnWidthTotal + 20 } } >
-                        <tr className="pad" style={ { height: topPadding } }>
-                            <td></td>
-                        </tr>
-                        { fixedRows }
-                        <tr className="pad" style={ { height: bottomPadding } }>
-                            <td></td>
-                        </tr>
-                        </tbody>
+                        <TableBody
+                            columns={fixedColumnOptions}
+                            dataProvider={this.props.dataProvider}
+                            offsetTop={this.state.offsetTop}
+                            rowHeight={this.props.rowHeight}
+                            rowsToRender={this.props.rowsToRender}
+                            rowBuffer={this.props.rowBuffer}
+                            onScroll={this.onScrollFixedBody}
+                            table={this}
+                            width={fixedColumnWidthTotal}
+                        />
                     </table>
                 </div>
                     : null }
@@ -266,15 +236,16 @@ class Table extends Component {
                                 { headings }
                             </tr>
                         </thead>
-                        <tbody ref="tbody" style={ { display: 'block', overflowX: 'auto', overflowY: 'auto', maxHeight: visibleHeight } } onScroll={ this.onScrollBody }>
-                            <tr className="pad" style={ { height: topPadding } }>
-                                <td></td>
-                            </tr>
-                            { rows }
-                            <tr className="pad" style={ { height: bottomPadding } }>
-                                <td></td>
-                            </tr>
-                        </tbody>
+                        <TableBody
+                            columns={columnOptions}
+                            dataProvider={this.props.dataProvider}
+                            offsetTop={this.state.offsetTop}
+                            rowHeight={this.props.rowHeight}
+                            rowsToRender={this.props.rowsToRender}
+                            rowBuffer={this.props.rowBuffer}
+                            onScroll={this.onScrollBody}
+                            table={this}
+                            />
                     </table>
                 </div>
             </div>
