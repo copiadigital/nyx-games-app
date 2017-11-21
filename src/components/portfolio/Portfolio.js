@@ -58,12 +58,12 @@ class Portfolio extends Component {
         return (
             <div className="page-portfolio">
                 <FilterForm filter={this.state.filter} filterManager={this.filterManager} />
-                <div className="portfolio-table-container">
-                    <PortfolioTable filter={this.state.filter} />
-                </div>
 
                 <div className="portfolio-table-export">
                     <a href={exportUrl} target="_blank" className="export export--csv">Download as CSV</a>
+                </div>
+                <div className="portfolio-table-container">
+                    <PortfolioTable filter={this.state.filter} />
                 </div>
 
                 { (this.state.filter.featured) ? <LinkButton to="/portfolio/all" className="button button--regular" onClick={this.onViewAll}>View all games</LinkButton> : null }
