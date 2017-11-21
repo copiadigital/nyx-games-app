@@ -63,7 +63,7 @@ class Portfolio extends Component {
                 </div>
 
                 <div className="portfolio-table-export">
-                    <a href={exportUrl} target="_blank" class="export export--csv">Download as CSV</a>
+                    <a href={exportUrl} target="_blank" className="export export--csv">Download as CSV</a>
                 </div>
 
                 { (this.state.filter.featured) ? <LinkButton to="/portfolio/all" className="button button--regular" onClick={this.onViewAll}>View all games</LinkButton> : null }
