@@ -52,11 +52,18 @@ class Portfolio extends Component {
         this.filterManager.setFilter({ featured: false });
     }
     render() {
+        var exportBaseUrl = process.env.REACT_APP_GAMES_API_BASEURL + '/game/export';
+        var exportUrl = this.filterManager.buildUrl(this.state.filter, exportBaseUrl);
+
         return (
             <div className="page-portfolio">
                 <FilterForm filter={this.state.filter} filterManager={this.filterManager} />
                 <div className="portfolio-table-container">
                     <PortfolioTable filter={this.state.filter} />
+                </div>
+
+                <div className="portfolio-table-export">
+                    <a href={exportUrl} target="_blank" class="export export--csv">Download as CSV</a>
                 </div>
 
                 { (this.state.filter.featured) ? <LinkButton to="/portfolio/all" className="button button--regular" onClick={this.onViewAll}>View all games</LinkButton> : null }
