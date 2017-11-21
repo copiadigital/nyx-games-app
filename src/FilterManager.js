@@ -86,8 +86,12 @@ class FilterManager {
     hasFilters(filter){
         return (_.size(_.reject(_.omit(filter, ['featured', 'explicitFeatured']), _.isEmpty)) > 0);
     }
-    buildUrl(filter, demoModal) {
+    buildUrl(filter, basePath) {
         var queryStringData;
+
+        if(typeof basePath === 'undefined'){
+            basePath = this.config.basePath;
+        }
 
         if(filter.searchQuery){
             queryStringData = {
@@ -95,7 +99,7 @@ class FilterManager {
             };
         }else {
             queryStringData = {
-                featured: filter.featured,
+                featured: (filter.featured)? 1 : 0,
                 category: filter.category,
                 channel: filter.channel,
                 jurisdiction: filter.jurisdiction,
@@ -105,7 +109,7 @@ class FilterManager {
             };
         }
 
-        var path = this.resolveBasePath(filter, queryStringData);
+        var path = this.resolveBasePath(basePath, filter, queryStringData);
 
         // remove null/undefined filters
         queryStringData = _.pick(queryStringData, function(val){
@@ -115,13 +119,11 @@ class FilterManager {
         var query = queryString.stringify(queryStringData, queryStringOptions);
         return path + '?' + query;
     }
-    updateUrl(filter, demoModal){
-        var newUrl = this.buildUrl(filter, demoModal);
+    updateUrl(filter){
+        var newUrl = this.buildUrl(filter);
         this.router.history.push(newUrl);
     }
-    resolveBasePath(filter, queryParams){
-        var basePath = this.config.basePath;
-
+    resolveBasePath(basePath, filter, queryParams){
         if(typeof(basePath) === 'function'){
             return basePath(filter, queryParams);
         }
