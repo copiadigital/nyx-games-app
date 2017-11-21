@@ -37,6 +37,10 @@
           vertical-align: inherit;
         }
 
+        th.center{
+          text-align: center;
+        }
+
         th.rotate > div {
           transform: translate(-18px, 35px) rotate(315deg);
           width: 25px;
@@ -102,7 +106,7 @@
           }
         }
 
-        td.jurisdiction{
+        td.tick{
           div{
             text-align: center;
           }

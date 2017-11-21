@@ -101,9 +101,9 @@ class PortfolioTable extends Component {
             { id: 'max_bet', width: 75, heading: 'Max bet' },
             { id: 'volatility', width: 75, heading: 'Volatility' },
             { id: 'freerounds_enabled', width: 75, heading: 'Free rounds' },
-            { id: 'brand_licensed', width: 75, heading: 'Branded', content: (data => { return booleanElse(data.brand_licensed) }) },
-            { id: 'high_quality', width: 75, heading: 'Premium', content: (data => { return booleanElse(data.high_quality) })  },
-            { id: 'jackpot_enabled', width: 75, heading: 'Jackpot', content: (data => { return booleanElse(data.jackpot_enabled) })  }
+            { id: 'brand_licensed', width: 75, heading: 'Branded', headingClassName: 'center', className: 'tick', content: (data => { return booleanElse(data.brand_licensed) }) },
+            { id: 'high_quality', width: 75, heading: 'Premium', headingClassName: 'center', className: 'tick', content: (data => { return booleanElse(data.high_quality) })  },
+            { id: 'jackpot_enabled', width: 75, heading: 'Jackpot', headingClassName: 'center', className: 'tick', content: (data => { return booleanElse(data.jackpot_enabled) })  }
         ];
 
         var jurisdictions = this.state.jurisdictions;
@@ -119,7 +119,7 @@ class PortfolioTable extends Component {
                 width: 25,
                 heading: jurisdiction.name,
                 headingClassName: 'jurisdiction rotate',
-                className: 'jurisdiction',
+                className: 'tick',
                 jurisdiction: jurisdiction.id,
                 content: hasJurisdiction,
             });
