@@ -60,7 +60,7 @@ class Portfolio extends Component {
                 <FilterForm filter={this.state.filter} filterManager={this.filterManager} />
 
                 <div className="portfolio-table-export">
-                    <a href={exportUrl} target="_blank" className="export export--csv">Download as CSV</a>
+                    <a href={exportUrl} target="_blank" className="export export--xls">Download as XLS</a>
                 </div>
                 <div className="portfolio-table-container">
                     <PortfolioTable filter={this.state.filter} />
