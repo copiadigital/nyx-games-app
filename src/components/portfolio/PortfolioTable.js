@@ -92,6 +92,7 @@ class PortfolioTable extends Component {
             { id: 'name', width: 200, heading: 'Game name' },
             { id: 'gameId', width: 75, heading: 'Game ID', content: (data => { return data.id }) },
             { id: 'channel', width: 90, heading: 'Channel', content: this.renderChannels, className: 'channel' },
+            { id: 'release_date', width: 100, heading: 'Release date', content: (data => { return data.released }) },
             { id: 'category', width: 90, heading: 'Game type', content: (data => { return uppercaseFirst(data.category); }) },
             { id: 'model', width: 90, heading: 'Game model', content: (data => { return uppercaseFirst(data.model); }) },
             { id: 'studio', width: 140, heading: 'Studio', content: (data => { return data.studio.name }) },
