@@ -181,7 +181,7 @@ class Table extends Component {
                 </style>
 
                 { (this.props.fixedColumns > 0) ?
-                <div className="fixed-container" style={ { float: 'left', width: fixedColumnWidthTotal } }>
+                <div className="fixed-container" style={ { float: 'left', width: fixedColumnWidthTotal, overflowX: 'hidden' } }>
                     <table className="fixed" cellPadding={0} cellSpacing={0} style={ { width: fixedColumnWidthTotal } }>
                         <thead style={ { display: 'block', overflow: 'hidden', width: fixedColumnWidthTotal + 20 }}>
                         <tr>
