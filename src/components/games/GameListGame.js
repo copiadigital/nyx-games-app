@@ -103,7 +103,7 @@ class GameListGame extends Component {
         newDate.setDate(now.getDate() - 30);
 
         var gameIsComingSoon = (releasedDate > now);
-        var gameIsNew = (releasedDate > newDate);
+        var gameIsNew = (!gameIsComingSoon && releasedDate > newDate);
 
         if(gameIsComingSoon){
             classes.push('games-grid-game--coming');
