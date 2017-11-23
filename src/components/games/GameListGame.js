@@ -77,7 +77,7 @@ class GameListGame extends Component {
     }
     renderNormal(game) {
         return (
-            <div>
+            <div className="games-grid-game__icon">
                 <ImageLoader
                     src={"https://dga1sy052ek6h.cloudfront.net/icons/200x127/" + game.id + ".png"}
                     loading={<LoadingImage width="35" height="35" />}
