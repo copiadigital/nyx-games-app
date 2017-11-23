@@ -49,26 +49,26 @@
 
 .games-grid-game__default .games-grid-banner--new{
     content: "";
-    width: 59px;
-    height: 59px;
+    width: 160px;
+    height: 128px;
     background-image: url("../images/banner-new.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    top: 0;
-    right: 0;
+    top: -6px;
+    right: -6px;
     position: absolute;
     display: inline-block;
 }
 
 .games-grid-game__default .games-grid-banner--coming{
     content: "";
-    width: 59px;
-    height: 59px;
+    width: 160px;
+    height: 128px;
     background-image: url("../images/banner-coming.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    top: 0;
-    right: 0;
+    top: -6px;
+    right: -6px;
     position: absolute;
     display: inline-block;
 }
