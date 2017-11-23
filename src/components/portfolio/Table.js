@@ -171,7 +171,7 @@ class Table extends Component {
         classes.push('rb-dynamic-table');
 
         return (
-            <div className={classes.join(' ')} style={ { display: 'flex' } }>
+            <div className={classes.join(' ')}>
                 <style>
                     .rb-dynamic-table thead tr, tbody tr{'{'}
                         display:table;
@@ -181,7 +181,7 @@ class Table extends Component {
                 </style>
 
                 { (this.props.fixedColumns > 0) ?
-                <div className="fixed-container" style={ { width: fixedColumnWidthTotal } }>
+                <div className="fixed-container" style={ { float: 'left', width: fixedColumnWidthTotal } }>
                     <table className="fixed" cellPadding={0} cellSpacing={0} style={ { width: fixedColumnWidthTotal } }>
                         <thead style={ { display: 'block', overflow: 'hidden', width: fixedColumnWidthTotal + 20 }}>
                         <tr>
@@ -204,7 +204,7 @@ class Table extends Component {
                 </div>
                     : null }
 
-                <div className="body-container" style={ {} }>
+                <div className="body-container" style={ { marginLeft: fixedColumnWidthTotal} }>
                     <table className="body" cellPadding={0} cellSpacing={0}>
                         <thead ref="thead" style={ { display: 'block', overflow: 'hidden' }}>
                             <tr>
