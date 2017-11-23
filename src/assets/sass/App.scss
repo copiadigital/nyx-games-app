@@ -23,6 +23,7 @@ body{
   background:#000102 url(../images/bg-renegades.jpg) center 50px no-repeat;
   background-size:100% auto;
   font-family:Lato, Arial, sans-serif;
+  color: #000000;
 
   @include respond(mobile-only){
     background-size:130% auto;
