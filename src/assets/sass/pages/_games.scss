@@ -34,7 +34,7 @@
     color:#fff;
 }
 
-.games-grid-game__default.games-grid-game__hq:after{
+.games-grid-game__default .games-grid-banner--hq{
     content: "";
     width: 59px;
     height: 59px;
@@ -43,6 +43,32 @@
     background-repeat: no-repeat;
     bottom: 0;
     left: 0;
+    position: absolute;
+    display: inline-block;
+}
+
+.games-grid-game__default .games-grid-banner--new{
+    content: "";
+    width: 59px;
+    height: 59px;
+    background-image: url("../images/banner-new.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    top: 0;
+    right: 0;
+    position: absolute;
+    display: inline-block;
+}
+
+.games-grid-game__default .games-grid-banner--coming{
+    content: "";
+    width: 59px;
+    height: 59px;
+    background-image: url("../images/banner-coming.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    top: 0;
+    right: 0;
     position: absolute;
     display: inline-block;
 }

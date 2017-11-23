@@ -94,12 +94,32 @@ class GameListGame extends Component {
         classes.push(this.state.highlight ? 'games-grid-game__highlight' : 'games-grid-game__default');
 
         if(game.high_quality){
-            classes.push('games-grid-game__hq');
+            classes.push('games-grid-game--hq');
+        }
+
+        var now = new Date();
+        var releasedDate = new Date(game.released);
+        var newDate = new Date();
+        newDate.setDate(now.getDate() - 30);
+
+        var gameIsComingSoon = (releasedDate > now);
+        var gameIsNew = (releasedDate > newDate);
+
+        if(gameIsComingSoon){
+            classes.push('games-grid-game--coming');
+        }
+
+        if(gameIsNew){
+            classes.push('games-grid-game--new');
         }
 
         return (
             <li className="games-grid-game-container" onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
                 <div className={ classes.join(' ') }>
+                    {game.high_quality ? <div className="games-grid-banner--hq" /> : '' }
+                    {gameIsComingSoon ? <div className="games-grid-banner--coming" /> : '' }
+                    {gameIsNew ? <div className="games-grid-banner--new" /> : '' }
+
                     {this.state.highlight ? this.renderHighlight(game) : this.renderNormal(game) }
                 </div>
             </li>
