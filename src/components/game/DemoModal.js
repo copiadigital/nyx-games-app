@@ -89,10 +89,12 @@ class DemoModal extends Component {
                         <dt>Free Spins</dt><dd>{forceContent(game.freerounds_enabled)}</dd>
                     </dl>
 
+                    {/*
                     <Downloads title="Downloads" className="downloads">
                         <Download href={`https://dga1sy052ek6h.cloudfront.net/ogsmarketing/${game.id}.zip`} title="Marketing pack" />
                         <Download href={`https://dga1sy052ek6h.cloudfront.net/ogscertificates/${game.id}.zip`} title="Certificate pack" />
                     </Downloads>
+                    */}
 
                     <p className="game-demo-modal-description">{game.description}</p>
 
