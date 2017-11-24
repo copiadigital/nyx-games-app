@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import Modal from 'react-modal';
 import Waypoint from 'react-waypoint';
 import _ from 'underscore';
@@ -91,6 +92,12 @@ class GameList extends Component {
     loadMoreGames(){
         // increment currentPage and call load games
         this.setState((state) => ({currentPage : state.currentPage + 1}), () => ( this.loadGames(this.props) ));
+
+        ReactGA.event({
+            category: 'GameList',
+            action: 'Load more',
+            label: 'Page ' + this.state.currentPage + 1
+        });
     }
     highlightGame(game){
         this.setState((prevState) => {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import ChannelList from "../utilities/ChannelList";
 import Downloads from "../utilities/Downloads";
 import Download from "../utilities/Download";
@@ -18,6 +19,13 @@ class DemoModal extends Component {
         };
 
         this.setChannel = this.setChannel.bind(this);
+    }
+    componentDidMount(){
+        ReactGA.event({
+            category: 'Game',
+            action: 'View demo modal',
+            label: 'ID:' + this.state.game.id
+        });
     }
     componentWillReceiveProps(nextProps){
         this.setState({

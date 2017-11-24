@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import queryString from 'query-string';
 
 class DemoIFrame extends Component {
@@ -8,10 +9,14 @@ class DemoIFrame extends Component {
         this.state = {
         };
     }
-    buildDemoUrl() {
-        const game = this.props.game;
-        const channel = this.props.channel;
-
+    componentDidMount(){
+        ReactGA.event({
+            category: 'Game',
+            action: 'Play demo ' + this.getClientType(this.props.channel),
+            label: 'ID:' + this.props.game.id
+        });
+    }
+    getClientType(channel){
         var clientType = 'flash';
 
         switch(channel){
@@ -25,6 +30,14 @@ class DemoIFrame extends Component {
                 clientType = 'flash';
                 break;
         }
+
+        return clientType;
+    }
+    buildDemoUrl() {
+        const game = this.props.game;
+        const channel = this.props.channel;
+
+        var clientType = this.getClientType(channel);
 
         return 'https://nogs-gl-stage.nyxmalta.com/game/?' + queryString.stringify({
                 nogsoperatorid: 241,
