@@ -73,6 +73,14 @@ class FilterForm extends Component {
                     <fieldset className="row sort-search">
                         <label>Sort by:</label>
                         <SortLink
+                            field="released"
+                            label="Date"
+                            disabled={ filtersDisabled }
+                            active={ this.state.filter.sort === 'released' || !this.state.filter.sort }
+                            order={ (this.state.filter.order === 'desc' || !this.state.filter.order)? 'desc' : 'asc' }
+                            setFilter={ this.setFilter }
+                        />
+                        <SortLink
                             field="name"
                             label="A-Z"
                             disabled={ filtersDisabled }
@@ -80,14 +88,6 @@ class FilterForm extends Component {
                             order={ (this.state.filter.order === 'desc')? 'desc' : 'asc' }
                             setFilter={ this.setFilter }
                             />
-                        <SortLink
-                            field="released"
-                            label="Date"
-                            disabled={ filtersDisabled }
-                            active={ this.state.filter.sort === 'released' }
-                            order={ (this.state.filter.order === 'desc')? 'desc' : 'asc' }
-                            setFilter={ this.setFilter }
-                        />
 
                         <SearchFilter
                             value={ this.state.filter.searchQuery }

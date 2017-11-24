@@ -59,8 +59,8 @@ class GameList extends Component {
     loadGames(props){
         this.setState({ loading: true });
 
-        var defaultSort = (props.filter.searchQuery)? '_score' : 'name';
-        var defaultOrder = (props.filter.searchQuery)? 'desc' : 'asc';
+        var defaultSort = (props.filter.searchQuery)? '_score' : 'released';
+        var defaultOrder = (props.filter.searchQuery)? 'desc' : 'desc';
 
         this.gamesModel.all({
             params: {
