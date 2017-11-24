@@ -66,7 +66,7 @@ class Portfolio extends Component {
                     <PortfolioTable filter={this.state.filter} />
                 </div>
 
-                { (this.state.filter.featured) ? <LinkButton to="/portfolio/all" className="button button--regular" onClick={this.onViewAll}>View all games</LinkButton> : null }
+                { (this.state.filter.featured) ? <LinkButton to="/portfolio/all" className="btn--regular" onClick={this.onViewAll}>View all games</LinkButton> : null }
             </div>
         );
     }

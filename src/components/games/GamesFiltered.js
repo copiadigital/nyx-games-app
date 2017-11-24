@@ -4,6 +4,7 @@ import GameList from './GameList';
 import FilterForm from "./FilterForm";
 import Games from './../../data/model/Games';
 import FilterManager from './../../FilterManager';
+import LinkButton from "../utilities/LinkButton";
 
 class GamesFiltered extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class GamesFiltered extends Component {
         this.setFilter = this.setFilter.bind(this);
         this.openDemoModal = this.openDemoModal.bind(this);
         this.closeDemoModal = this.closeDemoModal.bind(this);
+        this.onViewAll = this.onViewAll.bind(this);
     }
     componentWillMount(){
         var filterManager = this.filterManager = new FilterManager(this.context.router, {
@@ -89,6 +91,10 @@ class GamesFiltered extends Component {
         var newUrl = filterUrl + (hash? '#' + hash : '');
         this.context.router.history.push(newUrl);
     }
+    onViewAll(e){
+        e.preventDefault();
+        this.filterManager.setFilter({ featured: false });
+    }
     render() {
         return (
             <div>
@@ -98,6 +104,8 @@ class GamesFiltered extends Component {
                           openDemoModal={this.openDemoModal}
                           closeDemoModal={this.closeDemoModal}
                 />
+
+                { (this.state.filter.featured) ? <LinkButton to="/games/all" className="btn--regular" onClick={this.onViewAll}>View all games</LinkButton> : null }
             </div>
         );
     }
