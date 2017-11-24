@@ -65,6 +65,10 @@ class Table extends Component {
         this.reset();
     }
 
+    componentWillUnmount(){
+        this.events.removeAllListeners();
+    }
+
     getCurrentRowRange(){
         return this.getRowRangeForOffset(this.state.offsetTop);
     }
