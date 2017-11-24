@@ -54,8 +54,8 @@ class PortfolioTable extends Component {
                     jurisdiction: filter.jurisdiction,
                     studio: filter.studio,
                     channel: filter.channel,
-                    sort: filter.sort ? filter.sort : 'name',
-                    order: filter.order ? filter.order : 'asc'
+                    sort: filter.sort ? filter.sort : 'released',
+                    order: filter.order ? filter.order : 'desc'
                 };
             };
 
