@@ -46,11 +46,11 @@ class FilterForm extends Component {
                             setFilter={ this.setFilter }
                             disabled={ filtersDisabled }
                         />
-                        <JurisdictionFilter
-                            jurisdiction={ this.state.filter.jurisdiction }
-                            setFilter={ this.setFilter }
-                            disabled={ filtersDisabled }
-                        />
+                        {/*<JurisdictionFilter*/}
+                            {/*jurisdiction={ this.state.filter.jurisdiction }*/}
+                            {/*setFilter={ this.setFilter }*/}
+                            {/*disabled={ filtersDisabled }*/}
+                        {/*/>*/}
                         <CategoryFilter
                             category={ this.state.filter.category }
                             setFilter={ this.setFilter }

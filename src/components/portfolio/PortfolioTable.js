@@ -16,6 +16,15 @@ class PortfolioTable extends Component {
 
     }
     componentWillMount(){
+        //this.loadJurisdictions();
+        this.setState({ jurisdictions: [] });
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.getDataProvider().reset();
+    }
+
+    loadJurisdictions(){
         jurisdictions.all({
             params: {
                 itemsPerPage: 100,
@@ -26,10 +35,6 @@ class PortfolioTable extends Component {
                 jurisdictions: res.data.jurisdictions
             });
         });
-    }
-
-    componentWillReceiveProps(nextProps){
-        this.getDataProvider().reset();
     }
 
     renderChannels(data){
