@@ -25,6 +25,12 @@
 		background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2230%22%20height%3D%2230%22%20viewBox%3D%220%200%2030%2030%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ctitle%3EFacebook%3C%2Ftitle%3E%3Cpath%20d%3D%22M16.024%2030H1.656A1.656%201.656%200%200%201%200%2028.344V1.656C0%20.74.74%200%201.656%200h26.688C29.26%200%2030%20.74%2030%201.656v26.688C30%2029.26%2029.26%2030%2028.344%2030H20.7V18.382h3.9l.583-4.527H20.7v-2.89c0-1.312.364-2.205%202.243-2.205h2.398V4.71c-.413-.056-1.836-.18-3.492-.18-3.456%200-5.823%202.11-5.823%205.986v3.34h-3.91v4.526h3.91V30z%22%20fill%3D%22%23007DBE%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E")
 	}
 
+	&.icon--info{
+		background-image:url("../images/icon-info.png");
+		background-size: 100%;
+		height: 26px;
+	}
+
 	&.icon--linkedin-white{
 		background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20x%3D%220%22%20y%3D%220%22%20viewBox%3D%220%200%2044%2040%22%20xml%3Aspace%3D%22preserve%22%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E.st0%7Bfill%3A%23FFFFFF%3B%7D%3C%2Fstyle%3E%3Ctitle%3ELinkedIn%3C%2Ftitle%3E%3Cpath%20class%3D%22st0%22%20d%3D%22M44%2040h-9.7V25.9c0-3.7-1.5-6.2-4.9-6.2-2.6%200-4%201.7-4.6%203.3-.2.6-.2%201.4-.2%202.2V40H15s.1-24.9%200-27.2h9.6v4.3c.6-1.9%203.6-4.5%208.6-4.5%206.1%200%2010.9%203.9%2010.9%2012.3V40zM5.2%209.4C2%209.4%200%207.3%200%204.7%200%202%202.1%200%205.2%200c3.2%200%205.1%202%205.2%204.7%200%202.6-2%204.7-5.2%204.7zm-4.1%203.4h8.6V40H1.1V12.8z%22%2F%3E%3C%2Fsvg%3E")
 	}

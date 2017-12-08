@@ -90,7 +90,7 @@ body{
 }
 
 .app-body{
-  padding:20px 14px 150px 30px;
+  padding:20px 30px 150px 30px;
   background:#fff;
 }
 
@@ -155,4 +155,20 @@ body{
 
 button{
   border:none;
+}
+
+p.info{
+  font-size: 1.4em;
+  background-color: $color-blue-dark;
+  color: #fff;
+  padding: 15px;
+
+  .icon--info{
+    width: 35px;
+    height: 35px;
+  }
+
+  a{
+    color: #fff;
+  }
 }
