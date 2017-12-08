@@ -35,8 +35,8 @@ class App extends Component {
                                     <li><Link to="/games">Games</Link></li>
                                     <li><Link to="/portfolio">Portfolio</Link></li>
                                     <li><Link to="/service">Self service</Link></li>
-                                    <li><a href="http://www.nyxgaminggroup.com/news">News</a></li>
-                                    <li><a href="http://www.nyxgaminggroup.com/contact">Contact</a></li>
+                                    <li><a href="http://www.nyxgaminggroup.com/news" target="_blank">News</a></li>
+                                    <li><a href="http://www.nyxgaminggroup.com/contact" target="_blank">Contact</a></li>
                                 </ul>
                             </HamburgerResponsive>
                         </div>
