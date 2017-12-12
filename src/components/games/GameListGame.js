@@ -79,7 +79,7 @@ class GameListGame extends Component {
         return (
             <div className="games-grid-game__icon">
                 <ImageLoader
-                    src={"https://dga1sy052ek6h.cloudfront.net/icons/200x127/" + game.id + ".png"}
+                    src={"https://d3htn38ft20trn.cloudfront.net/icons/200x127/" + game.id + ".png"}
                     loading={<LoadingImage width="35" height="35" />}
                     className="games-grid-game-icon"
                     error={<span className="games-grid-game-icon-placeholder">{game.name}</span>}

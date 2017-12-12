@@ -44,7 +44,7 @@ class DemoModal extends Component {
             return <DemoIFrame game={game} channel={channel}/>;
         }else{
             return <ImageLoader
-                src={"https://dga1sy052ek6h.cloudfront.net/icons/livegames/" + game.id + ".png"}
+                src={"https://d3htn38ft20trn.cloudfront.net/icons/livegames/" + game.id + ".png"}
                 loading={<div />}
                 containerClassName="game-demo-icon-placeholder"
                 className="game-demo-icon-placeholder-image"
@@ -79,7 +79,7 @@ class DemoModal extends Component {
                     <div className="game-demo-modal-title">{game.name}</div>
 
                     <ImageLoader
-                        src={"https://dga1sy052ek6h.cloudfront.net/icons/gplogos/" + game.studio.name + ".png"}
+                        src={"https://d3htn38ft20trn.cloudfront.net/icons/gplogos/" + game.studio.name + ".png"}
                         loading={<div />}
                         containerClassName="game-demo-modal-provider"
                         className="game-provider-icon"
@@ -99,8 +99,8 @@ class DemoModal extends Component {
 
                     {/*
                     <Downloads title="Downloads" className="downloads">
-                        <Download href={`https://dga1sy052ek6h.cloudfront.net/ogsmarketing/${game.id}.zip`} title="Marketing pack" />
-                        <Download href={`https://dga1sy052ek6h.cloudfront.net/ogscertificates/${game.id}.zip`} title="Certificate pack" />
+                        <Download href={`https://d3htn38ft20trn.cloudfront.net/ogsmarketing/${game.id}.zip`} title="Marketing pack" />
+                        <Download href={`https://d3htn38ft20trn.cloudfront.net/ogscertificates/${game.id}.zip`} title="Certificate pack" />
                     </Downloads>
                     */}
 
