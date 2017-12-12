@@ -12,13 +12,20 @@
 	font-size:20px;
 	font-weight:500;
 	line-height:25px;
-	text-decoration:none;	
+	text-decoration:none;
+	cursor: pointer;
 }
 
 .btn--regular{
 	font-size: 16px;
 	line-height: 20px;
 	width: 180px;
+}
+
+.btn--small{
+	font-size: 13px;
+	line-height: 16px;
+	width: 120px;
 }
 
 .banner-button{

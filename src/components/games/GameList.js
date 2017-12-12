@@ -6,6 +6,7 @@ import _ from 'underscore';
 import Games from './../../data/model/Games';
 import GameListGame from './GameListGame';
 import Loading from "../utilities/Loading";
+import ErrorModal from "../utilities/ErrorModal";
 import DemoModal from "../game/DemoModal";
 
 class GameList extends Component {
@@ -15,6 +16,7 @@ class GameList extends Component {
         this.state = {
             loading: true,
             more: false,
+            hasError: false,
             currentPage: 1,
             games: [],
             highlightedGame: (props.highlightedGame)? props.highlightedGame : null,
@@ -87,6 +89,8 @@ class GameList extends Component {
                 currentPage: currentPage,
                 games: (currentPage > 1)? [ ...prevState.games, ...data.games ] : data.games
             }));
+        }).catch((err) => {
+            this.setState({ hasError: true });
         });
     }
     loadMoreGames(){
@@ -110,7 +114,21 @@ class GameList extends Component {
     closeDemoModal() {
         this.props.closeDemoModal();
     }
-    render() {
+    refreshPage(){
+        window.location.reload();
+    }
+    render(){
+        return (
+            <div>
+                { this.state.hasError ? <ErrorModal>
+                    <p>Ooops, we're having some trouble loading the list of games.</p>
+                    <button className="btn btn--small" onClick={this.refreshPage}>Try again</button>
+                </ErrorModal> : null }
+                {this.renderGames()}
+            </div>
+        );
+    }
+    renderGames() {
         const loading = this.state.loading;
         const more = this.state.more;
         const games = this.state.games;
@@ -159,7 +177,7 @@ class GameList extends Component {
     renderLoadMoreButton() {
         return <div>
             <Waypoint onEnter={this.loadMoreGames} >
-                <button onClick={this.loadMoreGames}>Load More Games</button>
+                <button className="btn btn--regular" onClick={this.loadMoreGames}>Load More Games</button>
             </Waypoint>
         </div>
     }

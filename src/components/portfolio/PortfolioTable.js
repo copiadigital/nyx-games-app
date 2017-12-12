@@ -4,6 +4,7 @@ import PaginatedAxiosDataProvider from './PaginatedDataProvider';
 import Games from './../../data/model/Games';
 import jurisdictions from './../../data/jurisdictions';
 import Loading from "../utilities/Loading";
+import ErrorModal from "../utilities/ErrorModal";
 import _ from 'underscore';
 
 class PortfolioTable extends Component {
@@ -11,6 +12,7 @@ class PortfolioTable extends Component {
         super(props);
 
         this.state = {
+            hasError: false,
             jurisdictions: null
         };
 
@@ -34,6 +36,8 @@ class PortfolioTable extends Component {
             this.setState({
                 jurisdictions: res.data.jurisdictions
             });
+        }).catch((err) => {
+            this.setState({ hasError: true });
         });
     }
 
@@ -77,6 +81,8 @@ class PortfolioTable extends Component {
                         params: requestParams
                     }).then((data) => {
                         return {items: data.games, total: data.meta.total};
+                    }).catch((err) => {
+                        self.setState({ hasError: true });
                     });
                 }
             });
@@ -85,9 +91,20 @@ class PortfolioTable extends Component {
         return this.dataProvider;
     }
 
+    refreshPage(){
+        window.location.reload();
+    }
+
     render() {
         // needs to be shared to keep updates going through
         var dataProvider = this.getDataProvider();
+
+        if(this.state.hasError){
+            return <ErrorModal>
+                <p>Ooops, we're having some trouble loading the data.</p>
+                <button className="btn btn--small" onClick={this.refreshPage}>Try again</button>
+            </ErrorModal>
+        }
 
         if(this.state.jurisdictions === null){
             return <Loading />
