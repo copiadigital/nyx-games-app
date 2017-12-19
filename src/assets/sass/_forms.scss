@@ -185,3 +185,19 @@
 		padding-left:3px;
 	}
 }
+
+.rw-widget-picker{
+
+	>*{
+		display:inline-block;
+	}
+
+	input{
+		cursor:pointer;
+	}
+
+	.rw-select{
+		position:absolute;
+		right:0;
+	}
+}
