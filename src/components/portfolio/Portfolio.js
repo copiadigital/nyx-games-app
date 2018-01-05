@@ -41,7 +41,7 @@ class Portfolio extends Component {
         });
     }
     shouldComponentUpdate(nextProps, nextState){
-        var differentFilter = (!_.isEqual(this.state.filtes,  nextState.filter));
+        var differentFilter = (!_.isEqual(this.state.filter,  nextState.filter));
         return differentFilter;
     }
     setFilter(filter) {
