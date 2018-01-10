@@ -23,6 +23,7 @@ class ChannelFilter extends Component {
                     onChange={ (values) => this.props.setFilter({ channel: values }) }
                     disabled={ this.props.disabled }
                     itemComponent={this.renderListItem}
+                    selectIcon="caret-down"
                 />
             </fieldset>
         );
