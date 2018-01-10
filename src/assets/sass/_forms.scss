@@ -20,6 +20,7 @@
 		display:inline-block;
 		margin-bottom:10px;
 		width:50%;
+		vertical-align:middle;
 		color:$color-blue;
 
 		@include respond(small){
@@ -186,18 +187,24 @@
 	}
 }
 
-.rw-widget-picker{
+.rw-multiselect{
 
-	>*{
-		display:inline-block;
+	.rw-widget-input > div{
+		vertical-align: middle;
+		padding-right: 0;
+		max-width: 1px;
+		-o-text-overflow: ellipsis;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
 	}
 
 	input{
 		cursor:pointer;
 	}
 
-	.rw-select{
-		position:absolute;
-		right:0;
-	}
+//	.rw-select{
+//		position:absolute;
+//		right:0;
+//	}
 }
