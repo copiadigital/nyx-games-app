@@ -85,11 +85,11 @@ class App extends Component {
                     </div>
                     <div className="app-legal">
                         <p>
-                            <a href="https://secure.gamblingcommission.gov.uk/PublicRegister/Search/Detail/40129"
-                               target="_blank" rel="noopener noreferrer">NYX Gaming Group is licensed and regulated by
+                            <a href="https://secure.gamblingcommission.gov.uk/PublicRegister/Search/Detail/41115"
+                               target="_blank" rel="noopener noreferrer">SG Digital is licensed and regulated by
                                 the United Kingdom Gambling Commission. Our license status can be viewed by clicking
                                 this phrase.</a><br />
-                            Copyright 2017 NYX Gaming Group - All Rights Reserved
+                            © 2018 Scientific Games - All Rights Reserved
                         </p>
                     </div>
                     <GoogleAnalytics />
