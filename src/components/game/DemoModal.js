@@ -7,6 +7,7 @@ import ImageLoader from "../utilities/ImageLoader";
 import ShareUrlTool from "../utilities/ShareUrlTool";
 import DemoIFrame from "./DemoIFrame";
 import DemoSwitch from "./DemoSwitch";
+import DemoWarning from "./DemoWarning";
 import _ from 'underscore';
 
 class DemoModal extends Component {
@@ -39,6 +40,11 @@ class DemoModal extends Component {
     renderDemo() {
         const game = this.state.game;
         const channel = this.state.channel;
+
+        var warningAccepted = sessionStorage.getItem('warningAccepted');
+        if (!warningAccepted) {
+            return <DemoWarning demoModal={this} />;
+        }
 
         if(game.hasDemo()) {
             return <DemoIFrame game={game} channel={channel}/>;
