@@ -37,6 +37,10 @@ class DemoModal extends Component {
     setChannel(channel) {
         this.props.openDemoModal(this.props.game, channel);
     }
+    setWarningAccepted(value){
+        this.setState({ warningAccepted: value });
+        sessionStorage.setItem('warningAccepted', value);
+    }
     renderDemo() {
         const game = this.state.game;
         const channel = this.state.channel;

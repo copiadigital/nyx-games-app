@@ -16,8 +16,7 @@ class DemoWarning extends Component {
         this.demoModal.props.closeDemoModal();
     }
     acceptWarning() {
-        sessionStorage.setItem('warningAccepted', 'yes');
-        this.demoModal.setChannel('desktop');
+        this.demoModal.setWarningAccepted(true);
     }
     render() {
         return (<div className="warningWindow">
