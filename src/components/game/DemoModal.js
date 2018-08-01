@@ -25,6 +25,7 @@ class DemoModal extends Component {
         }
 
         this.setChannel = this.setChannel.bind(this);
+        this.setWarningAccepted = this.setWarningAccepted.bind(this)
     }
     componentDidMount(){
         ReactGA.event({
@@ -54,7 +55,7 @@ class DemoModal extends Component {
         const channel = this.state.channel;
 
         if (this.state.warningAccepted =='no') {
-            return <DemoWarning demoModal={this} />;
+            return <DemoWarning warningAccepted={this.setWarningAccepted} />;
         }
 
         if(game.hasDemo()) {
