@@ -471,3 +471,21 @@
         font-size: 2em;
     }
 }
+
+.warningHeading {
+    font-size: 3em;
+}
+.warningWindow {
+    padding: 100px 50px 0px 50px;
+    color: white;
+}
+.warningMessage {
+    font-size: 1.4em;
+}
+.warningButton {
+    height: 40px;
+    width: 150px;
+    margin-right: 20px;
+    font-size: 2em;
+    font-weight: bold;
+}
