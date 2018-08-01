@@ -16,8 +16,13 @@ class DemoModal extends Component {
 
         this.state = {
             game: this.props.game,
-            channel: this.props.channel
+            channel: this.props.channel,
+            warningAccepted: sessionStorage.getItem('warningAccepted')
         };
+
+        if (this.state.warningAccepted == null) {
+            this.state.warningAccepted = 'no';
+        }
 
         this.setChannel = this.setChannel.bind(this);
     }
@@ -37,16 +42,18 @@ class DemoModal extends Component {
     setChannel(channel) {
         this.props.openDemoModal(this.props.game, channel);
     }
-    setWarningAccepted(value){
-        this.setState({ warningAccepted: value });
-        sessionStorage.setItem('warningAccepted', value);
+    setWarningAccepted(warningAccepted){
+        this.setState({ warningAccepted: warningAccepted });
+        sessionStorage.setItem('warningAccepted', warningAccepted);
+        if (warningAccepted == 'no') {
+            this.props.closeDemoModal();
+        }
     }
     renderDemo() {
         const game = this.state.game;
         const channel = this.state.channel;
 
-        var warningAccepted = sessionStorage.getItem('warningAccepted');
-        if (!warningAccepted) {
+        if (this.state.warningAccepted =='no') {
             return <DemoWarning demoModal={this} />;
         }
 

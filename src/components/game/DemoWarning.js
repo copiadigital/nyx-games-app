@@ -13,10 +13,10 @@ class DemoWarning extends Component {
         this.acceptWarning  = this.acceptWarning.bind(this);
     }
     rejectWarning() {
-        this.demoModal.props.closeDemoModal();
+        this.demoModal.setWarningAccepted('no');
     }
     acceptWarning() {
-        this.demoModal.setWarningAccepted(true);
+        this.demoModal.setWarningAccepted('yes');
     }
     render() {
         return (<div className="warningWindow">
