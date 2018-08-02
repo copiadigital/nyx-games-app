@@ -3,6 +3,9 @@ import _ from 'underscore';
 import ImageLoader from '../utilities/ImageLoader';
 import LoadingImage from '../utilities/LoadingImage';
 import StringTrim from '../utilities/StringTrim';
+import Responsive from 'react-responsive';
+const Desktop = props => <Responsive {...props} minWidth={992} />;
+const Mobile = props => <Responsive {...props} maxWidth={991} />;
 
 class GameListGame extends Component {
     constructor(props) {
@@ -75,17 +78,33 @@ class GameListGame extends Component {
             </div>
         );
     }
-    renderNormal(game) {
-        return (
-            <div className="games-grid-game__icon">
-                <ImageLoader
-                    src={"https://d3htn38ft20trn.cloudfront.net/icons/200x127/" + game.id + ".png"}
-                    loading={<LoadingImage width="35" height="35" />}
-                    className="games-grid-game-icon"
-                    error={<span className="games-grid-game-icon-placeholder">{game.name}</span>}
-                />
-            </div>
-        );
+    renderNormal(game, direct) {
+        if (!direct) {
+            return (
+                <div className="games-grid-game__icon">
+                    <ImageLoader
+                        src={"https://d3htn38ft20trn.cloudfront.net/icons/200x127/" + game.id + ".png"}
+                        loading={<LoadingImage width="35" height="35"/>}
+                        className="games-grid-game-icon"
+                        error={<span className="games-grid-game-icon-placeholder">{game.name}</span>}
+                    />
+                </div>
+            );
+        }
+
+        if (direct) {
+            return (
+                <div className="games-grid-game__icon" onClick={this.playDemoButtonHandler('mobile')}>
+                    <ImageLoader
+                        src={"https://d3htn38ft20trn.cloudfront.net/icons/200x127/" + game.id + ".png"}
+                        loading={<LoadingImage width="35" height="35"/>}
+                        className="games-grid-game-icon"
+                        error={<span className="games-grid-game-icon-placeholder">{game.name}</span>}
+                    />
+                </div>
+            );
+        }
+
     }
     render() {
         const game = this.props.game;
@@ -114,15 +133,31 @@ class GameListGame extends Component {
         }
 
         return (
+            <span>
+            <Desktop>
             <li className="games-grid-game-container" onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
                 <div className={ classes.join(' ') }>
                     {game.high_quality ? <div className="games-grid-banner--hq" /> : '' }
                     {gameIsComingSoon ? <div className="games-grid-banner--coming" /> : '' }
                     {gameIsNew ? <div className="games-grid-banner--new" /> : '' }
 
-                    {this.state.highlight ? this.renderHighlight(game) : this.renderNormal(game) }
+                    {this.state.highlight ? this.renderHighlight(game) : this.renderNormal(game, false) }
+
                 </div>
             </li>
+            </Desktop>
+            <Mobile>
+                <li className="games-grid-game-container">
+                <div className={ classes.join(' ') }>
+                    {game.high_quality ? <div className="games-grid-banner--hq" /> : '' }
+                    {gameIsComingSoon ? <div className="games-grid-banner--coming" /> : '' }
+                    {gameIsNew ? <div className="games-grid-banner--new" /> : '' }
+
+                    {this.renderNormal(game, true)}
+                </div>
+            </li>
+            </Mobile>
+            </span>
         );
     }
 }
