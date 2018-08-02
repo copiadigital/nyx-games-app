@@ -4,8 +4,10 @@ import ImageLoader from '../utilities/ImageLoader';
 import LoadingImage from '../utilities/LoadingImage';
 import StringTrim from '../utilities/StringTrim';
 import Responsive from 'react-responsive';
+
 const Desktop = props => <Responsive {...props} minWidth={992} />;
-const Mobile = props => <Responsive {...props} maxWidth={991} />;
+const Tablet = props => <Responsive {...props} minWidth={768} maxWidth={991} />;
+const Mobile = props => <Responsive {...props} maxWidth={767} />;
 
 class GameListGame extends Component {
     constructor(props) {
@@ -131,32 +133,42 @@ class GameListGame extends Component {
         if(gameIsNew){
             classes.push('games-grid-game--new');
         }
+        
+
+        let gameListItem = (
+            <div className={ classes.join(' ') }>
+                {game.high_quality ? <div className="games-grid-banner--hq" /> : '' }
+                {gameIsComingSoon ? <div className="games-grid-banner--coming" /> : '' }
+                {gameIsNew ? <div className="games-grid-banner--new" /> : '' }
+                <Desktop>
+                    {this.state.highlight ? this.renderHighlight(game) : this.renderNormal(game, false) }
+                </Desktop>
+                <Mobile>
+                    {this.renderNormal(game, true)}
+                </Mobile>
+                <Tablet>
+                    {this.renderNormal(game, true)}
+                </Tablet>
+            </div>
+        );
 
         return (
             <span>
-            <Desktop>
-            <li className="games-grid-game-container" onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-                <div className={ classes.join(' ') }>
-                    {game.high_quality ? <div className="games-grid-banner--hq" /> : '' }
-                    {gameIsComingSoon ? <div className="games-grid-banner--coming" /> : '' }
-                    {gameIsNew ? <div className="games-grid-banner--new" /> : '' }
-
-                    {this.state.highlight ? this.renderHighlight(game) : this.renderNormal(game, false) }
-
-                </div>
-            </li>
-            </Desktop>
-            <Mobile>
+                <Desktop>
+                <li className="games-grid-game-container" onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
+                    {gameListItem}
+                </li>
+                </Desktop>
+                <Mobile>
                 <li className="games-grid-game-container">
-                <div className={ classes.join(' ') }>
-                    {game.high_quality ? <div className="games-grid-banner--hq" /> : '' }
-                    {gameIsComingSoon ? <div className="games-grid-banner--coming" /> : '' }
-                    {gameIsNew ? <div className="games-grid-banner--new" /> : '' }
-
-                    {this.renderNormal(game, true)}
-                </div>
-            </li>
-            </Mobile>
+                    {gameListItem}
+                </li>
+                </Mobile>
+                <Tablet>
+                <li className="games-grid-game-container">
+                    {gameListItem}
+                </li>
+                </Tablet>
             </span>
         );
     }
