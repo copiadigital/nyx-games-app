@@ -4,15 +4,20 @@ class DemoSwitch extends Component {
     constructor(props){
         super(props);
 
-        this.state = {
-        };
+        this.state = {};
+        this.desktopOption = this.desktopOption.bind(this);
+        this.mobileOption = this.mobileOption.bind(this);
+
+        this.setChannel = this.props.setChannel.bind(this);
     }
-    clickHandlerBuild(channel) {
-        var self = this;
-        return function(event){
-            self.props.setChannel(channel);
-        }
+    mobileOption() {
+        this.setChannel('mobile');
+
     }
+    desktopOption() {
+        this.setChannel('desktop');
+    }
+
     render() {
         const game = this.props.game;
         const channel = this.props.channel;
@@ -28,8 +33,8 @@ class DemoSwitch extends Component {
 
         return (
             <div className="game-demo-switch-button-container">
-                { ( (game.channels.indexOf('desktop') > -1) ? <button className={ desktopClasses.join(' ') } onClick={this.clickHandlerBuild('desktop')}>Desktop</button> : '' ) }
-                { ( (game.channels.indexOf('mobile') > -1) ? <button className={ mobileClasses.join(' ') } onClick={this.clickHandlerBuild('mobile')}>Mobile</button> : '') }
+                { ( (game.channels.indexOf('desktop') > -1) ? <button className={ desktopClasses.join(' ') } onClick={this.desktopOption}>Desktop</button> : '' ) }
+                { ( (game.channels.indexOf('mobile') > -1) ? <button className={ mobileClasses.join(' ') } onClick={this.mobileOption}>Mobile</button> : '') }
             </div>
         );
     }

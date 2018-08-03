@@ -82,7 +82,7 @@ class DemoModal extends Component {
         const game = this.state.game;
         const channel = this.state.channel;
         if (!this.state.isFullScreen) {
-            return <DetailBar game={game} channel={channel} setFullScreen={this.makeFullScreen}/>;
+            return <DetailBar game={game} channel={channel} setFullScreen={this.makeFullScreen} modalChannel={this.setChannel}/>;
         }
         return '';
     }

@@ -17,10 +17,16 @@ class DetailBar extends Component {
 
         this.makeFullScreen = this.props.setFullScreen.bind(this);
         this.setFullScreen = this.setFullScreen.bind(this);
+        this.setChannel = this.setChannel.bind(this);
+        this.setModalChannel = this.props.modalChannel.bind(this);
     }
 
     setFullScreen() {
         this.makeFullScreen();
+    }
+
+    setChannel(channel) {
+        this.setModalChannel(channel);
     }
 
     render() {
