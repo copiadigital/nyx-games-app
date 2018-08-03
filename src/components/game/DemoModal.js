@@ -84,7 +84,7 @@ class DemoModal extends Component {
         if (!this.state.isFullScreen) {
             return <DetailBar game={game} channel={channel} setFullScreen={this.makeFullScreen}/>;
         }
-        return '<span></span>';
+        return '';
     }
 
     render() {
