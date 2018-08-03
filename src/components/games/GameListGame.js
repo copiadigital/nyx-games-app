@@ -80,33 +80,16 @@ class GameListGame extends Component {
             </div>
         );
     }
-    renderNormal(game, direct) {
-        if (!direct) {
-            return (
-                <div className="games-grid-game__icon">
-                    <ImageLoader
-                        src={"https://d3htn38ft20trn.cloudfront.net/icons/200x127/" + game.id + ".png"}
-                        loading={<LoadingImage width="35" height="35"/>}
-                        className="games-grid-game-icon"
-                        error={<span className="games-grid-game-icon-placeholder">{game.name}</span>}
-                    />
-                </div>
-            );
-        }
-
-        if (direct) {
-            return (
-                <div className="games-grid-game__icon" onClick={this.playDemoButtonHandler('mobile')}>
-                    <ImageLoader
-                        src={"https://d3htn38ft20trn.cloudfront.net/icons/200x127/" + game.id + ".png"}
-                        loading={<LoadingImage width="35" height="35"/>}
-                        className="games-grid-game-icon"
-                        error={<span className="games-grid-game-icon-placeholder">{game.name}</span>}
-                    />
-                </div>
-            );
-        }
-
+    renderNormal(game) {
+        return (
+            <div className="games-grid-game__icon">
+                <ImageLoader
+                    src={"https://d3htn38ft20trn.cloudfront.net/icons/200x127/" + game.id + ".png"}
+                    loading={<LoadingImage width="35" height="35"/>}
+                    className="games-grid-game-icon"
+                    error={<span className="games-grid-game-icon-placeholder">{game.name}</span>}
+                />
+            </div>);
     }
     render() {
         const game = this.props.game;
@@ -141,13 +124,13 @@ class GameListGame extends Component {
                 {gameIsComingSoon ? <div className="games-grid-banner--coming" /> : '' }
                 {gameIsNew ? <div className="games-grid-banner--new" /> : '' }
                 <Desktop>
-                    {this.state.highlight ? this.renderHighlight(game) : this.renderNormal(game, false) }
+                    {this.state.highlight ? this.renderHighlight(game) : this.renderNormal(game) }
                 </Desktop>
                 <Mobile>
-                    {this.renderNormal(game, true)}
+                    {this.renderNormal(game)}
                 </Mobile>
                 <Tablet>
-                    {this.renderNormal(game, true)}
+                    {this.renderNormal(game)}
                 </Tablet>
             </div>
         );
@@ -160,12 +143,12 @@ class GameListGame extends Component {
                 </li>
                 </Desktop>
                 <Mobile>
-                <li className="games-grid-game-container">
+                <li className="games-grid-game-container" onClick={this.playDemoButtonHandler('mobile')}>
                     {gameListItem}
                 </li>
                 </Mobile>
                 <Tablet>
-                <li className="games-grid-game-container">
+                <li className="games-grid-game-container" onClick={this.playDemoButtonHandler('mobile')}>
                     {gameListItem}
                 </li>
                 </Tablet>
