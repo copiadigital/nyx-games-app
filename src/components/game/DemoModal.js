@@ -97,10 +97,13 @@ class DemoModal extends Component {
 
         return (
             <div className="game-demo-modal-container">
+                <Desktop>
+                    <div className="game-demo-modal-icon game-demo-modal-fullscreen game-demo-fullscreen-container" onClick={this.setFullScreen} title="Full Screen">
+                    </div>
+                </Desktop>
+
                 <ShareUrlTool className="game-demo-modal-icon game-demo-modal-share" url={window.location.toString()} />
-                <div className="game-demo-modal-icon game-demo-modal-close" onClick={this.props.closeDemoModal} title="Close">
-                    <span role="img" aria-label="Close">&#10060;</span>
-                </div>
+                <div className="game-demo-modal-icon game-demo-modal-close" onClick={this.props.closeDemoModal} title="Close"></div>
 
                 <div className="game-demo-viewport">
                     <div className="game-demo-viewport-frame">

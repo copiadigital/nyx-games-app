@@ -75,11 +75,6 @@ class DetailBar extends Component {
                     <DemoSwitch game={game} channel={channel} setChannel={this.setChannel} />
                     <span>Demo options</span>
                 </div>
-                <Desktop>
-                    <div className="game-demo-fullscreen-container">
-                        <button className="button-class" onClick={this.setFullScreen}>Full Screen</button>
-                    </div>
-                </Desktop>
             </div>
         )
     }

@@ -225,16 +225,20 @@
     text-align:center;
     color:#fff;
     text-transform:uppercase;
-    border:1px $color-grey-dark solid;
-    border-radius:50%;
+    border:1px #fff solid;
+    border-position:inset;
     cursor:pointer;
     padding:0 4px 3px 4px;
-    background: $color-grey-dark;
+    background-color:$color-grey;
+    background-size:70%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    top:1px;
 }
 
 .game-demo-modal-close{
-    top:-15px;
-    right:-13px;
+    right:1px;
+    background-image:url(../images/icon-close.png);
 
     @include respond(small-only){
         right:5px;
@@ -242,12 +246,20 @@
 }
 
 .game-demo-modal-share{
-    top:-15px;
-    right:22px;
-    padding-left: 2px;
+    right:31px;
+    background-image:url(../images/icon-share.png);
 
     @include respond(small-only){
-        right:40px;
+        right:30px;
+    }
+}
+
+.game-demo-modal-fullscreen{
+    right:61px;
+    background-image:url(../images/icon-fullscreen.png);
+
+    @include respond(small-only){
+        right:60px;
     }
 }
 

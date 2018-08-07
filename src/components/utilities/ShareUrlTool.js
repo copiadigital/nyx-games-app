@@ -36,7 +36,6 @@ class ShareUrlTool extends Component {
 
         return (
             <div className={className} title={title} onClick={this.open}>
-                <span role="img" aria-label="Share">&#10138;</span>
                 {this.renderModal()}
             </div>
         );
@@ -55,7 +54,7 @@ class ShareUrlTool extends Component {
         >
             <h2>URL for game</h2>
             <input id="url" type="text" value={url} />
-            <ClipboardButton className="copy" data-clipboard-text={url} onSuccess={this.close} onError={this.error}>
+            <ClipboardButton className="copy" data-clipboard-text={url} onSuccess={this.close} onError={this.error} title="Copy to clipboard">
                 <img class="clipboard" src={clipboardIcon} alt="Copy to clipboard" />
             </ClipboardButton>
             {(error)? <p>Your browser does not support copying by click, please press Ctrl+C to copy the URL</p> : null}
