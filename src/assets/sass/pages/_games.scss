@@ -496,9 +496,15 @@
 
 .warningHeading {
     font-size: 3em;
+    @media (max-width: 667px) {
+        font-size: 2em;
+    }
 }
 .warningWindow {
     padding: 100px 50px 0px 50px;
+    @media (max-width: 667px) {
+        padding: 0px 10px 0px 10px
+    }
     color: white;
 }
 .warningMessage {
