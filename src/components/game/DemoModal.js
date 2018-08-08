@@ -84,6 +84,20 @@ class DemoModal extends Component {
         if (!this.state.isFullScreen) {
             return <DetailBar game={game} channel={channel} setFullScreen={this.makeFullScreen} modalChannel={this.setChannel}/>;
         }
+
+        var gameIframe = document.getElementsByClassName("gameContent");
+
+        if (gameIframe[0] != null) {
+            var width = document.getElementsByClassName("game-demo-modal")[0].scrollWidth;
+            var height = document.getElementsByClassName("game-demo-modal")[0].scrollHeight;
+
+            gameIframe[0]
+                .contentWindow
+                .postMessage(JSON.stringify({"msgId": "windowSizeChanged", "width": width, "height": height}), "*");
+            document.getElementsByClassName("gameContent")[0].width = width;
+            document.getElementsByClassName("gameContent")[0].height = height;
+        }
+
         return '';
     }
 
