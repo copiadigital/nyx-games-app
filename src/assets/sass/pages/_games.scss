@@ -195,8 +195,8 @@
 }
 
 .game-demo-modal{
-    width: calc(100% - 50px);
-    max-width: 1434px;
+    height: 100%;
+    width: 100%;
 
     @include respond(small-only){
         width: 100%;
