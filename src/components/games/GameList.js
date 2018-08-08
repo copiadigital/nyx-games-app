@@ -122,12 +122,11 @@ class GameList extends Component {
     afterOpenModal() {
 
         window.addEventListener("resize", function(){
-            console.log("resizeing");
-            var width = document.getElementsByClassName("game-demo-modal-container")[0].scrollWidth;
-            var height = document.getElementsByClassName("game-demo-modal-container")[0].scrollHeight;
             var gameIframe = document.getElementsByClassName("gameContent");
 
             if (gameIframe[0] != null) {
+                var width = document.getElementsByClassName("game-demo-modal-container")[0].scrollWidth;
+                var height = document.getElementsByClassName("game-demo-modal-container")[0].scrollHeight;
                 gameIframe[0]
                     .contentWindow
                     .postMessage(JSON.stringify({"msgId": "windowSizeChanged", "width": width, "height": height}), "*");
