@@ -52,7 +52,7 @@ class DemoIFrame extends Component {
         const game = this.props.game;
         const channel = this.props.channel;
 
-        return <iframe src={this.buildDemoUrl()} width="100%" height="100%" title={`${game.name} ${channel} demo`}></iframe>
+        return <iframe className="gameContent" src={this.buildDemoUrl()} width="100%" height="100%" title={`${game.name} ${channel} demo`}></iframe>
     }
 }
 

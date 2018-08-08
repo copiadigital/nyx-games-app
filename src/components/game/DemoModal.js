@@ -98,7 +98,7 @@ class DemoModal extends Component {
         return (
             <div className="game-demo-modal-container">
                 <Desktop>
-                    <div className="game-demo-modal-icon game-demo-modal-fullscreen game-demo-fullscreen-container" onClick={this.setFullScreen} title="Full Screen">
+                    <div className="game-demo-modal-icon game-demo-modal-fullscreen game-demo-fullscreen-container" onClick={this.makeFullScreen} title="Full Screen">
                     </div>
                 </Desktop>
 
