@@ -9,7 +9,6 @@ import Loading from "../utilities/Loading";
 import ErrorModal from "../utilities/ErrorModal";
 import DemoModal from "../game/DemoModal";
 
-
 class GameList extends Component {
     constructor(props){
         super(props);
@@ -121,12 +120,14 @@ class GameList extends Component {
     }
     afterOpenModal() {
 
-        window.addEventListener("resize", function(){
+         window.addEventListener("resize", function(){
+
             var gameIframe = document.getElementsByClassName("gameContent");
 
             if (gameIframe[0] != null) {
-                var width = document.getElementsByClassName("game-demo-modal-container")[0].scrollWidth;
-                var height = document.getElementsByClassName("game-demo-modal-container")[0].scrollHeight;
+                var width = document.documentElement.clientWidth;
+                var height = document.documentElement.clientHeight;
+
                 gameIframe[0]
                     .contentWindow
                     .postMessage(JSON.stringify({"msgId": "windowSizeChanged", "width": width, "height": height}), "*");

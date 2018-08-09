@@ -12,6 +12,8 @@ import _ from 'underscore';
 import Responsive from 'react-responsive';
 
 const Desktop = props => <Responsive {...props} minWidth={992} />;
+const Tablet = props => <Responsive {...props} minWidth={768} maxWidth={991} />;
+const Mobile = props => <Responsive {...props} maxWidth={767} />;
 
 class DemoModal extends Component {
     constructor(props){
@@ -88,8 +90,10 @@ class DemoModal extends Component {
         var gameIframe = document.getElementsByClassName("gameContent");
 
         if (gameIframe[0] != null) {
-            var width = document.getElementsByClassName("game-demo-modal")[0].scrollWidth;
-            var height = document.getElementsByClassName("game-demo-modal")[0].scrollHeight;
+            var width = document.documentElement.clientWidth;
+            var height = document.documentElement.clientHeight;
+
+            console.log("demomodal " + "height " + height + " width " + width);
 
             gameIframe[0]
                 .contentWindow
@@ -101,6 +105,44 @@ class DemoModal extends Component {
         return '';
     }
 
+    renderMobileFullScreen()
+    {
+        return <div className="game-demo-modal-container container-fullscreen">
+
+            <ShareUrlTool className="game-demo-modal-icon game-demo-modal-share" url={window.location.toString()} />
+            <div className="game-demo-modal-icon game-demo-modal-close" onClick={this.props.closeDemoModal} title="Close"></div>
+
+            <div className="game-demo-viewport">
+                <div className="game-demo-viewport-frame">
+                    <div className="game-demo-viewport-frame-holder">
+                        {this.renderDemo()}
+                    </div>
+                </div>
+            </div>
+            {this.renderDetailBar()}
+        </div>
+    }
+
+    renderDesktop()
+    {
+        return <div className={ this.state.isFullScreen ? "game-demo-modal-container container-fullscreen" : "game-demo-modal-container"}>
+            <div className="game-demo-modal-icon game-demo-modal-fullscreen game-demo-fullscreen-container" onClick={this.makeFullScreen} title="Full Screen">
+            </div>
+
+            <ShareUrlTool className="game-demo-modal-icon game-demo-modal-share" url={window.location.toString()} />
+            <div className="game-demo-modal-icon game-demo-modal-close" onClick={this.props.closeDemoModal} title="Close"></div>
+
+            <div className="game-demo-viewport">
+                <div className="game-demo-viewport-frame">
+                    <div className="game-demo-viewport-frame-holder">
+                        {this.renderDemo()}
+                    </div>
+                </div>
+            </div>
+            {this.renderDetailBar()}
+        </div>
+    }
+
     render() {
         const game = this.state.game;
         const channel = this.state.channel;
@@ -108,25 +150,18 @@ class DemoModal extends Component {
         var forceContent = function(val){
           return (!_.isNumber(val) && _.isEmpty(val))? 'n/a' : val;
         };
-
+        //container-fullscreen hardcoded need to make dynamic
         return (
-            <div className="game-demo-modal-container">
+            <div>
                 <Desktop>
-                    <div className="game-demo-modal-icon game-demo-modal-fullscreen game-demo-fullscreen-container" onClick={this.makeFullScreen} title="Full Screen">
-                    </div>
+                    {this.renderDesktop()}
                 </Desktop>
-
-                <ShareUrlTool className="game-demo-modal-icon game-demo-modal-share" url={window.location.toString()} />
-                <div className="game-demo-modal-icon game-demo-modal-close" onClick={this.props.closeDemoModal} title="Close"></div>
-
-                <div className="game-demo-viewport">
-                    <div className="game-demo-viewport-frame">
-                        <div className="game-demo-viewport-frame-holder">
-                            {this.renderDemo()}
-                        </div>
-                    </div>
-                </div>
-                {this.renderDetailBar()}
+                <Tablet>
+                    {this.renderMobileFullScreen()}
+                </Tablet>
+                <Mobile>
+                    {this.renderMobileFullScreen()}
+                </Mobile>
             </div>
         )
     }
