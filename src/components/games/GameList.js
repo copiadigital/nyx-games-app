@@ -119,14 +119,19 @@ class GameList extends Component {
         window.location.reload();
     }
     afterOpenModal() {
-
-         window.addEventListener("resize", function(){
+        
+        var windowResizer = function(){
 
             var gameIframe = document.getElementsByClassName("gameContent");
-
             if (gameIframe[0] != null) {
-                var width = document.documentElement.clientWidth;
-                var height = document.documentElement.clientHeight;
+                var containerFullScreen = document.getElementsByClassName("container-fullscreen");
+                if (containerFullScreen[0] == null) {
+                    var width = '100%';
+                    var height = '100%';
+                } else {
+                    var width = document.documentElement.clientWidth;
+                    var height = document.documentElement.clientHeight;
+                }
 
                 gameIframe[0]
                     .contentWindow
@@ -134,7 +139,17 @@ class GameList extends Component {
                 document.getElementsByClassName("gameContent")[0].width = width;
                 document.getElementsByClassName("gameContent")[0].height = height;
             }
-        });
+        }
+
+        //when the modal window opens add the event listener to resize game on window resize
+        window.addEventListener("resize", windowResizer);
+        //check if we are in full screen mode. If not call the window resizer method.
+
+        var containerFullScreen = document.getElementsByClassName("container-fullscreen");
+        if (containerFullScreen[0] != null) {
+            windowResizer();
+        }
+
     }
 
     render(){
