@@ -133,6 +133,8 @@ class GameList extends Component {
                     var height = document.documentElement.clientHeight;
                 }
 
+                console.log("width : " + width + "height : " + height);
+
                 gameIframe[0]
                     .contentWindow
                     .postMessage(JSON.stringify({"msgId": "windowSizeChanged", "width": width, "height": height}), "*");
