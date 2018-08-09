@@ -132,7 +132,7 @@ class GameList extends Component {
                     var width = document.documentElement.clientWidth;
                     var height = document.documentElement.clientHeight;
                 }
-
+                
                 gameIframe[0]
                     .contentWindow
                     .postMessage(JSON.stringify({"msgId": "windowSizeChanged", "width": width, "height": height}), "*");
@@ -141,14 +141,10 @@ class GameList extends Component {
             }
         }
 
-        //when the modal window opens add the event listener to resize game on window resize
+        //when the modal is opened add the event listener to resize game on window resize
         window.addEventListener("resize", windowResizer);
-        //check if we are in full screen mode. If not call the window resizer method.
-
-        var containerFullScreen = document.getElementsByClassName("container-fullscreen");
-        if (containerFullScreen[0] != null) {
-            windowResizer();
-        }
+        //when the modal is opened call the windowResizer Method to set the correct width and height of the game
+        windowResizer();
 
     }
 
