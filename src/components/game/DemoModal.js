@@ -87,19 +87,6 @@ class DemoModal extends Component {
             return <DetailBar game={game} channel={channel} setFullScreen={this.makeFullScreen} modalChannel={this.setChannel}/>;
         }
 
-        var gameIframe = document.getElementsByClassName("gameContent");
-
-        if (gameIframe[0] != null) {
-            var width = document.documentElement.clientWidth;
-            var height = document.documentElement.clientHeight;
-
-            gameIframe[0]
-                .contentWindow
-                .postMessage(JSON.stringify({"msgId": "windowSizeChanged", "width": width, "height": height}), "*");
-            document.getElementsByClassName("gameContent")[0].width = width;
-            document.getElementsByClassName("gameContent")[0].height = height;
-        }
-
         return '';
     }
 
@@ -148,7 +135,6 @@ class DemoModal extends Component {
         var forceContent = function(val){
           return (!_.isNumber(val) && _.isEmpty(val))? 'n/a' : val;
         };
-        //container-fullscreen hardcoded need to make dynamic
         return (
             <div>
                 <Desktop>
