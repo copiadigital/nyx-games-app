@@ -93,8 +93,6 @@ class DemoModal extends Component {
             var width = document.documentElement.clientWidth;
             var height = document.documentElement.clientHeight;
 
-            console.log("demomodal " + "height " + height + " width " + width);
-
             gameIframe[0]
                 .contentWindow
                 .postMessage(JSON.stringify({"msgId": "windowSizeChanged", "width": width, "height": height}), "*");
