@@ -30,7 +30,7 @@ class GameList extends Component {
         this.highlightGame = this.highlightGame.bind(this);
         this.openDemoModal = this.openDemoModal.bind(this);
         this.closeDemoModal = this.closeDemoModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
+        //this.afterOpenModal = this.afterOpenModal.bind(this);
     }
     componentDidMount(){
         this.loadGames(this.props);
@@ -118,35 +118,6 @@ class GameList extends Component {
     refreshPage(){
         window.location.reload();
     }
-    afterOpenModal() {
-        
-        var windowResizer = function(){
-
-            var gameIframe = document.getElementsByClassName("gameContent");
-            if (gameIframe[0] != null) {
-                var containerFullScreen = document.getElementsByClassName("container-fullscreen");
-                if (containerFullScreen[0] == null) {
-                    var width = '100%';
-                    var height = '100%';
-                } else {
-                    var width = document.documentElement.clientWidth;
-                    var height = document.documentElement.clientHeight;
-                }
-                
-                gameIframe[0]
-                    .contentWindow
-                    .postMessage(JSON.stringify({"msgId": "windowSizeChanged", "width": width, "height": height}), "*");
-                document.getElementsByClassName("gameContent")[0].width = width;
-                document.getElementsByClassName("gameContent")[0].height = height;
-            }
-        }
-
-        //when the modal is opened add the event listener to resize game on window resize
-        window.addEventListener("resize", windowResizer);
-        //when the modal is opened call the windowResizer Method to set the correct width and height of the game
-        windowResizer();
-
-    }
 
     render(){
         return (
@@ -195,7 +166,6 @@ class GameList extends Component {
                     contentLabel="Game demo modal"
                     className="modal game-demo-modal"
                     overlayClassName="modal-overlay"
-                    onAfterOpen={this.afterOpenModal}
                 >
                     {(this.state.isDemoModalOpen? <DemoModal
                         game={this.state.demoModal.game}

@@ -48,11 +48,104 @@ class DemoIFrame extends Component {
                 clienttype: clientType
             });
     }
+    // componentDidMount() {
+    //
+    //     var windowResizer = function(){
+    //         console.log("function called");
+    //         var gameIframe = document.getElementsByClassName("gameContent");
+    //         if (gameIframe[0] != null) {
+    //             var containerFullScreen = document.getElementsByClassName("container-fullscreen");
+    //             if (containerFullScreen[0] == null) {
+    //                 var width = '100%';
+    //                 var height = '100%';
+    //             } else {
+    //                 var width = document.documentElement.clientWidth;
+    //                 var height = document.documentElement.clientHeight;
+    //             }
+    //
+    //             gameIframe[0]
+    //                 .contentWindow
+    //                 .postMessage(JSON.stringify({"msgId": "windowSizeChanged", "width": width, "height": height}), "*");
+    //             document.getElementsByClassName("gameContent")[0].width = width;
+    //             document.getElementsByClassName("gameContent")[0].height = height;
+    //         }
+    //     }
+    //
+    //     window.addEventListener("message", function(event)
+    //     {
+    //         var objMessage  = JSON.parse(event.data);
+    //
+    //         switch (objMessage.msgId)
+    //         {
+    //             case "gameLoaderReady":
+    //                 windowResizer();
+    //                 break;
+    //         }
+    //     });
+    //
+    //
+    //     //when the modal is opened add the event listener to resize game on window resize
+    //     window.addEventListener("resize", windowResizer);
+    //     //when the modal is opened call the windowResizer Method to set the correct width and height of the game
+    //     windowResizer();
+    // }
+
+    setIframeSize() {
+        
+        var containerFullScreen = document.getElementsByClassName("container-fullscreen");
+        if (containerFullScreen[0] == null) {
+            var width = '100%';
+            var height = '100%';
+        } else {
+            var width = document.documentElement.clientWidth;
+            var height = document.documentElement.clientHeight;
+        }
+
+        if (this.ifr) {
+            this.ifr.contentWindow.postMessage(JSON.stringify({
+                "msgId": "windowSizeChanged",
+                "width": width,
+                "height": height
+            }), "*");
+            this.ifr.width = width;
+            this.ifr.height = height;
+            console.log("set iframe size");
+        }
+    }
+
+    handleFrameResize = (event) => {
+        var objMessage  = JSON.parse(event.data);
+
+        switch (objMessage.msgId)
+        {
+            case "gameLoaderReady":
+                this.setIframeSize();
+                break;
+        }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('message', this.handleFrameResize);
+    }
+
+    componentDidMount() {
+
+        this.ifr.onload = () => {
+            this.setIframeSize();
+        };
+
+        window.addEventListener("message", this.handleFrameResize);
+        window.addEventListener("resize", this.setIframeSize);
+    }
+
+
     render() {
         const game = this.props.game;
         const channel = this.props.channel;
 
-        return <iframe className="gameContent" src={this.buildDemoUrl()} width="100%" height="100%" title={`${game.name} ${channel} demo`}></iframe>
+        //return <iframe className="gameContent" src={this.buildDemoUrl()} width="100%" height="100%" title={`${game.name} ${channel} demo`}></iframe>
+
+        return <iframe className="gameContent" ref={(f) => { this.ifr = f; }} src={this.buildDemoUrl()} width="100%" height="100%" title={`${game.name} ${channel} demo`}></iframe>
     }
 }
 
