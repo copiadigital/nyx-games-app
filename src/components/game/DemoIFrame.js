@@ -107,13 +107,13 @@ class DemoIFrame extends Component {
     }
 
     handleFrameResize = (e) => {
-        var objMessage  = JSON.parse(e.data);
-        switch (objMessage.msgId)
-        {
-            case "gameLoaderReady":
+        //var objMessage  = JSON.parse(e.data);
+        //switch (objMessage.msgId)
+        //{
+        //    case "gameLoaderReady":
                 this.setIframeSize();
-                break;
-        }
+        //        break;
+        //}
     }
 
     componentWillUnmount() {
