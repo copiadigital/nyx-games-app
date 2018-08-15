@@ -9,13 +9,6 @@ class DemoIFrame extends Component {
         this.state = {
         };
     }
-    componentDidMount(){
-        ReactGA.event({
-            category: 'Game',
-            action: 'Play demo ' + this.getClientType(this.props.channel),
-            label: 'ID:' + this.props.game.id
-        });
-    }
     getClientType(channel){
         var clientType = 'flash';
 
@@ -91,7 +84,7 @@ class DemoIFrame extends Component {
     // }
 
     setIframeSize() {
-        
+
         var containerFullScreen = document.getElementsByClassName("container-fullscreen");
         if (containerFullScreen[0] == null) {
             var width = '100%';
@@ -113,9 +106,8 @@ class DemoIFrame extends Component {
         }
     }
 
-    handleFrameResize = (event) => {
-        var objMessage  = JSON.parse(event.data);
-
+    handleFrameResize = (e) => {
+        var objMessage  = JSON.parse(e.data);
         switch (objMessage.msgId)
         {
             case "gameLoaderReady":
@@ -129,6 +121,12 @@ class DemoIFrame extends Component {
     }
 
     componentDidMount() {
+
+        ReactGA.event({
+            category: 'Game',
+            action: 'Play demo ' + this.getClientType(this.props.channel),
+            label: 'ID:' + this.props.game.id
+        });
 
         this.ifr.onload = () => {
             this.setIframeSize();
