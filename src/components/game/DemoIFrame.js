@@ -84,7 +84,7 @@ class DemoIFrame extends Component {
     // }
 
     setIframeSize() {
-
+        console.log("nigher");
         var containerFullScreen = document.getElementsByClassName("container-fullscreen");
         if (containerFullScreen[0] == null) {
             var width = '100%';
@@ -98,42 +98,44 @@ class DemoIFrame extends Component {
             this.ifr.contentWindow.postMessage(JSON.stringify({
                 "msgId": "windowSizeChanged",
                 "width": width,
-                "height": height
-            }), "*");
+                "height": height }), "*");
             this.ifr.width = width;
             this.ifr.height = height;
-            console.log("set iframe size");
+            console.log("set iframe size ");
         }
     }
 
     handleFrameResize = (e) => {
-        //var objMessage  = JSON.parse(e.data);
-        //switch (objMessage.msgId)
-        //{
-        //    case "gameLoaderReady":
-                this.setIframeSize();
-        //        break;
-        //}
+        console.log("poes");
+        this.setIframeSize();
+        console.log("cunt");
+    }
+    shouldComponentUpdate(nextProps, nextState)  {
+        return false;
     }
 
     componentWillUnmount() {
-        window.removeEventListener('message', this.handleFrameResize);
+        window.removeEventListener('message', this.handleFrameResize());
     }
 
     componentDidMount() {
 
-        ReactGA.event({
-            category: 'Game',
-            action: 'Play demo ' + this.getClientType(this.props.channel),
-            label: 'ID:' + this.props.game.id
-        });
+        // ReactGA.event({
+        //     category: 'Game',
+        //     action: 'Play demo ' + this.getClientType(this.props.channel),
+        //     label: 'ID:' + this.props.game.id
+        // });
 
         this.ifr.onload = () => {
+            console.log("onload");
             this.setIframeSize();
+            console.log("end");
         };
 
-        window.addEventListener("message", this.handleFrameResize);
-        window.addEventListener("resize", this.setIframeSize);
+        window.addEventListener("message", this.handleFrameResize());
+        window.addEventListener("resize", () => {
+            this.setIframeSize();
+        });
     }
 
 
