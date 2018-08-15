@@ -84,7 +84,6 @@ class DemoIFrame extends Component {
     // }
 
     setIframeSize() {
-        console.log("nigher");
         var containerFullScreen = document.getElementsByClassName("container-fullscreen");
         if (containerFullScreen[0] == null) {
             var width = '100%';
@@ -106,9 +105,7 @@ class DemoIFrame extends Component {
     }
 
     handleFrameResize = (e) => {
-        console.log("poes");
         this.setIframeSize();
-        console.log("cunt");
     }
     shouldComponentUpdate(nextProps, nextState)  {
         return false;
@@ -120,16 +117,14 @@ class DemoIFrame extends Component {
 
     componentDidMount() {
 
-        // ReactGA.event({
-        //     category: 'Game',
-        //     action: 'Play demo ' + this.getClientType(this.props.channel),
-        //     label: 'ID:' + this.props.game.id
-        // });
+        ReactGA.event({
+            category: 'Game',
+            action: 'Play demo ' + this.getClientType(this.props.channel),
+            label: 'ID:' + this.props.game.id
+        });
 
         this.ifr.onload = () => {
-            console.log("onload");
             this.setIframeSize();
-            console.log("end");
         };
 
         window.addEventListener("message", this.handleFrameResize());
