@@ -21,7 +21,7 @@ class App extends Component {
                 <div className="app">
                     <div className="app-header">
                         <div className="wrapper wrapper--thin">
-                            <img src={logo} className="app-logo" alt="NYX logo"/>
+                            <img src={logo} className="app-logo" alt="SG Digital logo"/>
                             <h2 className="app-title">Game Portal</h2>
                             <HamburgerResponsive
                                 maxWidth="1150"
@@ -35,8 +35,8 @@ class App extends Component {
                                     <li><Link to="/games">Games</Link></li>
                                     <li><Link to="/portfolio">Portfolio</Link></li>
                                     <li><Link to="/service">Self service</Link></li>
-                                    <li><a href="http://www.nyxgaminggroup.com/news" target="_blank">News</a></li>
-                                    <li><a href="http://www.nyxgaminggroup.com/contact" target="_blank">Contact</a></li>
+                                    <li><a href="https://www.sgdigital.com/news" target="_blank">News</a></li>
+                                    <li><a href="https://www.sgdigital.com/contact" target="_blank">Contact</a></li>
                                 </ul>
                             </HamburgerResponsive>
                         </div>
