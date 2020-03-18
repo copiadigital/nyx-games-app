@@ -9,7 +9,7 @@
     "gulp": "^4.0.0",
     "immutability-helper": "^2.3.0",
     "node-sass": "^4.13.1",
-    "node-sass-chokidar": "0.0.3",
+    "node-sass-chokidar": "1.4.0",
     "npm-run-all": "^4.1.1",
     "promise": "^8.0.1",
     "query-string": "^5.0.0",
