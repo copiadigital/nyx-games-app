@@ -14,12 +14,36 @@ import {
 import './assets/sass/App.css';
 import GoogleAnalytics from "./components/utilities/GoogleAnalytics";
 import CheckAge from "./components/agegate/CheckAge";
+import cookie from 'js-cookie';
 
 class App extends Component {
+
+    constructor()
+    {
+        super();
+        this.state = {
+            redirect: false
+        }
+    }
+
+    componentDidMount(){
+        if(cookie.get("ageGateConfirmation") && cookie.get("ageGateConfirmation") === "true"){
+            console.log("Cool to go!");
+        }else{
+            this.setState({redirect: true});
+        }
+    }
+
     render() {
         return (
             <BrowserRouter>
                 <div className="app">
+                    {
+                        this.state.redirect ?
+                             <Redirect to="/checkage"/>
+                            :
+                        ''
+                    }
                     <div className="app-header">
                         <div className="wrapper wrapper--thin">
                             <img src={logo} className="app-logo" alt="SG Digital logo"/>
