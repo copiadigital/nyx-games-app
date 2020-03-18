@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom';
 import './assets/sass/App.css';
 import GoogleAnalytics from "./components/utilities/GoogleAnalytics";
+import CheckAge from "./components/agegate/CheckAge";
 
 class App extends Component {
     render() {
@@ -48,6 +49,7 @@ class App extends Component {
                         <div className="app-body">
                             <Switch>
                                 <Route path="/" exact={true} render={() => <Redirect to="/games"/>}/>
+                                <Route path="/checkage" component={CheckAge} />
                                 <Route path="/games" component={Games}/>
                                 <Route exact path="/portfolio/all"
                                        render={(props) => <Portfolio {...props} featured={false}
@@ -58,6 +60,7 @@ class App extends Component {
                                 <Route exact path="/portfolio" render={(props) => <Portfolio {...props} featured={true}
                                                                                              explicitFeatured={false}/>}/>
                                 <Route path="/service" component={Service}/>
+
                             </Switch>
                         </div>
                     </div>
