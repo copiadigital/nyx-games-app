@@ -5,7 +5,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "fbemitter": "^2.1.1",
-    "fsevents": "^1.2.11",
+    "fsevents": "^2.1.2",
     "gulp": "^4.0.0",
     "immutability-helper": "^2.3.0",
     "node-sass": "^4.13.1",
