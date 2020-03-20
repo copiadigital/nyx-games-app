@@ -208,3 +208,12 @@
 //		right:0;
 //	}
 }
+.dateInput{
+	width:100%;
+	font-size:18px;
+	text-align:center;
+
+	@include respond(medium){
+		width:50%;
+	}
+}
