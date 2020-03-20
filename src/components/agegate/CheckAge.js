@@ -42,7 +42,7 @@ class CheckAge extends Component {
         const month = dob.split("-")[1];
         const day = dob.split("-")[2];
         if(this.getAgeFromBirthDate(year, month, day).getFullYear() >= this.state.min_age){
-            console.log("Your age good to go");
+            // console.log("Your age good to go");
             cookie.set("ageGateConfirmation", "true", {expires: this.state.expires});
             window.location.href='/games';
             this.setState({age_success: true, button: false});
@@ -59,7 +59,7 @@ class CheckAge extends Component {
                 {
 
                     this.state.age_error ?
-                        <div style={{padding: '20px', backgroundColor: '#f44336',fontSize: '30px',color: 'white'}}>Unfortunately you failed the age verification test!</div>
+                        <div style={{padding: '20px', backgroundColor: '#f44336',fontSize: '30px',color: 'white'}}>You are not old enough to enter this website</div>
                  :
                  ""
 
@@ -71,6 +71,7 @@ class CheckAge extends Component {
                                         <div style={{padding: '20px',
                  backgroundColor: '#4CAF50',
                  fontSize: '30px',
+                 display: 'none',
                  color: 'white'}}>You are good to go, you passed the age gate!</div>
                  :
                  ""
@@ -82,11 +83,11 @@ class CheckAge extends Component {
 
                 <form onSubmit={this.onSubmit}>
                 <div>
-                <label style={{color: '#004de2', fontSize: '25px'}}>Select Your Date of Birth</label>
+                <label style={{color: '#333333', fontSize: '20px'}}>Select Your Date of Birth</label>
                 <br/><br/>
                 </div>
                 <div>
-                <input title={(this.state.button ? "You can't retry now" : "Enter DOB")} disabled={this.state.button} name="dob" required onChange={this.handleChange} type='date' style={{width: '50%', padding: '12px 20px',
+                <input className={"dateInput"} title={(this.state.button ? "You can't retry now" : "Enter DOB")} disabled={this.state.button} name="dob" required onChange={this.handleChange} type='date' style={{padding: '12px 20px',
                 margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}} />
                 </div>
                 <div>
