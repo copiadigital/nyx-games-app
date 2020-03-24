@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import cookie from 'js-cookie';
+const Country = require('./Country.js');
 
 class CheckAge extends Component {
     constructor(props){
@@ -13,33 +14,7 @@ class CheckAge extends Component {
             button: false,
             country: 'UK',
             expires: 7,
-            countries: [
-                {
-                    country_name: 'United Kingdom',
-                    age: 21,
-                    country_code: 'UK'
-                },
-                {
-                    country_name: 'United States',
-                    age: 18,
-                    country_code: 'USA'
-                },
-                {
-                    country_name: 'Canada',
-                    age: 18,
-                    country_code: 'CA'
-                },
-                {
-                    country_name: 'France',
-                    age: 18,
-                    country_code: 'FR'
-                },
-                {
-                    country_name: 'Mexico',
-                    age: 18,
-                    country_code: 'MEX'
-                }
-            ]
+            countries: Country.getCountry()
         };
     }
 
