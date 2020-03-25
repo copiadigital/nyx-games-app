@@ -217,3 +217,14 @@
 		width:50%;
 	}
 }
+
+.countryInput{
+	width:100%;
+	font-size:18px;
+	text-align:center;
+	margin:6px 0 30px 0;
+
+	@include respond(medium){
+		width:35%;
+	}
+}

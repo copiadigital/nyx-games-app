@@ -60,7 +60,7 @@ class CheckAge extends Component {
         const countries = []
 
         this.state.countries.forEach(function(item,key){
-            countries.push(<option value={item.country_code}>{item.country_name} - {item.country_code} ({item.age}+)</option>)
+            countries.push(<option value={item.country_code}>{item.country_name} - ({item.age}+)</option>)
         })
 
         return (
@@ -90,28 +90,21 @@ class CheckAge extends Component {
 
                 <h1 style={{fontSize: '30px'}}>You must be of legal age to enter this site.</h1>
 
-
                 <form onSubmit={this.onSubmit}>
+                <div>
+                    <label style={{color: '#333333', fontSize: '20px'}}>Select Your Country</label>
+                    <br/>
+                    <select name='country' title={(this.state.button ? "You can't retry now" : "Choose Your Country")} disabled={this.state.button} onChange={this.handleChange} required className={"countryInput"}>
+                        <option disabled>Choose your country...</option>
+                        {countries}
+                    </select>
+                </div>
 
                 <div>
                 <label style={{color: '#333333', fontSize: '20px'}}>Select Your Date of Birth</label>
-                <br/><br/>
-                </div>
-                <div>
+                <br/>
                 <input className={"dateInput"} title={(this.state.button ? "You can't retry now" : "Enter DOB")} disabled={this.state.button} name="dob" required onChange={this.handleChange} type='date' style={{padding: '12px 20px',
                 margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}} />
-                </div>
-
-                <div>
-                <label style={{color: '#004de2', fontSize: '25px'}}>Select Your Country</label>
-                <br/><br/>
-                </div>
-                <div>
-
-                <select name='country' title={(this.state.button ? "You can't retry now" : "Choose Your Country")} disabled={this.state.button} onChange={this.handleChange} required style={{width: '50%', padding: '12px 20px', margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}}>
-                <option disabled>Choose your country...</option>
-                {countries}
-                </select>
                 </div>
 
                 <div>
