@@ -78,7 +78,7 @@ class CheckAge extends Component {
 
                 }
 
-                <h1 style={{fontSize: '30px'}}>You must be {this.state.min_age} years of age to enter this site.</h1>
+                <h1 style={{fontSize: '30px'}}>This website requires you to be {this.state.min_age} years or older to enter.</h1>
 
 
                 <form onSubmit={this.onSubmit}>
