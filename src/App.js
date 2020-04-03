@@ -56,6 +56,16 @@ class App extends Component {
                                     <span className="icon-bar"></span>
                                 </button>}
                             >
+                            {
+                                    this.state.redirect ?
+                                <ul className="nav">
+                                    <li>Games</li>
+                                    <li>Portfolio</li>
+                                    <li>Self service</li>
+                                    <li><a href="https://www.sgdigital.com/news" target="_blank">News</a></li>
+                                    <li><a href="https://www.sgdigital.com/contact" target="_blank">Contact</a></li>
+                                </ul>
+                                    :
                                 <ul className="nav">
                                     <li><Link to="/games">Games</Link></li>
                                     <li><Link to="/portfolio">Portfolio</Link></li>
@@ -63,6 +73,7 @@ class App extends Component {
                                     <li><a href="https://www.sgdigital.com/news" target="_blank">News</a></li>
                                     <li><a href="https://www.sgdigital.com/contact" target="_blank">Contact</a></li>
                                 </ul>
+                            }
                             </HamburgerResponsive>
                         </div>
                     </div>
