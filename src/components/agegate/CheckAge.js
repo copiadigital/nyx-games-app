@@ -90,7 +90,6 @@ class CheckAge extends Component {
 
                 <h1 style={{fontSize: '30px'}}>You must be of legal age to enter this site.</h1>
 
-
                 <form onSubmit={this.onSubmit}>
 
                 <div>
