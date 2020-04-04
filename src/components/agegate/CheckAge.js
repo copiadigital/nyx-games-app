@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import cookie from 'js-cookie';
+const Country = require('./Country.js');
 
 class CheckAge extends Component {
     constructor(props){
@@ -13,7 +12,9 @@ class CheckAge extends Component {
             age_error: false,
             age_success: false,
             button: false,
-            expires: 7
+            country: 'UK',
+            expires: 7,
+            countries: Country.getCountry()
         };
     }
 
@@ -22,8 +23,6 @@ class CheckAge extends Component {
         const date = new Date();
         date.setFullYear(date.getFullYear() - year);
         date.setMonth(date.getMonth() - month);
-        //date.setDate(date.getDate() - day);
-        //.getFullYear()
         return date;
     }
 
@@ -35,14 +34,19 @@ class CheckAge extends Component {
         })
     }
 
+    getAgeFromCountry(country_code)
+    {
+        const getAge = this.state.countries.find(element => element.country_code === country_code);
+        return getAge.age;
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
         const { dob } = this.state;
         const year = dob.split("-")[0];
         const month = dob.split("-")[1];
         const day = dob.split("-")[2];
-        if(this.getAgeFromBirthDate(year, month, day).getFullYear() >= this.state.min_age){
-            // console.log("Your age good to go");
+        if(this.getAgeFromBirthDate(year, month, day).getFullYear() >= this.getAgeFromCountry(this.state.country)){
             cookie.set("ageGateConfirmation", "true", {expires: this.state.expires});
             window.location.href='/games';
             this.setState({age_success: true, button: false});
@@ -52,6 +56,12 @@ class CheckAge extends Component {
     }
 
     render() {
+
+        const countries = []
+
+        this.state.countries.forEach(function(item,key){
+            countries.push(<option value={item.country_code}>{item.country_name} - {item.country_code} ({item.age}+)</option>)
+        })
 
         return (
             <div style={{textAlign: 'center'}}>
@@ -78,10 +88,10 @@ class CheckAge extends Component {
 
                 }
 
-                <h1 style={{fontSize: '30px'}}>This website requires you to be {this.state.min_age} years or older to enter.</h1>
-
+                <h1 style={{fontSize: '30px'}}>You must be of legal age to enter this site.</h1>
 
                 <form onSubmit={this.onSubmit}>
+
                 <div>
                 <label style={{color: '#333333', fontSize: '20px'}}>Select Your Date of Birth</label>
                 <br/><br/>
@@ -90,6 +100,19 @@ class CheckAge extends Component {
                 <input className={"dateInput"} title={(this.state.button ? "You can't retry now" : "Enter DOB")} disabled={this.state.button} name="dob" required onChange={this.handleChange} type='date' style={{padding: '12px 20px',
                 margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}} />
                 </div>
+
+                <div>
+                <label style={{color: '#004de2', fontSize: '25px'}}>Select Your Country</label>
+                <br/><br/>
+                </div>
+                <div>
+
+                <select name='country' title={(this.state.button ? "You can't retry now" : "Choose Your Country")} disabled={this.state.button} onChange={this.handleChange} required style={{width: '50%', padding: '12px 20px', margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}}>
+                <option disabled>Choose your country...</option>
+                {countries}
+                </select>
+                </div>
+
                 <div>
                 <br/>
                 <button type='submit' title={(this.state.button ? "You can't retry now" : "Enter")} style={{backgroundColor: '#004de2',
