@@ -21,8 +21,6 @@ class CheckAge extends Component {
         const date = new Date();
         date.setFullYear(date.getFullYear() - year);
         date.setMonth(date.getMonth() - month);
-        //date.setDate(date.getDate() - day);
-        //.getFullYear()
         return date;
     }
 
@@ -37,9 +35,11 @@ class CheckAge extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const { dob } = this.state;
+
         const year = dob.split("-")[0];
         const month = dob.split("-")[1];
         const day = dob.split("-")[2];
+
         if(this.getAgeFromBirthDate(year, month, day).getFullYear() >= this.state.min_age){
             // console.log("Your age good to go");
             cookie.set("ageGateConfirmation", "true", {expires: this.state.expires});
@@ -87,7 +87,7 @@ class CheckAge extends Component {
                 </div>
                 <div>
                 <input className={"dateInput"} title={(this.state.button ? "You can't retry now" : "Enter DOB")} disabled={this.state.button} name="dob" required onChange={this.handleChange} type='date' style={{padding: '12px 20px',
-                margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}} date-format="dd-mm-yyyy" placeholder="Click to enter DOB"/>
+                margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}} date-format="yyyy-mm-dd" placeholder="Click to enter DOB"/>
                 </div>
                 <div>
                 <br/>
