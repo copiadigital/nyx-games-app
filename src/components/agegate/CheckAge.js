@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import cookie from 'js-cookie';
+import Input from 'date-input-polyfill-react';
 
 class CheckAge extends Component {
     constructor(props){
@@ -88,7 +87,7 @@ class CheckAge extends Component {
                 </div>
                 <div>
                 <input className={"dateInput"} title={(this.state.button ? "You can't retry now" : "Enter DOB")} disabled={this.state.button} name="dob" required onChange={this.handleChange} type='date' style={{padding: '12px 20px',
-                margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}} />
+                margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}} date-format="dd-mm-yyyy" placeholder="Click to enter DOB"/>
                 </div>
                 <div>
                 <br/>
