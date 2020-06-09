@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import cookie from 'js-cookie';
+import Input from 'date-input-polyfill-react';
 
 class CheckAge extends Component {
     constructor(props){
@@ -22,8 +21,6 @@ class CheckAge extends Component {
         const date = new Date();
         date.setFullYear(date.getFullYear() - year);
         date.setMonth(date.getMonth() - month);
-        //date.setDate(date.getDate() - day);
-        //.getFullYear()
         return date;
     }
 
@@ -38,9 +35,11 @@ class CheckAge extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const { dob } = this.state;
+
         const year = dob.split("-")[0];
         const month = dob.split("-")[1];
         const day = dob.split("-")[2];
+
         if(this.getAgeFromBirthDate(year, month, day).getFullYear() >= this.state.min_age){
             // console.log("Your age good to go");
             cookie.set("ageGateConfirmation", "true", {expires: this.state.expires});
@@ -60,21 +59,21 @@ class CheckAge extends Component {
 
                     this.state.age_error ?
                         <div style={{padding: '20px', backgroundColor: '#f44336',fontSize: '30px',color: 'white'}}>You are not old enough to enter this website</div>
-                        :
-                        ""
+                 :
+                 ""
 
                 }
 
                 {
 
                     this.state.age_success ?
-                        <div style={{padding: '20px',
-                            backgroundColor: '#4CAF50',
-                            fontSize: '30px',
-                            display: 'none',
-                            color: 'white'}}>You are good to go, you passed the age gate!</div>
-                        :
-                        ""
+                                        <div style={{padding: '20px',
+                 backgroundColor: '#4CAF50',
+                 fontSize: '30px',
+                 display: 'none',
+                 color: 'white'}}>You are good to go, you passed the age gate!</div>
+                 :
+                 ""
 
                 }
 
@@ -82,31 +81,32 @@ class CheckAge extends Component {
 
 
                 <form onSubmit={this.onSubmit}>
-                    <div>
-                        <label style={{color: '#333333', fontSize: '20px'}}>Select Your Date of Birth</label>
-                        <br/><br/>
-                    </div>
-                    <div>
-                        <input className={"dateInput"} title={(this.state.button ? "You can't retry now" : "Enter DOB")} disabled={this.state.button} name="dob" required onChange={this.handleChange} type='date' style={{padding: '12px 20px',
-                            margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}} />
-                    </div>
-                    <div>
-                        <br/>
-                        <button type='submit' title={(this.state.button ? "You can't retry now" : "Enter")} style={{backgroundColor: '#004de2',
-                            border: 'none',
-                            color: 'white',
-                            padding: '15px 32px',
-                            textAlign: 'center',
-                            textDecoration: 'none',
-                            display: 'inline-block',
-                            fontSize: '16px'
-                        }} disabled={this.state.button}>Enter</button>
-                    </div>
+                <div>
+                <label style={{color: '#333333', fontSize: '20px'}}>Select Your Date of Birth</label>
+                <br/><br/>
+                </div>
+                <div>
+                <input className={"dateInput"} title={(this.state.button ? "You can't retry now" : "Enter DOB")} disabled={this.state.button} name="dob" required onChange={this.handleChange} type='date' style={{padding: '12px 20px',
+                margin: '8px 0', boxSizing: 'border-box', border: '3px solid #555'}} date-format="yyyy-mm-dd" placeholder="Click to enter DOB"/>
+                </div>
+                <div>
+                <br/>
+                <button type='submit' title={(this.state.button ? "You can't retry now" : "Enter")} style={{backgroundColor: '#004de2',
+                    border: 'none',
+                    color: 'white',
+                    padding: '15px 32px',
+                    textAlign: 'center',
+                    textDecoration: 'none',
+                    display: 'inline-block',
+                    fontSize: '16px'
+                }} disabled={this.state.button}>Enter</button>
+                </div>
                 </form>
             </div>
         )
-
+            
     }
 }
 
 export default CheckAge;
+
